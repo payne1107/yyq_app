@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_common_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/rl_child"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/activity_back"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:onClick="back"
+            android:paddingRight="@dimen/margin_size_15"
+            android:src="@mipmap/icon_back"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="页面一"
+            android:textColor="@color/color_3"
+            android:textSize="@dimen/text_size_34"
+            android:visibility="visible" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="88px"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/activity_back"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="460px"
+                android:layout_height="60px"
+                android:background="@drawable/search_bg"
+                android:hint="大家都在搜：实习"
+                android:paddingLeft="12dp"
+                android:textColorHint="@color/text_color_9"
+                android:textSize="@dimen/text_size_28"
+                android:visibility="gone" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <TextView
+            android:id="@+id/activity_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:padding="10dip"
+            android:text="设置"
+            android:textColor="@color/ff6000"
+            android:textSize="@dimen/text_size_32"
+            android:visibility="gone" />
+    </RelativeLayout>
+</RelativeLayout>
