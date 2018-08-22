@@ -3,12 +3,15 @@ package com.yyq58.activity.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -43,6 +46,7 @@ import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.bean.FieldErrors;
 import com.yyq58.activity.httpstack.OkHttpStack;
 import com.yyq58.activity.utils.ConfigUtil;
+import com.yyq58.activity.utils.PermissionUtils;
 import com.yyq58.activity.utils.StatusUtils;
 import com.yyq58.activity.utils.StringUtils;
 import com.yyq58.activity.widget.LoadingDailog;
@@ -398,7 +402,147 @@ public abstract class BaseActivity extends FragmentActivity {
         });
     }
     /************************************************网络请求框架End*************************************************/
+/************************************************6.0动态权限相关start******************************************/
+    /**
+     * 是否得到权限
+     * @param pmss 需要申请的权限
+     * @return
+     */
+    public boolean isGetPermission(String pmss) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            //没有申请过权限
+            return PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this, pmss);
+        } else {
+            //已经申请过权限
+            return false;
+        }
+    }
 
+    public void showCamera() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_CAMERA, mPermissionGrant);
+    }
+
+    public void getAccounts() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_GET_ACCOUNTS, mPermissionGrant);
+    }
+
+    public void callPhone() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_CALL_PHONE, mPermissionGrant);
+    }
+
+    public void readPhoneState() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_READ_PHONE_STATE, mPermissionGrant);
+    }
+
+    public void accessFineLocation() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_ACCESS_FINE_LOCATION, mPermissionGrant);
+    }
+
+    /**
+     * 定位权限
+     */
+    public void accessCoarseLocation() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_ACCESS_COARSE_LOCATION, mPermissionGrant);
+    }
+
+    public void readExternalStorage() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_READ_EXTERNAL_STORAGE, mPermissionGrant);
+    }
+
+    public void writeExternalStorage() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE, mPermissionGrant);
+    }
+
+    public void recordAudio() {
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_RECORD_AUDIO, mPermissionGrant);
+    }
+
+
+    public PermissionUtils.PermissionGrant mPermissionGrant = new PermissionUtils.PermissionGrant() {
+        @Override
+        public void onPermissionGranted(int requestCode) {
+            switch (requestCode) {
+                case PermissionUtils.CODE_RECORD_AUDIO:
+                    Toast.makeText(getApplicationContext(), "Result Permission Grant CODE_RECORD_AUDIO", Toast.LENGTH_SHORT).show();
+                    break;
+                case PermissionUtils.CODE_GET_ACCOUNTS:
+                    Toast.makeText(getApplicationContext(), "Result Permission Grant CODE_GET_ACCOUNTS", Toast.LENGTH_SHORT).show();
+                    break;
+                case PermissionUtils.CODE_READ_PHONE_STATE:
+                    Toast.makeText(getApplicationContext(), "Result Permission Grant CODE_READ_PHONE_STATE", Toast.LENGTH_SHORT).show();
+                    break;
+                case PermissionUtils.CODE_CALL_PHONE:
+//                    Toast.makeText(getApplicationContext(), "Result Permission Grant CODE_CALL_PHONE", Toast.LENGTH_SHORT).show();
+                    handleCallPhone();
+                    break;
+                case PermissionUtils.CODE_CAMERA:
+                    handleShowCamera();
+                    break;
+                case PermissionUtils.CODE_ACCESS_FINE_LOCATION:
+                    Toast.makeText(getApplicationContext(), "Result Permission Grant CODE_ACCESS_FINE_LOCATION", Toast.LENGTH_SHORT).show();
+                    break;
+                case PermissionUtils.CODE_ACCESS_COARSE_LOCATION:
+                    handleAccessCoarseLocation();
+                    break;
+                case PermissionUtils.CODE_READ_EXTERNAL_STORAGE:
+                    handleReadExternalStorage();
+                    break;
+                case PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE:
+                    handleWriteExternalStorage();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 拨打电话权限处理结果
+     */
+    public void handleCallPhone() {
+
+    }
+
+    /**
+     * 处理相机拍照权限返回结果
+     */
+    public void handleShowCamera() {
+
+    }
+
+    /**
+     * 处理读取文件权限返回结果
+     * <p>
+     * 注意：此处是更新apk返回的权限处理结果
+     */
+    public void handleReadExternalStorage() {
+    }
+
+    /**
+     * 定位返回结果
+     * <p>
+     * 注意：此处是更新apk返回的权限处理结果
+     */
+    public void handleAccessCoarseLocation() {
+    }
+
+    /**
+     * 处理写入文件权限返回结果
+     */
+    public void handleWriteExternalStorage() {
+
+    }
+
+    /**
+     * Callback received when a permissions request has been completed.
+     */
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionUtils.requestPermissionsResult(this, requestCode, permissions, grantResults, mPermissionGrant);
+    }
+
+    /***************************************************** 6.0动态权限相关end *********************************************************/
     /***
      * 终止正在加载对话框
      * @param  activity 上下文
@@ -537,4 +681,16 @@ public abstract class BaseActivity extends FragmentActivity {
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
     }
+
+    /****
+     * 获取返回的请求code
+     * @param json
+     * @return
+     */
+    public int getRequestCode(String json) {
+        JSONObject object = JSONObject.parseObject(json);
+        int resultCode = Integer.valueOf(object.getString("code"));
+        return resultCode;
+    }
+
 }
