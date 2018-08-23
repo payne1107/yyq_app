@@ -305,30 +305,42 @@ public abstract class BaseActivity extends FragmentActivity {
 
     /***
      * 上传头像
-     * @param userId
+     * @param content
      * @param photoPath
+     * @param type avatar/zone
      */
-    public void uploadImg(String userId, String photoPath) {
-        startIOSDialogLoading(mContext, "正在上传中..");
+    public void uploadImg(String content,String photoPath,String url,String type) {
+        startIOSDialogLoading(mContext,"正在上传中..");
         HttpUtils httpUtils = new HttpUtils();
         httpUtils.configResponseTextCharset("UTF-8");
         RequestParams params = new RequestParams();
         params.addBodyParameter("file", new File(photoPath));
-        params.addBodyParameter("userId", userId);
+        params.addBodyParameter("type", type);
         params.addHeader("Accept", "application/json");
         if (!StringUtils.isEmpty(MyApplication.isLogin)) {
             params.addHeader("Authorization", MyApplication.isLogin);
         }
-        httpUtils.send(HttpRequest.HttpMethod.POST, "---------------------->", params, new RequestCallBack<Object>() {
+        Log.d("Dong", "==-=====?>>" + " content --"+content +" phot" +photoPath +" typ=="+type);
+        httpUtils.send(HttpRequest.HttpMethod.POST, url, params, new RequestCallBack<Object>() {
             @Override
             public void onSuccess(ResponseInfo<Object> responseInfo) {
                 stopIOSDialogLoading(mContext);
+                String json = (String) responseInfo.result;
+                Log.d("Dong", "上传头像成功返回json --->" + json);
+                toastMessage("上传成功");
+//                UploadImgBean uploadImgBean = JSON.parseObject(json, UploadImgBean.class);
+//                if ("1".equals(uploadImgBean.getResultCode())) { //上传成功
+//                    toastMessage("上传成功");
+//                    getImageUrl(uploadImgBean.getResultMsg());
+//                } else {
+//                    Toast.makeText(BaseActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
+//                }
             }
 
             @Override
             public void onFailure(HttpException e, String s) {
                 stopIOSDialogLoading(mContext);
-                Toast.makeText(BaseActivity.this, "图片上传失败", Toast.LENGTH_SHORT).show();//请求上传图片接口失败
+                Toast.makeText(BaseActivity.this, "上传失败", Toast.LENGTH_SHORT).show();//请求上传图片接口失败
             }
         });
     }
