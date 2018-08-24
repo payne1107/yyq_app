@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initView() {
         super.initView();
-        setInVisibleTitleIcon("登录", true, true);
+        setInVisibleTitleIcon("登录", true, false);
         ivPhoneClear = (ImageView) findViewById(R.id.iv_phone_clear);
         etPhone = (EditText) findViewById(R.id.et_phone);
         etPassword = (EditText) findViewById(R.id.et_password);

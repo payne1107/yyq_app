@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -116,7 +115,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         //将bitmap保存到本地，下次在获取可以从本地获取展示，之后在从网络获取显示
                         ivAvatar.setImageBitmap(bitmap);
                         SDCardUtil.saveBitmap(bitmap, newPath);
-                        uploadImg(MyApplication.userId, newPath, ConfigUtil.UPLOAD_AVATAR_URL, 2);
+                        uploadImg(MyApplication.userId, newPath, ConfigUtil.UPLOAD_PIC_URL, "avatar");
                     }
                 }
                 break;
