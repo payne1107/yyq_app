@@ -36,5 +36,10 @@ public class ConfigUtil {
      */
     public static final String UPLOAD_PIC_URL = MyApplication.REQUEST_URL + "appv1zone/upload.do";
     public static final int UPLOAD_PIC_URL_ACTION = 4;
+    /***
+     * 获取我的才艺 台前和幕后
+     */
+    public static final String QUERY_MINE_ACQUIREMENT_URL = MyApplication.REQUEST_URL + "appv1consumerlabel/getAllLabel.do";
+    public static final int QUERY_MINE_ACQUIREMENT_URL_ACTION = 5;
 
 }

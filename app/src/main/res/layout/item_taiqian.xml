@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_name"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:textColor="@color/text_color_3"
+
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:background="@drawable/taiqian_btn_style"
+        android:text="1231223"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</com.zhy.autolayout.AutoLinearLayout>
