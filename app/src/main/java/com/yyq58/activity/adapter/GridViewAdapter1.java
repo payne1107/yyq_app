@@ -13,7 +13,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
-class GridViewAdapter1 extends BaseAdapter {
+public class GridViewAdapter1 extends BaseAdapter {
     private Context mContext;
     private List<TaiQianBean> mList;
 
@@ -45,7 +45,6 @@ class GridViewAdapter1 extends BaseAdapter {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_taiqian, null);
             view.setTag(holder);
             holder.tvName = view.findViewById(R.id.tv_name);
-
             AutoUtils.autoSize(view);
         } else {
             holder = (ViewHolder) view.getTag();

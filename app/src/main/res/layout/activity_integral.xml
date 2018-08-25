@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/sys_title" />
+
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_15"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_size_28"
+        android:text="通告推送规则与积分排名规则！"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_size_28"
+        android:text="一、积分用途：上热门、查档排名靠前，增加更多的曝光机会，获得更多的通告订单。"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_size_28"
+        android:text="二、获取积分方法："
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="1、发布动态、作品、点赞、评论 访问各+10分。"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="2、被别人点赞 每次+20分 每天可以+300分"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="3、作品内容被分享推荐 每条+20分"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+    android:layout_marginTop="@dimen/margin_size_5"
+    android:layout_marginRight="@dimen/margin_size_15"
+    android:layout_marginLeft="@dimen/margin_size_15"
+    android:textColor="@color/text_color_6"
+    android:textSize="@dimen/text_size_24"
+    android:text="4、线上抢单成功并交易 每单+50分"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="5、上传作品被打赏+60分/次"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="6、分享档期卡 每天+30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="7、分享个人主页与他人主页 每次+15分"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="8、每天登录+20分"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="9、关注别人+5分，被别人关注+10分"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:textColor="@color/text_color_6"
+        android:textSize="@dimen/text_size_24"
+        android:text="10、VIP会员所有+分项X1.5倍加分"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</com.zhy.autolayout.AutoLinearLayout>

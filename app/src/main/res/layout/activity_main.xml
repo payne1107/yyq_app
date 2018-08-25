@@ -38,7 +38,7 @@
                 android:drawableTop="@mipmap/tabbar_home_pre"
                 android:padding="2dp"
                 android:text="首页"
-                android:textColor="@color/color_62d"
+                android:textColor="@color/color_4b3a75"
                 android:textSize="10sp" />
         </RelativeLayout>
 
@@ -57,7 +57,7 @@
                 android:drawablePadding="4dp"
                 android:drawableTop="@mipmap/tabbar_hostory"
                 android:padding="2dp"
-                android:text="工地"
+                android:text="历史记录"
                 android:textColor="@color/text_color_3"
                 android:textSize="10sp" />
         </RelativeLayout>

@@ -8,7 +8,7 @@
         android:id="@+id/rl_child"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:background="@color/white">
+        android:background="@color/color_4b3a75">
 
         <ImageView
             android:id="@+id/activity_back"
@@ -30,7 +30,7 @@
             android:paddingBottom="10dip"
             android:paddingTop="10dip"
             android:text="页面一"
-            android:textColor="@color/color_3"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_34"
             android:visibility="visible" />
 
@@ -62,7 +62,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:padding="10dip"
-            android:text="设置"
+            android:text=""
             android:textColor="@color/ff6000"
             android:textSize="@dimen/text_size_32"
             android:visibility="gone" />

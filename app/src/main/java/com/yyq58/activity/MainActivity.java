@@ -83,28 +83,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Drawable drawable = getResources().getDrawable(R.mipmap.tabbar_usercenter_pre);
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                 tvBtnFirst.setCompoundDrawables(null,drawable ,null,null);
-                tvBtnFirst.setTextColor(getResources().getColor(R.color.color_62d));
+                tvBtnFirst.setTextColor(getResources().getColor(R.color.color_4b3a75));
                 setIndexSelected(0);
                 break;
             case R.id.rl_btn_second:
-                Drawable drawable1 = getResources().getDrawable(R.mipmap.tabbar_hostory);
+                Drawable drawable1 = getResources().getDrawable(R.mipmap.tabbar_hostory_pre);
                 drawable1.setBounds(0, 0, drawable1.getMinimumWidth(), drawable1.getMinimumHeight());
                 tvBtnSecond.setCompoundDrawables(null,drawable1 ,null,null);
-                tvBtnSecond.setTextColor(getResources().getColor(R.color.color_62d));
+                tvBtnSecond.setTextColor(getResources().getColor(R.color.color_4b3a75));
                 setIndexSelected(1);
                 break;
             case R.id.rl_btn_third:
                 Drawable drawable2 = getResources().getDrawable(R.mipmap.tabbar_message_pre);
                 drawable2.setBounds(0, 0, drawable2.getMinimumWidth(), drawable2.getMinimumHeight());
                 tvBtnThird.setCompoundDrawables(null,drawable2 ,null,null);
-                tvBtnThird.setTextColor(getResources().getColor(R.color.color_62d));
+                tvBtnThird.setTextColor(getResources().getColor(R.color.color_4b3a75));
                 setIndexSelected(2);
                 break;
             case R.id.rl_btn_fourth:
                 Drawable drawable3 = getResources().getDrawable(R.mipmap.tabbar_usercenter_pre);
                 drawable3.setBounds(0, 0, drawable3.getMinimumWidth(), drawable3.getMinimumHeight());
                 tvBtnFourth.setCompoundDrawables(null,drawable3 ,null,null);
-                tvBtnFourth.setTextColor(getResources().getColor(R.color.color_62d));
+                tvBtnFourth.setTextColor(getResources().getColor(R.color.color_4b3a75));
                 setIndexSelected(3);
                 break;
             default:
@@ -177,7 +177,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        setStatusMainBar(R.color.color_62d);
+        setStatusMainBar(R.color.color_4b3a75);
     }
 
     /**

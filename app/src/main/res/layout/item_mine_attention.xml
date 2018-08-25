@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <com.yyq58.activity.widget.CircleImageView
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:src="@mipmap/my_header"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:textColor="@color/text_color_3"
+                android:textSize="@dimen/text_size_30"
+                android:text="小品：ZYY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="@dimen/margin_size_10"
+                android:textColor="@color/text_color_3"
+                android:textSize="@dimen/text_size_24"
+                android:text="安徽省合肥市"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:background="@drawable/guanzhu_btn_style"
+            android:gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:drawablePadding="3dp"
+                android:textSize="@dimen/text_size_24"
+                android:layout_marginRight="@dimen/margin_size_10"
+                android:layout_marginLeft="@dimen/margin_size_10"
+                android:layout_marginBottom="@dimen/margin_size_5"
+                android:layout_marginTop="@dimen/margin_size_5"
+                android:textColor="@color/white"
+                android:text="已关注"
+                android:drawableLeft="@mipmap/icon_yiguanzhu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

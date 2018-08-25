@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
-    private static final int REQUEST_CHOOSE_QCQUIREMENT_CODE = 1000;
+    protected static final int REQUEST_CHOOSE_QCQUIREMENT_CODE = 1000;
     private TextView tvGetCode;
     private EditText etPhone;
     boolean isRun = true;//是否在获取验证码中
@@ -41,6 +41,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private CircleImageView ivAvatar;
     // 裁剪之后保存图片到新路径 专用头像路径，更换后会被替换头像
     private String newPath = MyApplication.getImageFolderPath() + ".png";
+    private String labelId;
+    private String labelName;
+    private String avatarUrl;//存储头像
+
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
         setContentView(R.layout.activity_register);
@@ -101,7 +105,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         switch (requestCode) {
             case REQUEST_CHOOSE_QCQUIREMENT_CODE:
                 //选择才艺
-
+                if (data != null) {
+                    labelId = data.getStringExtra("laeblId");
+                    labelName = data.getStringExtra("labelName");
+                    tvAcquirement.setText(StringUtils.isEmpty(labelName) ? "" : labelName);
+                }
                 break;
             case MyApplication.SELECT_PICTURE_CODE:
                 Uri imageUrl = data.getData();
@@ -147,8 +155,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             toastMessage("密码不能为空");
             return;
         }
-        if ("请选择才艺".equals(acquirement)) {
+        if ("请选择才艺".equals(acquirement) || "".equals(acquirement)) {
             toastMessage("请选择才艺");
+            return;
+        }
+        if (StringUtils.isEmpty(avatarUrl)) {
+            toastMessage("请上传头像");
             return;
         }
         Map<String, String> params = new HashMap<>();
@@ -156,6 +168,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         params.put("code", verifyCode);
         params.put("pwd", pwd);
         params.put("nickName", nickName);
+        params.put("avatar", avatarUrl);
+        params.put("labelId", labelId);
+        params.put("labelName", labelName);
         httpPostRequest(ConfigUtil.REGISTER_URL, params, ConfigUtil.REGISTER_URL_ACTION);
     }
 
@@ -180,6 +195,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         super.httpOnResponse(json, action);
         switch (action) {
             case ConfigUtil.GET_REGISTER_SMS_URL_ACTION:
+
+                break;
+            case ConfigUtil.REGISTER_URL_ACTION:
+                toastMessage("注册成功");
+                finish();
                 break;
         }
     }
@@ -268,4 +288,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             }
         }
     };
+
+
+    @Override
+    protected void getImageUrl(String url) {
+        super.getImageUrl(url);
+        avatarUrl = url;
+    }
 }

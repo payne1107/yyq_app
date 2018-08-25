@@ -44,6 +44,7 @@ import com.yyq58.R;
 import com.yyq58.activity.LoginActivity;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.bean.FieldErrors;
+import com.yyq58.activity.bean.UploadImgBean;
 import com.yyq58.activity.httpstack.OkHttpStack;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.PermissionUtils;
@@ -328,13 +329,13 @@ public abstract class BaseActivity extends FragmentActivity {
                 String json = (String) responseInfo.result;
                 Log.d("Dong", "上传头像成功返回json --->" + json);
                 toastMessage("上传成功");
-//                UploadImgBean uploadImgBean = JSON.parseObject(json, UploadImgBean.class);
-//                if ("1".equals(uploadImgBean.getResultCode())) { //上传成功
-//                    toastMessage("上传成功");
-//                    getImageUrl(uploadImgBean.getResultMsg());
-//                } else {
-//                    Toast.makeText(BaseActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
-//                }
+                UploadImgBean uploadImgBean = JSON.parseObject(json, UploadImgBean.class);
+                if (1000 == uploadImgBean.getCode()) { //上传成功
+                    toastMessage("上传成功");
+                    getImageUrl(uploadImgBean.getData().get(0));
+                } else {
+                    Toast.makeText(BaseActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -600,10 +601,10 @@ public abstract class BaseActivity extends FragmentActivity {
                         || StatusUtils.MIUISetStatusBarLightMode(this.getWindow(), true)
                         || StatusUtils.FlymeSetStatusBarLightMode(this.getWindow(), true)) {
                     StatusUtils.StatusBarLightMode(this);
-                    StatusUtils.setStatusBarColor(this, R.color.white);
+                    StatusUtils.setStatusBarColor(this, R.color.color_4b3a75);
                     setStatusBar();
                 } else {
-                    StatusUtils.setStatusBarColor(this, R.color.white);
+                    StatusUtils.setStatusBarColor(this, R.color.color_4b3a75);
                     setStatusBar();
                 }
             }
@@ -623,7 +624,7 @@ public abstract class BaseActivity extends FragmentActivity {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             if (Build.VERSION.SDK_INT >= 21) {
-                window.setStatusBarColor(getResources().getColor(R.color.white));//状态栏颜色
+                window.setStatusBarColor(getResources().getColor(R.color.color_4b3a75));//状态栏颜色
             }
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRlChild.getLayoutParams();
             params.setMargins(0, getStatusBarHeight(), 0, 0);

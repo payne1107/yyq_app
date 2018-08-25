@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/sys_title" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/color_4b3a75"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_size_35"
+            android:textColor="@color/text_color_6"
+            android:text="账户余额"
+            android:textSize="@dimen/text_size_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginBottom="@dimen/margin_size_35"
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:textColor="@color/white"
+            android:text="￥0"
+            android:textSize="@dimen/text_size_30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:textSize="@dimen/text_size_28"
+            android:textColor="@color/text_color_3"
+            android:text="提现"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginRight="@dimen/margin_size_15"
+                android:src="@mipmap/icon_list_arrow_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:textSize="@dimen/text_size_28"
+            android:textColor="@color/text_color_3"
+            android:text="充值"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:src="@mipmap/icon_list_arrow_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.zhy.autolayout.AutoLinearLayout>
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_marginTop="@dimen/margin_size_5"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:textSize="@dimen/text_size_28"
+            android:textColor="@color/text_color_3"
+            android:text="所有账单"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:src="@mipmap/icon_list_arrow_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

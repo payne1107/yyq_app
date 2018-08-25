@@ -39,8 +39,12 @@ public class MyApplication extends Application{
     public static String userId = "";
     //用户的邀请码
     public static String inviteCode = "";
+    //用户手机号
+    public static String userPhone = "";
 
     private static MyApplication mInstance;
+    //记录上次选择的城市位置
+    public static String currentCity;
 
     public static MyApplication getApplication() {
         if (mInstance == null) {
