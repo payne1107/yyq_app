@@ -1,7 +1,6 @@
 package com.yyq58.activity.utils;
 
 
-import com.yyq58.activity.MainActivity;
 import com.yyq58.activity.application.MyApplication;
 
 /**
@@ -41,5 +40,16 @@ public class ConfigUtil {
      */
     public static final String QUERY_MINE_ACQUIREMENT_URL = MyApplication.REQUEST_URL + "appv1consumerlabel/getAllLabel.do";
     public static final int QUERY_MINE_ACQUIREMENT_URL_ACTION = 5;
+    /****
+     * 忘记密码 ->获取验证码
+     */
+    public static final String GET_REMEBER_PWD_VERITIFY_CODE_URL = MyApplication.REQUEST_URL + "appv1Consumer/smsPwd.do";
+    public static final int GET_REMEBER_PWD_VERITIFY_CODE_URL_ACTION = 6;
+    /****
+     * 找回密码--->重置密码
+     */
+    public static final String RESET_PWD_URL = MyApplication.REQUEST_URL + "appv1Consumer/resetPwd.do";
+    public static final int RESET_PWD_URL_ACTION = 7;
+
 
 }

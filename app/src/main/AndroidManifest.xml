@@ -111,6 +111,9 @@
         <activity
             android:name=".activity.IntegralActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RemberPwdActivity"
+            android:screenOrientation="portrait" />
 
         <!-- FileProvider配置访问路径，适配7.0及其以上 -->
         <provider
