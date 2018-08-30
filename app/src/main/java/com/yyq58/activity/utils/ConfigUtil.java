@@ -50,6 +50,11 @@ public class ConfigUtil {
      */
     public static final String RESET_PWD_URL = MyApplication.REQUEST_URL + "appv1Consumer/resetPwd.do";
     public static final int RESET_PWD_URL_ACTION = 7;
+    /***
+     * 获取首页通告列表
+     */
+    public static final String QUERY_APPV1_NOTICE_LIST_URL = MyApplication.REQUEST_URL + "appv1notice/list.do";
+    public static final int QUERY_APPV1_NOTICE_LIST_URL_ACTION = 8;
 
 
 }
