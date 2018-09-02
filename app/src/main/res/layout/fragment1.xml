@@ -36,7 +36,7 @@
                 android:text="合肥市" />
 
             <EditText
-                android:id="@+id/et_phone"
+                android:id="@+id/et_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_size_10"

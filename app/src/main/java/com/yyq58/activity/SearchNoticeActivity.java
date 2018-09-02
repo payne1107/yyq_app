@@ -1,12 +1,10 @@
-package com.yyq58.activity.fragment;
+package com.yyq58.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.provider.ContactsContract;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,12 +15,12 @@ import com.alibaba.fastjson.JSON;
 import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.itheima.pulltorefreshlib.PullToRefreshListView;
 import com.yyq58.R;
-import com.yyq58.activity.NoticeDetailsActivity;
 import com.yyq58.activity.adapter.NewestFragmentAdapter;
 import com.yyq58.activity.application.MyApplication;
-import com.yyq58.activity.base.BaseFragment;
+import com.yyq58.activity.base.BaseActivity;
 import com.yyq58.activity.bean.Appv1NoticeBean;
 import com.yyq58.activity.utils.ConfigUtil;
+import com.yyq58.activity.utils.StatusUtils;
 import com.yyq58.activity.utils.StringUtils;
 import com.yyq58.activity.widget.IRecycleViewOnItemClickListener;
 import com.yyq58.activity.widget.MyDialog;
@@ -32,44 +30,50 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AnchorFragment extends BaseFragment {
+/****
+ * 搜索公告
+ */
+public class SearchNoticeActivity extends BaseActivity implements View.OnClickListener {
 
-    private View mRootView;
+    private Context mContet;
     private PullToRefreshListView listView;
     private List<Appv1NoticeBean.DataBean> mList = new ArrayList<>();
     private int page = 1;
     private NewestFragmentAdapter adapter;
     private boolean swipeLoadMore = false;
+    private EditText editSearch;
 
     @Override
-    public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (mRootView == null) {
-            mRootView = inflater.inflate(R.layout.fragment_newest_layout, null);
-        }
-        //缓存的rootView需要判断是否已经被加过parent,如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
-        ViewGroup parent = (ViewGroup) mRootView.getParent();
-        if (parent != null) {
-            parent.removeView(mRootView);
-        }
-        return mRootView;
+    protected void onCreateCustom(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_serarch_notice);
+        mContet = SearchNoticeActivity.this;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initView();
+    protected void initData() {
+
     }
 
-    private void initView() {
-        listView = mRootView.findViewById(R.id.listView);
+    @Override
+    protected void initView() {
+        super.initView();
+        setInVisibleTitleIcon("", true, true);
+        editSearch = findViewById(R.id.et_search);
+        editSearch.setVisibility(View.VISIBLE);
+        tvSet.setText("搜索");
+        tvSet.setTextColor(getResources().getColor(R.color.white));
+        tvSet.setVisibility(View.VISIBLE);
+
+        listView = findViewById(R.id.listView);
         listView.setMode(PullToRefreshBase.Mode.BOTH);
-        adapter = new NewestFragmentAdapter(getActivity(), mList);
+        adapter = new NewestFragmentAdapter(mContet, mList);
         listView.setAdapter(adapter);
 
         setListener();
     }
 
     private void setListener() {
+        tvSet.setOnClickListener(this);
         listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -91,7 +95,7 @@ public class AnchorFragment extends BaseFragment {
             public void onItemClick(View view, int position) {
                 Appv1NoticeBean.DataBean bean = mList.get(position);
                 final String noticeId = bean.getNoticeId();
-                final MyDialog dialog = new MyDialog(getActivity());
+                final MyDialog dialog = new MyDialog(mContet);
                 dialog.setContentView(R.layout.dialog_qiangdan_layout);
                 dialog.show();
                 TextView tvConfirm = dialog.findViewById(R.id.positiveButton);
@@ -103,7 +107,7 @@ public class AnchorFragment extends BaseFragment {
                         //确定
                         String money = etMoney.getText().toString();
                         if (StringUtils.isEmpty(money)) {
-                            Toast.makeText(getActivity(), "抢单金额不能为空", Toast.LENGTH_LONG).show();
+                            Toast.makeText(mContet, "抢单金额不能为空", Toast.LENGTH_LONG).show();
                             return;
                         }
                         qiangDanPost(MyApplication.userId, noticeId, money);
@@ -132,7 +136,7 @@ public class AnchorFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), NoticeDetailsActivity.class);
+                Intent intent = new Intent(mContet, NoticeDetailsActivity.class);
                 Appv1NoticeBean.DataBean bean = (Appv1NoticeBean.DataBean) adapterView.getAdapter().getItem(i);
                 if (bean != null) {
                     String title = bean.getTitle();
@@ -148,25 +152,25 @@ public class AnchorFragment extends BaseFragment {
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
-        queryNoticeList(page, 3, "", "", "", "", "");
+        StatusUtils.setStatusBarColor(this, R.color.color_4b3a75);
     }
 
-    /****
-     * 发起抢单请求
-     * @param consumer_id  用户id
-     * @param notice_id 通告id
-     * @param money 金额
-     */
-    private void qiangDanPost(String consumer_id, String notice_id, String money) {
-        startIOSDialogLoading(getActivity(), "");
-        Map<String, String> params = new HashMap<>();
-        params.put("consumer_id", consumer_id);
-        params.put("notice_id", notice_id);
-        params.put("money", money);
-        httpPostRequest(ConfigUtil.SAVE_QIANG_DAN_URL, params, ConfigUtil.SAVE_QIANG_DAN_URL_ACTION);
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.activity_set:
+                String strSearch = editSearch.getText().toString().trim();
+                if (StringUtils.isEmpty(strSearch)) {
+                    toastMessage("搜索条件不能为空");
+                    return;
+                }
+                queryNoticeList(page,0, strSearch, "", "", "", "");
+                break;
+        }
     }
+
 
     /****
      * 查询通告列表数据
@@ -179,6 +183,7 @@ public class AnchorFragment extends BaseFragment {
      * @param labelId 标签
      */
     private void queryNoticeList(int page, int type, String keywords, String province, String city, String county, String labelId) {
+        startIOSDialogLoading(mContet, "");
         Map<String, String> params = new HashMap<>();
         params.put("page", String.valueOf(page));
         params.put("TYPE", String.valueOf(type));
@@ -200,6 +205,22 @@ public class AnchorFragment extends BaseFragment {
         httpPostRequest(ConfigUtil.QUERY_APPV1_NOTICE_LIST_URL, params, ConfigUtil.QUERY_APPV1_NOTICE_LIST_URL_ACTION);
     }
 
+    /****
+     * 发起抢单请求
+     * @param consumer_id  用户id
+     * @param notice_id 通告id
+     * @param money 金额
+     */
+    private void qiangDanPost(String consumer_id, String notice_id, String money) {
+        startIOSDialogLoading(mContet, "");
+        Map<String, String> params = new HashMap<>();
+        params.put("consumer_id", consumer_id);
+        params.put("notice_id", notice_id);
+        params.put("money", money);
+        httpPostRequest(ConfigUtil.SAVE_QIANG_DAN_URL, params, ConfigUtil.SAVE_QIANG_DAN_URL_ACTION);
+    }
+
+
     @Override
     public void httpOnResponse(String json, int action) {
         super.httpOnResponse(json, action);
@@ -209,7 +230,7 @@ public class AnchorFragment extends BaseFragment {
                 break;
             case ConfigUtil.SAVE_QIANG_DAN_URL_ACTION:
                 if (getRequestCode(json) == 1000) {
-                    Toast.makeText(getActivity(), "抢单成功", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContet, "抢单成功", Toast.LENGTH_LONG).show();
                 }
                 break;
         }

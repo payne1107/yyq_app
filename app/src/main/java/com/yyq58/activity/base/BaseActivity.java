@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -34,12 +35,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.itheima.pulltorefreshlib.PullToRefreshListView;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 import com.yyq58.R;
 import com.yyq58.activity.LoginActivity;
 import com.yyq58.activity.application.MyApplication;
@@ -71,10 +78,10 @@ public abstract class BaseActivity extends FragmentActivity {
     private Activity mContext;
     //加载对话框
     public LoadingDailog loadingDailog;
-    private RelativeLayout mRlChild;
-    private TextView tvTitle;
-    private ImageView ivBack;
-    private TextView tvSet;
+    protected RelativeLayout mRlChild;
+    protected TextView tvTitle;
+    protected ImageView ivBack;
+    protected TextView tvSet;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -706,4 +713,75 @@ public abstract class BaseActivity extends FragmentActivity {
         return resultCode;
     }
 
+    /****
+     * 分享功能
+     * @param share_media 分享的类型
+     * @param mContext 上下文
+     * @param inviteUrl 分享的链接
+     * @param userPhone 用戶手機號
+     */
+    public void shareAction(SHARE_MEDIA share_media, Context mContext, String inviteUrl, String userPhone,String title) {
+        UMImage image = new UMImage(mContext, R.drawable.splash_logo);
+        UMWeb web = new UMWeb(inviteUrl + userPhone);
+        web.setTitle(title);//标题
+        web.setThumb(image);  //缩略图
+        web.setDescription("演壹圈，全国都在用……");//描述
+        new ShareAction(this).withMedia(web)
+                .setPlatform(share_media)
+                .setCallback(umShareListener)
+                .share();
+    }
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+            //分享开始的回调
+            Log.d("Dong", "onStart platform" + platform);
+        }
+
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Log.d("Dong", " 分享成功啦" + platform);
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            if (t != null) {
+                Log.d("Dong", "throw:" + t.getMessage());
+            }
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Log.d("Dong","------------------>"+platform.name()) ;
+            if (platform.name().equals("SINA")) {
+                return;
+            } else if (platform.name().equals("WEIXIN")) {
+                toastMessage("微信邀请取消了");
+                return;
+            } else if ("WEIXIN_CIRCLE".equals(platform.name())) {
+                toastMessage("微信朋友圈分享取消了");
+                return;
+            } else if ("QQ".equals(platform.name())) {
+                toastMessage("QQ分享取消了");
+                return;
+            }
+            // toastMessage(platform + "邀请取消了");
+        }
+    };
+
+    /****
+     * 设置数据为空显示的view
+     * @param pullToRefreshListView
+     */
+    private View view = null;
+    public void setEmptyView(PullToRefreshListView pullToRefreshListView) {
+        if (view == null) {
+            view = LayoutInflater.from(mContext).inflate(R.layout.layout_empty, null);
+            if (pullToRefreshListView != null) {
+                pullToRefreshListView.setEmptyView(view);
+            }
+        }
+    }
 }

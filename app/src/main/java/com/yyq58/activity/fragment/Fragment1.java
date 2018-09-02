@@ -8,11 +8,13 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yyq58.R;
+import com.yyq58.activity.SearchNoticeActivity;
 import com.yyq58.activity.adapter.TalentTypeAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
@@ -32,6 +34,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
     private AutoLinearLayout layoutYR;
     private TextView tvSeachYR;
     private TextView tvYRDynamic;
+    private EditText etSearch;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
         layoutYR = mRootView.findViewById(R.id.layout_yr);
         tvSeachYR = mRootView.findViewById(R.id.tv_search_yr);
         tvYRDynamic = mRootView.findViewById(R.id.tv_yr_dynamic);
+        etSearch = mRootView.findViewById(R.id.et_search);
 
         TabLayout tabLayout = mRootView.findViewById(R.id.tabLayout);
         ViewPager viewPager = mRootView.findViewById(R.id.viewpager);
@@ -74,6 +78,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
         ivOpen.setOnClickListener(this);
         tvYRDynamic.setOnClickListener(this);
         tvSeachYR.setOnClickListener(this);
+        etSearch.setOnClickListener(this);
     }
 
     @Override
@@ -104,6 +109,9 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.tv_search_yr:
                 Toast.makeText(getActivity(), "1233333333333", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.et_search:
+                startActivity(new Intent(getActivity(), SearchNoticeActivity.class));
                 break;
         }
     }

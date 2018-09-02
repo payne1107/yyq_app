@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <com.zhy.autolayout.AutoLinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:textSize="@dimen/text_size_30"
+            android:textColor="@color/text_color_3"
+            android:text="合肥合肥合肥分行而非河岸发奋读书 大飞洒发是否但是大幅爱的"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24"
+                android:text="价格："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_price"
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24"
+                android:text="自报价"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.zhy.autolayout.AutoLinearLayout>
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24"
+                android:text="时间："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_time"
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24"
+                android:text="2018-09-09 17:25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.zhy.autolayout.AutoLinearLayout>
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24"
+                android:text="地点："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_location"
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24"
+                android:text="安徽省合肥市包河区"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24"
+                android:text="发布时间"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_create_time"
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24"
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.zhy.autolayout.AutoLinearLayout>
+        <View
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:background="@color/color_e"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <com.zhy.autolayout.AutoLinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/margin_size_20"
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_26"
+                    android:text="浏览次数："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_browser_num"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_26"
+                    android:text="12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.zhy.autolayout.AutoLinearLayout>
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/layout_is_qiangdan"
+                android:layout_marginLeft="@dimen/margin_size_10"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_edit_notice"
+                    android:drawableLeft="@mipmap/icon_history_edit"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_26"
+                    android:text="编辑"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_dele_notice"
+                    android:layout_marginRight="@dimen/margin_size_10"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:drawableLeft="@mipmap/icon_history_delete"
+                    android:textColor="@color/google_red"
+                    android:textSize="@dimen/text_size_26"
+                    android:text="删除"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_set_full"
+                    android:drawableLeft="@mipmap/icon_jiaguanzhu_white"
+                    android:textColor="@color/google_red"
+                    android:textSize="@dimen/text_size_26"
+                    android:text="设为满员"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+</com.zhy.autolayout.AutoLinearLayout>

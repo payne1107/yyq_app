@@ -7,8 +7,6 @@
 
     <LinearLayout
         android:gravity="center"
-        android:layout_marginRight="56px"
-        android:layout_marginLeft="56px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -21,18 +19,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="提示"
+            android:text="提示\n请输入抢单价格"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_size_36" />
-        <TextView
+        <EditText
+            android:layout_marginRight="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_10"
             android:id="@+id/message"
-            android:maxLines="2"
+            android:maxLines="1"
+            android:inputType="number"
             android:layout_marginBottom="@dimen/margin_size_30"
             android:layout_marginTop="@dimen/margin_size_15"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/str_start_task_des"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_size_32" />
 

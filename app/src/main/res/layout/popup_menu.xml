@@ -237,50 +237,101 @@
     <com.zhy.autolayout.AutoLinearLayout
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/layout_release_order"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:src="@mipmap/icon_release_notice"
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/layout_release_order"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:textSize="@dimen/text_size_30"
-                android:layout_marginTop="@dimen/margin_size_5"
-                android:textColor="@color/text_color_3"
-                android:text="通告"
+                <ImageView
+                    android:src="@mipmap/icon_release_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="@dimen/text_size_30"
+                    android:layout_marginTop="@dimen/margin_size_5"
+                    android:textColor="@color/text_color_3"
+                    android:text="通告"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.zhy.autolayout.AutoLinearLayout>
+            <com.zhy.autolayout.AutoLinearLayout
+                android:id="@+id/layout_release_pic"
+                android:layout_marginLeft="@dimen/margin_size_30"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@mipmap/icon_release_seek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="@dimen/text_size_30"
+                    android:layout_marginTop="@dimen/margin_size_5"
+                    android:textColor="@color/text_color_3"
+                    android:text="求单"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.zhy.autolayout.AutoLinearLayout>
         </com.zhy.autolayout.AutoLinearLayout>
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/layout_release_pic"
-            android:layout_marginLeft="@dimen/margin_size_30"
+            android:layout_marginTop="@dimen/margin_size_20"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:src="@mipmap/icon_release_seek"
+            <com.zhy.autolayout.AutoLinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:textSize="@dimen/text_size_30"
-                android:layout_marginTop="@dimen/margin_size_5"
-                android:textColor="@color/text_color_3"
-                android:text="求单"
+                <ImageView
+                    android:src="@mipmap/icon_release_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="@dimen/text_size_30"
+                    android:layout_marginTop="@dimen/margin_size_5"
+                    android:textColor="@color/text_color_3"
+                    android:text="通告"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.zhy.autolayout.AutoLinearLayout>
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_marginLeft="@dimen/margin_size_30"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@mipmap/icon_release_seek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="@dimen/text_size_30"
+                    android:layout_marginTop="@dimen/margin_size_5"
+                    android:textColor="@color/text_color_3"
+                    android:text="求单"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.zhy.autolayout.AutoLinearLayout>
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>
 

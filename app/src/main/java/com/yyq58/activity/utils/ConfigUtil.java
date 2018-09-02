@@ -3,6 +3,7 @@ package com.yyq58.activity.utils;
 
 import com.yyq58.activity.application.MyApplication;
 
+
 /**
  * Created by Administrator on 2017/9/29 0029.
  * 网络地址存放
@@ -14,6 +15,10 @@ public class ConfigUtil {
     public static String sessionId;
     public static final String SAVE_CITY_ID="city_id";
     public static final String SAVE_CITY_NAME="city_name";
+    /***
+     * 分享的链接地址
+     */
+    public static final String INVTITE_SHARE_URL = "https://wxapi.yyq58.com/share/modules/notice-details.html?noticeId=";
 
     /****
      * 注册短信验证码接口
@@ -55,6 +60,40 @@ public class ConfigUtil {
      */
     public static final String QUERY_APPV1_NOTICE_LIST_URL = MyApplication.REQUEST_URL + "appv1notice/list.do";
     public static final int QUERY_APPV1_NOTICE_LIST_URL_ACTION = 8;
-
+    /****
+     * 发起抢单
+     */
+    public static final String SAVE_QIANG_DAN_URL = MyApplication.REQUEST_URL + "appv1notice/savenBaoMing.do";
+    public static final int SAVE_QIANG_DAN_URL_ACTION = 9;
+    /****
+     * 通告详情
+     */
+    public static final String QUERY_NOTICE_DETAILS_URL = MyApplication.REQUEST_URL + "appv1notice/findById.do";
+    public static final int QUERY_NOTICE_DETAILS_URL_ACTION = 10;
+    /****
+     * 推荐公告
+     */
+    public static final String QUERY_RECOMMEND_NOTICE_LIST_URL = MyApplication.REQUEST_URL + "appv1notice/recommendNotice.do";
+    public static final int QUERY_RECOMMEND_NOTICE_LIST_URL_ACTION = 11;
+    /****
+     * 历史纪录 --》 通告列表
+     */
+    public static final String QUERY_NOTICE_LIST_URL = MyApplication.REQUEST_URL + "appv1notice/getNoticeByConsumerId.do";
+    public static final int QUERY_NOTICE_LIST_URL_ACTION = 12;
+    /****
+     * 编辑通告
+     */
+    public static final String EDIT_NOTICE_URL = MyApplication.REQUEST_URL + "appv1notice/editNotice.do";
+    public static final int EDIT_NOTICE_URL_ACTION = 13;
+    /****
+     * 历史纪录---》删除通告
+     */
+    public static final String DELETE_NOTICE_URL = MyApplication.REQUEST_URL + "appv1notice/deteteById.do";
+    public static final int DELETE_NOTICE_URL_ACTION = 14;
+    /****
+     * 历史纪录--》设为满员
+     */
+    public static final String UPDATE_NOTICE_MANYUAN_URL = MyApplication.REQUEST_URL + "appv1notice/updateManYuan.do";
+    public static final int UPDATE_NOTICE_MANYUAN_URL_ACTION = 15;
 
 }

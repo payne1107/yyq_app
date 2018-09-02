@@ -1,21 +1,31 @@
 package com.yyq58.activity.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.itheima.pulltorefreshlib.PullToRefreshListView;
 import com.yyq58.R;
+import com.yyq58.activity.NoticeDetailsActivity;
 import com.yyq58.activity.adapter.NewestFragmentAdapter;
+import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
 import com.yyq58.activity.bean.Appv1NoticeBean;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.StringUtils;
+import com.yyq58.activity.widget.IRecycleViewOnItemClickListener;
+import com.yyq58.activity.widget.MyDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,6 +86,67 @@ public class NewestFragNment extends BaseFragment {
                 queryNoticeList(page,0,"","","","","");
             }
         });
+
+        //抢单点击事件
+        adapter.setOnItemClickListener(new IRecycleViewOnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Appv1NoticeBean.DataBean bean = mList.get(position);
+                final String noticeId = bean.getNoticeId();
+                final MyDialog dialog = new MyDialog(getActivity());
+                dialog.setContentView(R.layout.dialog_qiangdan_layout);
+                dialog.show();
+                TextView tvConfirm = dialog.findViewById(R.id.positiveButton);
+                TextView tvCancel = dialog.findViewById(R.id.negativeButton);
+                final EditText etMoney = dialog.findViewById(R.id.message);
+                tvConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //确定
+                        String money = etMoney.getText().toString();
+                        if (StringUtils.isEmpty(money)) {
+                            Toast.makeText(getActivity(),"抢单金额不能为空",Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        qiangDanPost(MyApplication.userId, noticeId, money);
+                        dialog.dismiss();
+                    }
+                });
+
+                tvCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //取消
+                        dialog.dismiss();
+                    }
+                });
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        });
+
+        /****
+         * listviewItem点击事件
+         */
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), NoticeDetailsActivity.class);
+                Appv1NoticeBean.DataBean bean = (Appv1NoticeBean.DataBean) adapterView.getAdapter().getItem(i);
+                if (bean != null) {
+                    String title = bean.getTitle();
+                    String noticeid = bean.getNoticeId();
+                    boolean isDeadtime = bean.isDeadTime();
+                    intent.putExtra("isDeadtime", isDeadtime);
+                    intent.putExtra("noticeTitle", title);
+                    intent.putExtra("noticeid", noticeid);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -83,6 +154,22 @@ public class NewestFragNment extends BaseFragment {
         super.onResume();
         queryNoticeList(page, 0, "", "", "", "", "");
     }
+
+    /****
+     * 发起抢单请求
+     * @param consumer_id  用户id
+     * @param notice_id 通告id
+     * @param money 金额
+     */
+    private void qiangDanPost(String consumer_id, String notice_id, String money) {
+        startIOSDialogLoading(getActivity(), "");
+        Map<String, String> params = new HashMap<>();
+        params.put("consumer_id", consumer_id);
+        params.put("notice_id", notice_id);
+        params.put("money", money);
+        httpPostRequest(ConfigUtil.SAVE_QIANG_DAN_URL, params, ConfigUtil.SAVE_QIANG_DAN_URL_ACTION);
+    }
+
 
     /****
      * 查询通告列表数据
@@ -123,6 +210,11 @@ public class NewestFragNment extends BaseFragment {
         switch (action) {
             case ConfigUtil.QUERY_APPV1_NOTICE_LIST_URL_ACTION:
                 handleQueryAppv1NoticeList(json);
+                break;
+            case ConfigUtil.SAVE_QIANG_DAN_URL_ACTION:
+                if (getRequestCode(json) == 1000) {
+                    Toast.makeText(getActivity(), "抢单成功", Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }

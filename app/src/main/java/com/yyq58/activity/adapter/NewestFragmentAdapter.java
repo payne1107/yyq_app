@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.yyq58.R;
 import com.yyq58.activity.bean.Appv1NoticeBean;
 import com.yyq58.activity.utils.StringUtils;
+import com.yyq58.activity.widget.IRecycleViewOnItemClickListener;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -49,7 +50,7 @@ public class NewestFragmentAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
@@ -75,25 +76,26 @@ public class NewestFragmentAdapter extends BaseAdapter {
             int browserNum = bean.getViews();
             String time = bean.getTime();
             String createTime = bean.getCreateTime();
-            int isQiuDan = bean.getIsQiudan();
-            String reason =bean.getReason();
-            if (isQiuDan == 1) {
-                holder.layoutIsQiangDan.setVisibility(View.VISIBLE);
-            } else {
-                holder.layoutIsQiangDan.setVisibility(View.GONE);
-            }
-            if (StringUtils.isEmpty(reason)) {
+            boolean isdeadTime = bean.isDeadTime();
+
+            if (isdeadTime) {
                 holder.ivGuoQi.setVisibility(View.VISIBLE);
             } else {
                 holder.ivGuoQi.setVisibility(View.GONE);
             }
-
             holder.tvBrowserNum.setText("" + browserNum);
             holder.tvLocation.setText(StringUtils.isEmpty(location) ? "" : location);
             holder.tvPrice.setText(StringUtils.isEmpty(price) ? "" : price);
             holder.tvTime.setText(StringUtils.isEmpty(time) ? "" : time);
             holder.tvTime2.setText(StringUtils.isEmpty(createTime) ? "" : createTime);
             holder.tvTitle.setText(StringUtils.isEmpty(title) ? "" : title);
+
+            holder.layoutIsQiangDan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onItemClick(view, i);
+                }
+            });
         }
         return view;
     }
@@ -107,5 +109,10 @@ public class NewestFragmentAdapter extends BaseAdapter {
         public TextView tvLocation;
         public AutoLinearLayout layoutIsQiangDan;
         public ImageView ivGuoQi;
+    }
+
+    private IRecycleViewOnItemClickListener mOnItemClickListener;//声明接口
+    public void setOnItemClickListener(IRecycleViewOnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
     }
 }
