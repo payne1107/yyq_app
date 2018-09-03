@@ -121,8 +121,47 @@ public class AnnunciateFragNment extends BaseFragment {
             @Override
             public void onSaveClick(View view, int position) {
                 //设为满员
+                setNoticeFull(position);
             }
         });
+    }
+
+    /****
+     * 设为满员
+     * @param position
+     */
+    private void setNoticeFull(int position) {
+        AnnuciteFragmentBean.DataBean bean = mList.get(position);
+        final String noticeId = bean.getNoticeId();
+        final MyDialog dialog = new MyDialog(getActivity());
+        dialog.setTitle("满员提示");
+        dialog.setMessage("是否确认设置为满员");
+        dialog.setOnPositiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setNoticeFull(noticeId,1);
+                dialog.dismiss();
+            }
+        });
+        dialog.setOnNegativeListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    /***
+     * 设置为满员请求
+     * @param noticeId 通告id
+     * @param status 满员状态 1
+     */
+    private void setNoticeFull(String noticeId, int status) {
+        Map<String, String> params = new HashMap<>();
+        params.put("noticeId", noticeId);
+        params.put("status", String.valueOf(status));
+        httpPostRequest(ConfigUtil.UPDATE_NOTICE_MANYUAN_URL, params, ConfigUtil.UPDATE_NOTICE_MANYUAN_URL_ACTION);
     }
 
     /***
@@ -203,6 +242,12 @@ public class AnnunciateFragNment extends BaseFragment {
                 if (getRequestCode(json) == 1000) {
                     Toast.makeText(getActivity(), "删除通告成功", Toast.LENGTH_LONG).show();
                     queryNoticeList(MyApplication.userId, page);
+                }
+                break;
+            case ConfigUtil.UPDATE_NOTICE_MANYUAN_URL_ACTION:
+                //满员
+                if (getRequestCode(json) == 1000) {
+                    Toast.makeText(getActivity(), "设置满员成功", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
