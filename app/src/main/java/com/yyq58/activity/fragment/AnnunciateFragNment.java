@@ -80,8 +80,38 @@ public class AnnunciateFragNment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), AnnunciateDetailsActivity.class);
-                startActivity(intent);
+                AnnuciteFragmentBean.DataBean bean = (AnnuciteFragmentBean.DataBean) adapterView.getAdapter().getItem(i);
+                if (bean != null) {
+                    String noticeId = bean.getNoticeId();
+                    String avatarUrl = bean.getAvatar();
+                    String accountName = bean.getAccount();
+                    String createTime = bean.getCreateTime();
+                    String title =bean.getTitle();
+                    String content = bean.getContent();
+                    String typename = bean.getTypeName();
+                    String price = bean.getPrice();
+                    String time = bean.getTime();
+                    String location = bean.getPlace();
+                    String province =bean.getProvince();
+                    String city = bean.getCity();
+                    int type = bean.getType();
+                    Intent intent = new Intent(getActivity(), AnnunciateDetailsActivity.class);
+                    intent.putExtra("noticeId", noticeId);
+                    intent.putExtra("avatarUrl", avatarUrl);
+                    intent.putExtra("accountName", accountName);
+                    intent.putExtra("createTime", createTime);
+                    intent.putExtra("title", title);
+                    intent.putExtra("content", content);
+                    intent.putExtra("typename", typename);
+                    intent.putExtra("price", price);
+                    intent.putExtra("time", time);
+                    intent.putExtra("location", location);
+                    intent.putExtra("province", province);
+                    intent.putExtra("city", city);
+                    intent.putExtra("type", type);
+
+                    startActivity(intent);
+                }
             }
         });
 
@@ -100,6 +130,12 @@ public class AnnunciateFragNment extends BaseFragment {
                     String content = bean.getContent();
                     int num = bean.getNum();
                     String noticeId = bean.getNoticeId();
+                    String manyuan = bean.getManyuan();
+                    String province =bean.getProvince();
+                    String city =bean.getCity();
+                    String county = bean.getCounty();
+                    String title = bean.getTypeName();
+
                     intent.putExtra("labelName",labelName );
                     intent.putExtra("time", time);
                     intent.putExtra("location", location);
@@ -108,6 +144,11 @@ public class AnnunciateFragNment extends BaseFragment {
                     intent.putExtra("content", content);
                     intent.putExtra("noticeId", noticeId);
                     intent.putExtra("num", num);
+                    intent.putExtra("manyuan", manyuan);
+                    intent.putExtra("province", province);
+                    intent.putExtra("city", city);
+                    intent.putExtra("county", county);
+                    intent.putExtra("title", title);
                     startActivity(intent);
                 }
             }
@@ -257,6 +298,7 @@ public class AnnunciateFragNment extends BaseFragment {
         if (listView != null && listView.isRefreshing()) {
             listView.onRefreshComplete();
         }
+        Log.d("Dong", "--->" +json);
         AnnuciteFragmentBean bean = JSON.parseObject(json, AnnuciteFragmentBean.class);
         if (bean != null) {
             mList = bean.getData();

@@ -2,6 +2,7 @@ package com.yyq58.activity.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +12,23 @@ import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.itheima.pulltorefreshlib.PullToRefreshListView;
 import com.yyq58.R;
 import com.yyq58.activity.adapter.QiuDanFragmentAdapter;
+import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
+import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.widget.IButtonClickListener;
 
+import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QiuDanFragment extends BaseFragment {
 
     private PullToRefreshListView listView;
     private List<String> mList = new ArrayList<>();
     private QiuDanFragmentAdapter adapter;
+    private int page = 1;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,5 +79,39 @@ public class QiuDanFragment extends BaseFragment {
         mList.add("测试3");
         adapter = new QiuDanFragmentAdapter(getActivity(), mList);
         listView.setAdapter(adapter);
+
+        queryQiudanList(MyApplication.userId,page);
+    }
+
+
+    /***
+     * 查询求单列表
+     * @param consumerId
+     * @param page
+     */
+    private void queryQiudanList(String consumerId,int page) {
+        Map<String, String> params = new HashMap<>();
+        params.put("consumerId", consumerId);
+        params.put("page", String.valueOf(page));
+        httpPostRequest(ConfigUtil.QUERY_QIUDAN_LIST_URL, params, ConfigUtil.QUERY_QIUDAN_LIST_URL_ACTION);
+    }
+
+    @Override
+    public void httpOnResponse(String json, int action) {
+        super.httpOnResponse(json, action);
+        switch (action) {
+            case ConfigUtil.QUERY_QIUDAN_LIST_URL_ACTION:
+                handleQueryQiuDanList(json);
+                break;
+        }
+    }
+
+    /***
+     * 求单列表处理
+     * @param json
+     */
+    private void handleQueryQiuDanList(String json) {
+        Log.d("Dong", "qd--->" +json);
+        
     }
 }

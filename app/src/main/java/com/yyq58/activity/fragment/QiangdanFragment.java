@@ -1,20 +1,30 @@
 package com.yyq58.activity.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.yyq58.R;
+import com.yyq58.activity.AnnunciateDetailsActivity;
 import com.yyq58.activity.adapter.QiangdanFragmentAdapter;
 import com.yyq58.activity.base.BaseFragment;
+import com.yyq58.activity.bean.QiangDanFragmentBean;
+import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.widget.IButtonClickListener;
 import com.yyq58.activity.widget.MyListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /***
  * 抢单艺人列表
@@ -22,8 +32,10 @@ import java.util.List;
 public class QiangdanFragment extends BaseFragment{
 
     private MyListView listview;
-    private List<String> mList = new ArrayList<>();
+    private List<QiangDanFragmentBean.DataBean> mList = new ArrayList<>();
     private QiangdanFragmentAdapter adapter;
+    private String noticeId;
+    private int page = 1;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +57,12 @@ public class QiangdanFragment extends BaseFragment{
         setListener();
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        noticeId  = ((AnnunciateDetailsActivity) activity).getNoticeId();
+    }
+
     private void setListener() {
         adapter.setOnItemClickListener(new IButtonClickListener() {
             @Override
@@ -62,14 +80,53 @@ public class QiangdanFragment extends BaseFragment{
                 Toast.makeText(getActivity(),"zhifu",Toast.LENGTH_LONG).show();
             }
         });
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), "跳转到个人中心", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void initView() {
         listview = mRootView.findViewById(R.id.listview);
-        mList.add("张三");
-        mList.add("里斯");
-        mList.add("payen");
         adapter = new QiangdanFragmentAdapter(getActivity(),mList);
         listview.setAdapter(adapter);
+        queryQiangdanList(noticeId,page);
+    }
+
+    /***
+     * 获取抢单艺人列表
+     * @param noticeId 通告id
+     * @param page
+     */
+    private void queryQiangdanList(String noticeId,int page) {
+        Map<String, String> params = new HashMap<>();
+        params.put("noticeId", noticeId);
+        params.put("page", String.valueOf(page));
+        httpPostRequest(ConfigUtil.QIANG_DAN_LISTS_BY_NOTICEID_URL, params, ConfigUtil.QIANG_DAN_LISTS_BY_NOTICEID_URL_ACTION);
+    }
+
+    @Override
+    public void httpOnResponse(String json, int action) {
+        super.httpOnResponse(json, action);
+        switch (action) {
+            case ConfigUtil.QIANG_DAN_LISTS_BY_NOTICEID_URL_ACTION:
+                handleQueryQiangdanLists(json);
+                break;
+        }
+    }
+
+    /***
+     * 抢单艺人列表
+     * @param json
+     */
+    private void handleQueryQiangdanLists(String json) {
+        QiangDanFragmentBean bean = JSON.parseObject(json, QiangDanFragmentBean.class);
+        if (bean != null) {
+             mList = bean.getData();
+            adapter.setData(mList);
+        }
     }
 }

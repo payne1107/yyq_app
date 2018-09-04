@@ -14,10 +14,15 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.yyq58.R;
+import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
 import com.yyq58.activity.fragment.QiangdanFragment;
 import com.yyq58.activity.fragment.TuijianFragment;
+import com.yyq58.activity.utils.ConfigUtil;
+import com.yyq58.activity.utils.StringUtils;
+import com.yyq58.activity.widget.CircleImageView;
 
 /***
  * 历史纪录---》通告详情
@@ -30,6 +35,11 @@ public class AnnunciateDetailsActivity extends BaseActivity implements View.OnCl
     private FrameLayout frameLayout;
     private Fragment[] mFragments;
     private int mIndex;
+    private String noticeId;
+    private String title;
+    private String province;
+    private String city;
+    private int type;
 
 
     @Override
@@ -50,6 +60,43 @@ public class AnnunciateDetailsActivity extends BaseActivity implements View.OnCl
         tvSet.setVisibility(View.VISIBLE);
         tvSet.setText("分享");
         tvSet.setTextColor(getResources().getColor(R.color.white));
+
+        noticeId = getIntent().getStringExtra("noticeId");
+        String avatarUrl =getIntent().getStringExtra("avatarUrl");
+        String accountName =getIntent().getStringExtra("accountName");
+        String createTime =getIntent().getStringExtra("createTime");
+        title = getIntent().getStringExtra("title");
+        String content =getIntent().getStringExtra("content");
+        String typename =getIntent().getStringExtra("typename");
+        String price =getIntent().getStringExtra("price");
+        String time = getIntent().getStringExtra("time");
+        String location = getIntent().getStringExtra("location");
+        province = getIntent().getStringExtra("province");
+        city = getIntent().getStringExtra("city");
+        type = getIntent().getIntExtra("type", 0);
+
+
+
+        CircleImageView circleImageView =findViewById(R.id.iv_avatar);
+        TextView tvUsername =findViewById(R.id.tv_username);
+        TextView tvDate = findViewById(R.id.tv_date);
+        TextView tvTitle =findViewById(R.id.tv_content);
+        TextView tvContent =findViewById(R.id.tv_content2);
+        TextView categoryType =findViewById(R.id.tv_category);
+        TextView tvPrice =findViewById(R.id.tv_price);
+        TextView tvLocation =findViewById(R.id.tv_location);
+        TextView tvEndTime = findViewById(R.id.tv_end_date);
+        if (!StringUtils.isEmpty(avatarUrl)) {
+            MyApplication.imageLoader.displayImage(avatarUrl, circleImageView);
+        }
+        tvUsername.setText(StringUtils.isEmpty(accountName) ? "" : accountName);
+        tvDate.setText(StringUtils.isEmpty(createTime) ? "" : createTime);
+        tvTitle.setText(StringUtils.isEmpty(title) ? "" : title);
+        tvContent.setText(StringUtils.isEmpty(content) ? "" : content);
+        categoryType.setText(StringUtils.isEmpty(typename) ? "" : typename);
+        tvPrice.setText(StringUtils.isEmpty(price) ? "" : price);
+        tvLocation.setText(StringUtils.isEmpty(location) ? "" : location);
+        tvEndTime.setText(StringUtils.isEmpty(time) ? "" : time);
 
         tvQiangdanYR = findViewById(R.id.tv_qiangdan_yr);
         tvTuijianYR = findViewById(R.id.tv_tuijian_yr);
@@ -74,11 +121,11 @@ public class AnnunciateDetailsActivity extends BaseActivity implements View.OnCl
                 showShareWindowDialog();
                 break;
             case R.id.tv_share_wx_cirle:
-                //shareAction(SHARE_MEDIA.WEIXIN_CIRCLE,mContext, ConfigUtil.INVTITE_SHARE_URL,noticeId,content);
+                shareAction(SHARE_MEDIA.WEIXIN_CIRCLE,mContext, ConfigUtil.INVTITE_SHARE_URL,noticeId,title);
                 dialog.dismiss();
                 break;
             case R.id.tv_share_wx_friend:
-                //shareAction(SHARE_MEDIA.WEIXIN, mContext, ConfigUtil.INVTITE_SHARE_URL, noticeId, content);
+                shareAction(SHARE_MEDIA.WEIXIN, mContext, ConfigUtil.INVTITE_SHARE_URL, noticeId, title);
                 dialog.dismiss();
                 break;
             case R.id.tv_cancel:
@@ -156,5 +203,22 @@ public class AnnunciateDetailsActivity extends BaseActivity implements View.OnCl
         tvShareWxCirle.setOnClickListener(this);
         tvShareWxFriend.setOnClickListener(this);
         tvCancel.setOnClickListener(this);
+    }
+
+    public String getNoticeId() {
+        return noticeId;
+    }
+    public String getProvince() {
+
+        return province;
+    }
+    public String getCity() {
+
+        return city;
+    }
+
+    public int getType() {
+
+        return type;
     }
 }

@@ -1,6 +1,7 @@
 package com.yyq58.activity.utils;
 
 
+import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.yyq58.activity.application.MyApplication;
 
 
@@ -95,5 +96,25 @@ public class ConfigUtil {
      */
     public static final String UPDATE_NOTICE_MANYUAN_URL = MyApplication.REQUEST_URL + "appv1notice/updateManYuan.do";
     public static final int UPDATE_NOTICE_MANYUAN_URL_ACTION = 15;
+    /***
+     * 抢单艺人列表
+     */
+    public static final String QIANG_DAN_LISTS_BY_NOTICEID_URL = MyApplication.REQUEST_URL + "appv1notice/getBaoMingListsByNoticeId.do";
+    public static final int QIANG_DAN_LISTS_BY_NOTICEID_URL_ACTION = 16;
+    /***
+     * 推荐艺人列表
+     */
+    public static final String QUERY_TUIJIAN_LISTS_URL = MyApplication.REQUEST_URL + "appv1notice/getRecommendConsumer.do";
+    public static final int QUERY_TUIJIAN_LISTS_URL_ACTION = 17;
+    /****
+     *  求单列表
+     */
+    public static final String QUERY_QIUDAN_LIST_URL = MyApplication.REQUEST_URL + "appv1qiudan/list.do";
+    public static final int QUERY_QIUDAN_LIST_URL_ACTION = 18;
+    /***
+     * 求单编辑
+     */
+    public static final String EDIT_QIUDAN_URL = MyApplication.REQUEST_URL + "appv1qiudan/update.do";
+    public static final int EDIT_QIUDAN_URL_ACTION = 19;
 
 }

@@ -1,5 +1,6 @@
 package com.yyq58.activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
 import com.lljjcoder.citypickerview.widget.CityPicker;
 import com.yyq58.R;
+import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.StringUtils;
@@ -20,6 +22,8 @@ import com.zhy.autolayout.AutoLinearLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /***
  * 通告编辑
@@ -34,10 +38,21 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
     private TextView tvTime;
     private String noticeId;
     private TextView tvLocation;
+    private Context mContext;
+    private EditText etPersonNum;
+    private String manyuan;
+    private EditText etContent;
+    private String district;
+    private String city;
+    private String province;
+    private EditText etDetailsLocation;
+    private int mianyi =0;
+    private String title;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
         setContentView(R.layout.activity_notice_edit);
+        mContext = NoticeEditActivity.this;
     }
 
     @Override
@@ -53,13 +68,13 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
         initViewDateDialog(this, System.currentTimeMillis() - ConfigUtil.TenYears);
 
         TextView tvCategory = findViewById(R.id.tv_category);
-        EditText etPersonNum =findViewById(R.id.et_person_num);
+        etPersonNum = findViewById(R.id.et_person_num);
         tvTime = findViewById(R.id.tv_time);
         tvLocation = findViewById(R.id.tv_location);
-        EditText etDetailsLocation =findViewById(R.id.et_details_location);
+        etDetailsLocation = findViewById(R.id.et_details_location);
         etPrice = findViewById(R.id.et_price);
         checkBox = findViewById(R.id.checkbox_price);
-        EditText etContent =findViewById(R.id.et_content);
+        etContent = findViewById(R.id.et_content);
         layoutSave = findViewById(R.id.layout_save);
 
         String labelName = getIntent().getStringExtra("labelName");
@@ -70,6 +85,13 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
         price = getIntent().getStringExtra("price");
         String content = getIntent().getStringExtra("content");
         int num = getIntent().getIntExtra("num", 0);
+        manyuan = getIntent().getStringExtra("manyuan");
+        province = getIntent().getStringExtra("province");
+        city = getIntent().getStringExtra("city");
+        district = getIntent().getStringExtra("county");
+        title = getIntent().getStringExtra("title");
+
+
 
         tvCategory.setText(StringUtils.isEmpty(labelName) ? "" : labelName);
         etPersonNum.setText("" + num);
@@ -90,8 +112,10 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
+                    mianyi = 1;
                     etPrice.setText("");
                 } else {
+                    mianyi = 0;
                     etPrice.setText(StringUtils.isEmpty(price) ? "" : price);
                 }
             }
@@ -103,6 +127,7 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.layout_save:
                 //保存
+                editNotice(noticeId);
                 break;
             case R.id.tv_time:
                 dialogDay.show(getSupportFragmentManager(), "all");
@@ -111,6 +136,65 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
                 //选择城市
                 showChooseCityDialog();
                 break;
+        }
+    }
+
+    /****
+     * 通告编辑
+     * @param noticeId 通告id
+     */
+    private void editNotice(String noticeId) {
+        String num = etPersonNum.getText().toString().trim();
+        String content = etContent.getText().toString().trim();
+        String detailLocation =etDetailsLocation.getText().toString().trim();
+        String price =etPrice.getText().toString().trim();
+        String time = tvTime.getText().toString();
+        if (StringUtils.isEmpty(detailLocation)) {
+            toastMessage("详细地址不能为空");
+            return;
+        }
+        if (StringUtils.isEmpty(content)) {
+            toastMessage("内容简介不能为空");
+            return;
+        }
+        startIOSDialogLoading(mContext, "");
+        Map<String, String> params = new HashMap<>();
+        params.put("noticeId", noticeId);
+        params.put("consumerId", MyApplication.userId);
+        params.put("labelName", title);
+        params.put("num", num);
+        params.put("manyuan", manyuan);
+        params.put("content", content);
+        params.put("province", province);
+        params.put("city", city);
+        params.put("county", district);
+        params.put("detailPlace", detailLocation);
+        params.put("mianyi", String.valueOf(mianyi));
+        params.put("time", time);
+        if (mianyi == 0) {
+            params.put("price", price);
+        }
+        httpPostRequest(ConfigUtil.EDIT_NOTICE_URL, params, ConfigUtil.EDIT_NOTICE_URL_ACTION);
+    }
+
+    @Override
+    protected void httpOnResponse(String json, int action) {
+        super.httpOnResponse(json, action);
+        switch (action) {
+            case ConfigUtil.EDIT_NOTICE_URL_ACTION:
+                handleEditNotice(json);
+                break;
+        }
+    }
+
+    /***
+     * 处理编辑通告
+     * @param json
+     */
+    private void handleEditNotice(String json) {
+        if (getRequestCode(json) == 1000) {
+            toastMessage("保存成功");
+            finish();
         }
     }
 
@@ -135,12 +219,14 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
                 .build();
         cityPicker.show();
         cityPicker.setOnCityItemClickListener(new CityPicker.OnCityItemClickListener() {
+
+
             @Override
             public void onSelected(String... citySelected) {
-                String province = citySelected[0];
-                String city = citySelected[1];
-                String district = citySelected[2];
-                tvLocation.setText(province + "-" + city + "-" + district );
+                province = citySelected[0];
+                city = citySelected[1];
+                district = citySelected[2];
+                tvLocation.setText(province + "-" + city + "-" + district);
             }
         });
     }

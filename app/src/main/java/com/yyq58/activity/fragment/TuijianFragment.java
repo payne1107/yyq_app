@@ -1,20 +1,29 @@
 package com.yyq58.activity.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.yyq58.R;
+import com.yyq58.activity.AnnunciateDetailsActivity;
 import com.yyq58.activity.adapter.TuijianFragmentAdapter;
 import com.yyq58.activity.base.BaseFragment;
+import com.yyq58.activity.bean.QiangDanFragmentBean;
+import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.widget.IButtonClickListener;
 import com.yyq58.activity.widget.MyListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /***
  * 推荐艺人列表
@@ -24,6 +33,10 @@ public class TuijianFragment extends BaseFragment{
     private MyListView listView;
     private List<String> mList = new ArrayList<>();
     private TuijianFragmentAdapter adapter;
+    private String province;
+    private String city;
+    private int type;
+    private int page = 1;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +78,14 @@ public class TuijianFragment extends BaseFragment{
         });
     }
 
+    @Override
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        province   = ((AnnunciateDetailsActivity) context).getProvince();
+        city  = ((AnnunciateDetailsActivity) context).getCity();
+        type  = ((AnnunciateDetailsActivity) context).getType();
+    }
+
     private void initView() {
         listView = mRootView.findViewById(R.id.listview);
         mList.add("不忘初心");
@@ -76,6 +97,38 @@ public class TuijianFragment extends BaseFragment{
         adapter = new TuijianFragmentAdapter(getActivity(),mList);
         listView.setAdapter(adapter);
 
+        queryTuijianList(type,page,province,city);
+    }
 
+    /***
+     * 获取推荐艺人列表
+     * @param type
+     * @param page
+     */
+    private void queryTuijianList(int type,int page,String province,String city) {
+        Map<String, String> params = new HashMap<>();
+        params.put("type", String.valueOf(type));
+        params.put("page", String.valueOf(page));
+        params.put("province", province);
+        params.put("city", city);
+        httpPostRequest(ConfigUtil.QUERY_TUIJIAN_LISTS_URL, params, ConfigUtil.QUERY_TUIJIAN_LISTS_URL_ACTION);
+    }
+
+    @Override
+    public void httpOnResponse(String json, int action) {
+        super.httpOnResponse(json, action);
+        switch (action) {
+            case ConfigUtil.QUERY_TUIJIAN_LISTS_URL_ACTION:
+                handleQueryTuijianLists(json);
+                break;
+        }
+    }
+
+    /***
+     * 推荐艺人列表
+     * @param json
+     */
+    private void handleQueryTuijianLists(String json) {
+        Log.d("Dong", "推荐艺人列表" + json);
     }
 }

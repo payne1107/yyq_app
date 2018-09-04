@@ -54,6 +54,7 @@
             android:textSize="@dimen/text_size_28" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/et_person_num"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
