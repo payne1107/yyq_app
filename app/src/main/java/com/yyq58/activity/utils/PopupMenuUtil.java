@@ -24,6 +24,8 @@ public class PopupMenuUtil {
     private static final String TAG = "PopupMenuUtil";
     private AutoLinearLayout layoutReleaseOrder;
     private AutoLinearLayout layoutReleasePic;
+    private AutoLinearLayout layoutReleaseNotice;
+    private AutoLinearLayout layoutReleaseVideo;
 
     public static PopupMenuUtil getInstance() {
         return MenuUtilHolder.INSTANCE;
@@ -97,11 +99,16 @@ public class PopupMenuUtil {
     private void initLayout(Context context) {
         rlClick = (RelativeLayout) rootVew.findViewById(R.id.pop_rl_click);
         ivBtn = (ImageView) rootVew.findViewById(R.id.pop_iv_img);
+        layoutReleaseNotice = rootVew.findViewById(R.id.layout_release_notice);
+        layoutReleaseVideo = rootVew.findViewById(R.id.layout_release_video);
         layoutReleaseOrder = (AutoLinearLayout) rootVew.findViewById(R.id.layout_release_order);
         layoutReleasePic = (AutoLinearLayout) rootVew.findViewById(R.id.layout_release_pic);
         rlClick.setOnClickListener(new MViewClick(0, context));
         layoutReleaseOrder.setOnClickListener(new MViewClick(1, context));
-        layoutReleasePic.setOnClickListener(new MViewClick(2, context));
+        layoutReleaseNotice.setOnClickListener(new MViewClick(2,context));
+        layoutReleasePic.setOnClickListener(new MViewClick(3, context));
+        layoutReleaseVideo.setOnClickListener(new MViewClick(4, context));
+
     }
 
     /**
@@ -134,6 +141,12 @@ public class PopupMenuUtil {
                     //context.startActivity(new Intent(context, ReleasePicActivity.class));
                     _close();
                     break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
             }
         }
     }
@@ -165,8 +178,8 @@ public class PopupMenuUtil {
 
         _startAnimation(layoutReleaseOrder, 500, animatorProperty);
         _startAnimation(layoutReleasePic, 430, animatorProperty);
-//        _startAnimation(llTest3, 430, animatorProperty);
-//        _startAnimation(llTest4, 500, animatorProperty);
+        _startAnimation(layoutReleaseNotice, 500, animatorProperty);
+        _startAnimation(layoutReleaseVideo, 430, animatorProperty);
 //
 //        _startAnimation(llTest5, 500, animatorProperty);
 //        _startAnimation(llTest6, 430, animatorProperty);
@@ -187,8 +200,8 @@ public class PopupMenuUtil {
 
             _closeAnimation(layoutReleaseOrder, 300, top);
             _closeAnimation(layoutReleasePic, 200, top);
-//            _closeAnimation(llTest3, 200, top);
-//            _closeAnimation(llTest4, 300, top);
+            _closeAnimation(layoutReleaseVideo, 200, top);
+            _closeAnimation(layoutReleaseNotice, 300, top);
 //            _closeAnimation(llTest5, 300, bottom);
 //            _closeAnimation(llTest6, 200, bottom);
 //            _closeAnimation(llTest7, 200, bottom);

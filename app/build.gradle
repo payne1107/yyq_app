@@ -47,4 +47,6 @@ dependencies {
     implementation files('libs/umeng-shareboard-widget-6.9.2.jar')
     implementation files('libs/umeng-sharetool-6.9.2.jar')
     implementation 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
+    //三级联动城市选择
+    implementation 'liji.library.dev:citypickerview:0.7.0'
 }

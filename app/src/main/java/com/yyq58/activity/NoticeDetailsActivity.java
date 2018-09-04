@@ -4,8 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.JsonReader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,6 @@ import com.yyq58.R;
 import com.yyq58.activity.adapter.RecommendNoticeAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
-import com.yyq58.activity.bean.Appv1NoticeBean;
 import com.yyq58.activity.bean.NoticeDetailsBean;
 import com.yyq58.activity.bean.RecommendNoticeBean;
 import com.yyq58.activity.utils.ConfigUtil;
@@ -317,11 +314,16 @@ public class NoticeDetailsActivity extends BaseActivity implements View.OnClickL
     private void showShareWindowDialog() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_share_layout, null);
         dialog = new Dialog(mContext, R.style.transparentFrameWindowStyle);
-        dialog.setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        dialog.setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         Window window = dialog.getWindow();
         WindowManager.LayoutParams wl = window.getAttributes();
+
+        /**  不加 下面两句 居中显示 start */
+        wl.x = 0;
+        wl.y =this.getWindowManager().getDefaultDisplay().getHeight();
+        /**  不加 下面两句 居中显示 end*/
         // 以下这两句是为了保证按钮可以水平满屏
-        wl.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
         wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         // 设置显示位置
         dialog.onWindowAttributesChanged(wl);

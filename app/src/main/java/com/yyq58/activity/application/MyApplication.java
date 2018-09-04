@@ -73,7 +73,7 @@ public class MyApplication extends Application{
 
     /** 友盟三方登录 Id & key 入口 **/
     {
-        PlatformConfig.setWeixin("wxaaeca438918db105","e82dd16ae570173053b1aa997940eed8");
+        PlatformConfig.setWeixin("wxaaeca438918db105","3839e8372fdd780f1f1665f06e7eae22");
 //        PlatformConfig.setQQZone("1106919069","8BuoORvKxidGie64");
         //PlatformConfig.setSinaWeibo("2597775029","0e89b0d8b79b943615ed541b4bfda00c","http://www.sina.com");
     }

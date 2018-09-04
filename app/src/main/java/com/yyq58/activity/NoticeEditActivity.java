@@ -1,8 +1,7 @@
 package com.yyq58.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -12,12 +11,11 @@ import android.widget.TextView;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
-import com.lidroid.xutils.db.annotation.Check;
+import com.lljjcoder.citypickerview.widget.CityPicker;
 import com.yyq58.R;
 import com.yyq58.activity.base.BaseActivity;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.StringUtils;
-import com.zaaach.citypicker.CityPickerActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
 import java.text.SimpleDateFormat;
@@ -35,6 +33,7 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
     private TimePickerDialog dialogDay;
     private TextView tvTime;
     private String noticeId;
+    private TextView tvLocation;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
         TextView tvCategory = findViewById(R.id.tv_category);
         EditText etPersonNum =findViewById(R.id.et_person_num);
         tvTime = findViewById(R.id.tv_time);
-        TextView tvLocation =findViewById(R.id.tv_location);
+        tvLocation = findViewById(R.id.tv_location);
         EditText etDetailsLocation =findViewById(R.id.et_details_location);
         etPrice = findViewById(R.id.et_price);
         checkBox = findViewById(R.id.checkbox_price);
@@ -86,6 +85,7 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
     private void seetListener() {
         layoutSave.setOnClickListener(this);
         tvTime.setOnClickListener(this);
+        tvLocation.setOnClickListener(this);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -107,7 +107,42 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
             case R.id.tv_time:
                 dialogDay.show(getSupportFragmentManager(), "all");
                 break;
+            case R.id.tv_location:
+                //选择城市
+                showChooseCityDialog();
+                break;
         }
+    }
+
+    /***
+     * 选择城市对话框
+     */
+    private void showChooseCityDialog() {
+        CityPicker cityPicker = new CityPicker.Builder(NoticeEditActivity.this).textSize(16) //滚轮文字的大小
+                .title("城市选择") //标题，设置名称
+                .titleBackgroundColor("#fafafa") //标题背景
+                .confirTextColor("#000000")
+                .cancelTextColor("#000000")
+                .province("北京市")
+                .city("北京市")
+                .district("朝阳区")
+                .textColor(Color.parseColor("#000000"))
+                .provinceCyclic(true)
+                .cityCyclic(false)
+                .districtCyclic(false)
+                .visibleItemsCount(7)
+                .itemPadding(10)
+                .build();
+        cityPicker.show();
+        cityPicker.setOnCityItemClickListener(new CityPicker.OnCityItemClickListener() {
+            @Override
+            public void onSelected(String... citySelected) {
+                String province = citySelected[0];
+                String city = citySelected[1];
+                String district = citySelected[2];
+                tvLocation.setText(province + "-" + city + "-" + district );
+            }
+        });
     }
 
     /**
