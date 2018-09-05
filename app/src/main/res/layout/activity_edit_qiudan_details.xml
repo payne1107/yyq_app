@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/sys_title" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:text="类别"
+            android:textColor="@color/text_color_3"
+            android:textSize="@dimen/text_size_28" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:gravity="right"
+            android:text=""
+            android:textColor="@color/text_color_3"
+            android:textSize="@dimen/text_size_28" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_10"
+        android:orientation="vertical">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间"
+                android:textColor="@color/text_color_3" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_size_20"
+                android:layout_weight="1"
+                android:text="2017-02-02"
+                android:textColor="@color/google_blue" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_size_15"
+                android:src="@mipmap/icon_list_arrow_black" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:background="@color/color_e" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地区"
+                android:textColor="@color/text_color_3" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_size_20"
+                android:layout_weight="1"
+                android:text="北京市"
+                android:textColor="@color/google_blue" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_size_15"
+                android:src="@mipmap/icon_list_arrow_black" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:background="@color/color_e" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="价格"
+                android:textColor="@color/text_color_3" />
+
+            <EditText
+                android:id="@+id/et_price"
+                android:layout_width="0dp"
+                android:inputType="number"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_size_20"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textColor="@color/google_blue" />
+
+            <CheckBox
+                android:id="@+id/checkbox_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_size_15"
+                android:text="自报价"
+                android:textColor="@color/text_color_6" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:background="@color/color_e" />
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="通告内容简介"
+            android:paddingLeft="@dimen/margin_size_5"
+            android:paddingTop="@dimen/margin_size_5"
+            android:textColorHint="@color/text_color_9"
+            android:textSize="@dimen/text_size_24" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:button="@drawable/radibutton_bg"
+            android:checked="true"
+            android:text="被放鸽子了，意外空出，请老板带走" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:button="@drawable/radibutton_bg"
+            android:checked="false"
+            android:text="这么好的日子空单了，老板给个机会" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:button="@drawable/radibutton_bg"
+            android:checked="false"
+            android:text="内功深厚，老板不信您试一试" />
+    </RadioGroup>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/layout_save"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/color_4b3a75"
+            android:gravity="center"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

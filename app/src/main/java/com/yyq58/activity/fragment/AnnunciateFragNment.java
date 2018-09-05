@@ -135,6 +135,7 @@ public class AnnunciateFragNment extends BaseFragment {
                     String city =bean.getCity();
                     String county = bean.getCounty();
                     String title = bean.getTypeName();
+                    String mianyi = bean.getMianyi();
 
                     intent.putExtra("labelName",labelName );
                     intent.putExtra("time", time);
@@ -149,6 +150,7 @@ public class AnnunciateFragNment extends BaseFragment {
                     intent.putExtra("city", city);
                     intent.putExtra("county", county);
                     intent.putExtra("title", title);
+                    intent.putExtra("mianyi", mianyi);
                     startActivity(intent);
                 }
             }

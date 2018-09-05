@@ -11,7 +11,7 @@ public class AnnuciteFragmentBean {
      */
 
     private int code;
-    private Object msg;
+    private String msg;
     private List<DataBean> data;
 
     public int getCode() {
@@ -22,11 +22,11 @@ public class AnnuciteFragmentBean {
         this.code = code;
     }
 
-    public Object getMsg() {
+    public String getMsg() {
         return msg;
     }
 
-    public void setMsg(Object msg) {
+    public void setMsg(String msg) {
         this.msg = msg;
     }
 
@@ -72,7 +72,7 @@ public class AnnuciteFragmentBean {
          */
 
         private String detailPlace;
-        private Object reason;
+        private String reason;
         private String city;
         private int num;
         private String typeName;
@@ -89,11 +89,11 @@ public class AnnuciteFragmentBean {
         private int likes;
         private int isQiudan;
         private String tureName;
-        private Object images;
+        private String images;
         private String consumerId;
         private String phonenum;
         private String avatar;
-        private Object mianyi;
+        private String mianyi;
         private String xingyong;
         private String noticeId;
         private String createTime;
@@ -109,11 +109,11 @@ public class AnnuciteFragmentBean {
             this.detailPlace = detailPlace;
         }
 
-        public Object getReason() {
+        public String getReason() {
             return reason;
         }
 
-        public void setReason(Object reason) {
+        public void setReason(String reason) {
             this.reason = reason;
         }
 
@@ -245,11 +245,11 @@ public class AnnuciteFragmentBean {
             this.tureName = tureName;
         }
 
-        public Object getImages() {
+        public String getImages() {
             return images;
         }
 
-        public void setImages(Object images) {
+        public void setImages(String images) {
             this.images = images;
         }
 
@@ -277,11 +277,11 @@ public class AnnuciteFragmentBean {
             this.avatar = avatar;
         }
 
-        public Object getMianyi() {
+        public String getMianyi() {
             return mianyi;
         }
 
-        public void setMianyi(Object mianyi) {
+        public void setMianyi(String mianyi) {
             this.mianyi = mianyi;
         }
 

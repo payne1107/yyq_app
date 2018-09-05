@@ -1,5 +1,6 @@
 package com.yyq58.activity.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,12 +12,15 @@ import com.alibaba.fastjson.JSON;
 import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.itheima.pulltorefreshlib.PullToRefreshListView;
 import com.yyq58.R;
+import com.yyq58.activity.EditQiuDanDetailsActivity;
 import com.yyq58.activity.adapter.QiuDanFragmentAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
+import com.yyq58.activity.bean.AnnuciteFragmentBean;
 import com.yyq58.activity.bean.QiuDanFragmentListbean;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.widget.IButtonClickListener;
+import com.yyq58.activity.widget.MyDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,14 +58,38 @@ public class QiuDanFragment extends BaseFragment {
         adapter.setOnItemClickListener(new IButtonClickListener() {
             @Override
             public void onEditClick(View view, int position) {
+                QiuDanFragmentListbean.DataBean bean = mList.get(position);
                 //编辑
-                Toast.makeText(getActivity(), "编辑", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), EditQiuDanDetailsActivity.class);
+                if (bean != null) {
+                    String typeName = bean.getTypeName();
+                    String time = bean.getTime();
+                    String province =bean.getProvince();
+                    String city =bean.getCity();
+                    String county = bean.getCounty();
+                    String price = bean.getPrice();
+                    String content = bean.getContent();
+                    String noticeId = bean.getNoticeId();
+                    String labelId = bean.getLabelId();
+                    String mianyi = bean.getMianyi();
+                    intent.putExtra("typeName",typeName );
+                    intent.putExtra("time",time );
+                    intent.putExtra("province",province );
+                    intent.putExtra("city",city );
+                    intent.putExtra("county",county );
+                    intent.putExtra("price",price );
+                    intent.putExtra("content",content );
+                    intent.putExtra("noticeId",noticeId );
+                    intent.putExtra("labelId",labelId );
+                    intent.putExtra("mianyi",mianyi );
+                    startActivity(intent);
+                    }
             }
 
             @Override
             public void onDeleClick(View view, int position) {
                 //删除
-                Toast.makeText(getActivity(), "删除", Toast.LENGTH_LONG).show();
+                showDeleteNoticeDialog(position);
             }
 
             @Override
@@ -69,6 +97,44 @@ public class QiuDanFragment extends BaseFragment {
 
             }
         });
+    }
+
+    /***
+     * 删除通告
+     * @param position
+     */
+    private void showDeleteNoticeDialog(int position) {
+        QiuDanFragmentListbean.DataBean bean = mList.get(position);
+        final String noticeId = bean.getNoticeId();
+        final MyDialog dialog = new MyDialog(getActivity());
+        dialog.setTitle("删除提示");
+        dialog.setMessage("是否确认删除");
+        dialog.setOnPositiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteQiiudanNotice(noticeId);
+                dialog.dismiss();
+            }
+        });
+        dialog.setOnNegativeListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    /***
+     * 删除求单通告
+     * @param noticeId
+     */
+    private void deleteQiiudanNotice(String noticeId) {
+        startIOSDialogLoading(getActivity(), "");
+        Map<String, String> params = new HashMap<>();
+        params.put("id", noticeId);
+        params.put("consumerId", MyApplication.userId);
+        httpPostRequest(ConfigUtil.DELETE_QIUDAN_URL, params, ConfigUtil.DELETE_QIUDAN_URL_ACTION);
     }
 
     private void initView() {
@@ -102,6 +168,12 @@ public class QiuDanFragment extends BaseFragment {
             case ConfigUtil.QUERY_NOTICE_LIST_URL_ACTION:
                 handleQueryQiuDanList(json);
                 break;
+            case ConfigUtil.DELETE_QIUDAN_URL_ACTION:
+                if (getRequestCode(json) == 1000) {
+                    Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_LONG).show();
+                    queryQiudanList(MyApplication.userId,page);
+                }
+                break;
         }
     }
 
@@ -110,6 +182,9 @@ public class QiuDanFragment extends BaseFragment {
      * @param json
      */
     private void handleQueryQiuDanList(String json) {
+        if (listView != null && listView.isRefreshing()) {
+            listView.onRefreshComplete();
+        }
         QiuDanFragmentListbean bean = JSON.parseObject(json, QiuDanFragmentListbean.class);
         if (bean != null) {
             mList = bean.getData();

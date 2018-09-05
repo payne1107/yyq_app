@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.yyq58.activity.widget.CircleImageView
+            android:id="@+id/iv_avatar"
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:layout_marginBottom="@dimen/margin_size_5"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:src="@mipmap/my_header"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_title"
+                android:textColor="@color/text_color_3"
+                android:textSize="@dimen/text_size_24"
+                android:text="payne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <com.zhy.autolayout.AutoLinearLayout
+
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="@dimen/margin_size_5"
+                    android:textColor="@color/text_color_9"
+                    android:textSize="@dimen/text_size_24"
+                    android:text="通告标签:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_label_name"
+                    android:layout_marginTop="@dimen/margin_size_5"
+                    android:textColor="@color/google_red"
+                    android:textSize="@dimen/text_size_24"
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.zhy.autolayout.AutoLinearLayout>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_price"
+                android:text="面议"
+                android:textSize="@dimen/text_size_24"
+                android:textColor="@color/google_red"
+                android:drawableLeft="@mipmap/icon_list_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="3dp"
+                android:id="@+id/tv_private_chat"
+                android:text="私聊"
+                android:textSize="@dimen/text_size_24"
+                android:textColor="@color/text_color_3"
+                android:drawableLeft="@mipmap/icon_list_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

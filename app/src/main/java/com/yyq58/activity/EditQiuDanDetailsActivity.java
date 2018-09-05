@@ -1,12 +1,12 @@
 package com.yyq58.activity;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.jzxiang.pickerview.TimePickerDialog;
@@ -25,34 +25,31 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/***
- * 通告编辑
- */
-public class NoticeEditActivity extends BaseActivity implements View.OnClickListener, OnDateSetListener {
 
+/***
+ * 编辑求单
+ */
+public class EditQiuDanDetailsActivity extends BaseActivity implements View.OnClickListener, OnDateSetListener {
+
+    private RadioGroup radioGroup;
+    private int resonId = 1; //编辑求单原因 默认为1
     private AutoLinearLayout layoutSave;
-    private CheckBox checkBox;
-    private EditText etPrice;
-    private String price;
-    private TimePickerDialog dialogDay;
-    private TextView tvTime;
     private String noticeId;
+    private String labelId;
+    private TextView tvTime;
+    private TextView tvCategory;
     private TextView tvLocation;
-    private Context mContext;
-    private EditText etPersonNum;
-    private String manyuan;
+    private EditText etPrice;
     private EditText etContent;
-    private String district;
-    private String city;
+    private CheckBox checkBox;
     private String province;
-    private EditText etDetailsLocation;
-    private int mianyi =0;
-    private String title;
+    private String city;
+    private String district;
+    private TimePickerDialog dialogDay;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_notice_edit);
-        mContext = NoticeEditActivity.this;
+        setContentView(R.layout.activity_edit_qiudan_details);
     }
 
     @Override
@@ -63,36 +60,31 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void initView() {
         super.initView();
-        setInVisibleTitleIcon("通告编辑", true, true);
-
+        setInVisibleTitleIcon("求单编辑", true, true);
         initViewDateDialog(this, System.currentTimeMillis() - ConfigUtil.TenYears);
-
-        TextView tvCategory = findViewById(R.id.tv_category);
-        etPersonNum = findViewById(R.id.et_person_num);
-        tvTime = findViewById(R.id.tv_time);
-        tvLocation = findViewById(R.id.tv_location);
-        etDetailsLocation = findViewById(R.id.et_details_location);
-        etPrice = findViewById(R.id.et_price);
-        checkBox = findViewById(R.id.checkbox_price);
-        etContent = findViewById(R.id.et_content);
-        layoutSave = findViewById(R.id.layout_save);
-
-        String labelName = getIntent().getStringExtra("labelName");
-        noticeId = getIntent().getStringExtra("noticeId");
-        String time =getIntent().getStringExtra("time");
-        String location =getIntent().getStringExtra("location");
-        String detailsPlace =getIntent().getStringExtra("detailsPlace");
-        price = getIntent().getStringExtra("price");
-        String content = getIntent().getStringExtra("content");
-        int num = getIntent().getIntExtra("num", 0);
-        manyuan = getIntent().getStringExtra("manyuan");
-        province = getIntent().getStringExtra("province");
+        String typename = getIntent().getStringExtra("typeName");
+        String time = getIntent().getStringExtra("time");
+        province =getIntent().getStringExtra("province");
         city = getIntent().getStringExtra("city");
-        district = getIntent().getStringExtra("county");
-        title = getIntent().getStringExtra("title");
+        district =getIntent().getStringExtra("county");
+        String price = getIntent().getStringExtra("price");
+        String content =getIntent().getStringExtra("content");
+        noticeId = getIntent().getStringExtra("noticeId");
+        labelId = getIntent().getStringExtra("labelId");
         String mianyi = getIntent().getStringExtra("mianyi");
 
-
+        tvCategory = findViewById(R.id.tv_category);
+        tvTime = findViewById(R.id.tv_time);
+        tvLocation = findViewById(R.id.tv_location);
+        etPrice = findViewById(R.id.et_price);
+        etContent = findViewById(R.id.et_content);
+        checkBox = findViewById(R.id.checkbox_price);
+        radioGroup = findViewById(R.id.radioGroup);
+        layoutSave = findViewById(R.id.layout_save);
+        tvCategory.setText(StringUtils.isEmpty(typename) ? "" : typename);
+        tvTime.setText(StringUtils.isEmpty(time) ? "" : time);
+        tvLocation.setText(province + " " + city + " " + district);
+        etContent.setText(StringUtils.isEmpty(content) ? "" : content);
         if (mianyi.equals("1")) {
             //面议
             checkBox.setChecked(true);
@@ -103,32 +95,40 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
             checkBox.setChecked(false);
             etPrice.setEnabled(true);
         }
-        tvCategory.setText(StringUtils.isEmpty(labelName) ? "" : labelName);
-        etPersonNum.setText("" + num);
-        tvTime.setText(StringUtils.isEmpty(time) ? "" : time);
-        tvLocation.setText(StringUtils.isEmpty(location) ? "" : location);
-        etDetailsLocation.setText(StringUtils.isEmpty(detailsPlace) ? "" : detailsPlace);
-        etPrice.setText(StringUtils.isEmpty(price) ? "" : price);
-        etContent.setText(StringUtils.isEmpty(content) ? "" : content);
 
-        seetListener();
+        setListener();
     }
 
-    private void seetListener() {
+
+
+
+    private void setListener() {
         layoutSave.setOnClickListener(this);
-        tvTime.setOnClickListener(this);
         tvLocation.setOnClickListener(this);
+        tvTime.setOnClickListener(this);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mianyi = 1;
-                    etPrice.setText("");
                     etPrice.setEnabled(false);
                 } else {
-                    mianyi = 0;
                     etPrice.setEnabled(true);
-                    etPrice.setText(StringUtils.isEmpty(price) ? "" : price);
+                }
+            }
+        });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int id) {
+                switch (id) {
+                    case R.id.radioButton1:
+                        resonId = 1;
+                        break;
+                    case R.id.radioButton2:
+                        resonId = 2;
+                        break;
+                    case R.id.radioButton3:
+                        resonId = 3;
+                        break;
                 }
             }
         });
@@ -138,75 +138,61 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_save:
-                //保存
-                editNotice(noticeId);
+                saveQiudanEdit();
                 break;
             case R.id.tv_time:
                 dialogDay.show(getSupportFragmentManager(), "all");
                 break;
             case R.id.tv_location:
-                //选择城市
                 showChooseCityDialog();
                 break;
         }
     }
 
     /****
-     * 通告编辑
-     * @param noticeId 通告id
+     * 保存求单编辑请求
      */
-    private void editNotice(String noticeId) {
-        String num = etPersonNum.getText().toString().trim();
-        String content = etContent.getText().toString().trim();
-        String detailLocation =etDetailsLocation.getText().toString().trim();
+    private void saveQiudanEdit() {
+        String time = tvTime.getText().toString().trim();
         String price =etPrice.getText().toString().trim();
-        String time = tvTime.getText().toString();
-        if (StringUtils.isEmpty(detailLocation)) {
-            toastMessage("详细地址不能为空");
+        String content =etContent.getText().toString().trim();
+        if (StringUtils.isEmpty(time)) {
+            toastMessage("请选择时间");
             return;
         }
-        if (StringUtils.isEmpty(content)) {
-            toastMessage("内容简介不能为空");
-            return;
-        }
-        startIOSDialogLoading(mContext, "");
         Map<String, String> params = new HashMap<>();
-        params.put("noticeId", noticeId);
         params.put("consumerId", MyApplication.userId);
-        params.put("labelName", title);
-        params.put("num", num);
-        params.put("manyuan", manyuan);
-        params.put("content", content);
+        params.put("labelId", labelId);
+        params.put("workTime", time);
         params.put("province", province);
         params.put("city", city);
         params.put("county", district);
-        params.put("detailPlace", detailLocation);
-        params.put("mianyi", String.valueOf(mianyi));
-        params.put("time", time);
-        if (mianyi == 0) {
-            params.put("price", price);
+        if (checkBox.isChecked()) {
+            params.put("mianyi", "1");
+        } else {
+            params.put("mianyi", "0");
+            if (StringUtils.isEmpty(price)) {
+                toastMessage("金额不能为空");
+                params.put("price", price);
+                return;
+            }
         }
-        httpPostRequest(ConfigUtil.EDIT_NOTICE_URL, params, ConfigUtil.EDIT_NOTICE_URL_ACTION);
+        params.put("remark", content);
+        params.put("reason", String.valueOf(resonId));
+        params.put("id", noticeId);
+        httpPostRequest(ConfigUtil.EDIT_QIUDAN_URL, params, ConfigUtil.EDIT_QIUDAN_URL_ACTION);
     }
 
     @Override
     protected void httpOnResponse(String json, int action) {
         super.httpOnResponse(json, action);
         switch (action) {
-            case ConfigUtil.EDIT_NOTICE_URL_ACTION:
-                handleEditNotice(json);
+            case ConfigUtil.EDIT_QIUDAN_URL_ACTION:
+                if (getRequestCode(json) == 1000) {
+                    toastMessage("编辑成功");
+                    finish();
+                }
                 break;
-        }
-    }
-
-    /***
-     * 处理编辑通告
-     * @param json
-     */
-    private void handleEditNotice(String json) {
-        if (getRequestCode(json) == 1000) {
-            toastMessage("保存成功");
-            finish();
         }
     }
 
@@ -214,7 +200,7 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
      * 选择城市对话框
      */
     private void showChooseCityDialog() {
-        CityPicker cityPicker = new CityPicker.Builder(NoticeEditActivity.this).textSize(16) //滚轮文字的大小
+        CityPicker cityPicker = new CityPicker.Builder(EditQiuDanDetailsActivity.this).textSize(16) //滚轮文字的大小
                 .title("城市选择") //标题，设置名称
                 .titleBackgroundColor("#fafafa") //标题背景
                 .confirTextColor("#000000")

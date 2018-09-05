@@ -130,6 +130,12 @@
         <activity
             android:name=".activity.NoticeEditActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditQiuDanDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.QiangDanFragmentDetailsActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

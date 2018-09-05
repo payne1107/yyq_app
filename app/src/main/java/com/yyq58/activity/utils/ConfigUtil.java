@@ -115,5 +115,16 @@ public class ConfigUtil {
      */
     public static final String EDIT_QIUDAN_URL = MyApplication.REQUEST_URL + "appv1qiudan/update.do";
     public static final int EDIT_QIUDAN_URL_ACTION = 19;
+    /***
+     *求单--->删除
+     */
+    public static final String DELETE_QIUDAN_URL = MyApplication.REQUEST_URL + "appv1qiudan/delete.do";
+    public static final int DELETE_QIUDAN_URL_ACTION = 20;
+    /***
+     * 抢单列表
+     */
+    public static final String QUERY_QIANGDAN_LISTS_BY_USERID_URL = MyApplication.REQUEST_URL + "appv1notice/getBaoMingListsByConsumerID.do";
+    public static final int QUERY_QIANGDAN_LISTS_BY_USERID_URL_ACTION = 21;
+
 
 }

@@ -8,19 +8,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yyq58.R;
+import com.yyq58.activity.bean.Appv1NoticeBean;
+import com.yyq58.activity.bean.QiangDanFramgmentBean;
+import com.yyq58.activity.utils.StringUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
 public class QiangDanListAdapter extends BaseAdapter {
     private Context mContext;
-    private List<String> mList;
+    private List<QiangDanFramgmentBean.DataBean> mList;
 
-    public QiangDanListAdapter(Context context, List<String> list) {
+    public QiangDanListAdapter(Context context, List<QiangDanFramgmentBean.DataBean> list) {
         this.mContext = context;
         this.mList = list;
     }
-
+    public void setData(List<QiangDanFramgmentBean.DataBean> data) {
+        mList.clear();
+        mList.addAll(data);
+        notifyDataSetChanged();
+    }
     @Override
     public int getCount() {
         return mList.size();
@@ -52,7 +59,23 @@ public class QiangDanListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.tvTitle.setText(mList.get(i));
+        QiangDanFramgmentBean.DataBean bean = mList.get(i);
+        if (bean != null) {
+            String title = bean.getTitle();
+            String price =bean.getPrice();
+            String time =bean.getTime();
+            String place =bean.getPlace();
+            int status = bean.getStatus();
+            holder.tvTime.setText(StringUtils.isEmpty(time) ? "" : time);
+            holder.tvTitle.setText(StringUtils.isEmpty(title) ? "" : title);
+            holder.tvLocation.setText(StringUtils.isEmpty(place) ? "" : place);
+            holder.tvPrice.setText(StringUtils.isEmpty(price) ? "" : price);
+            if (status == 1) {
+                holder.tvStatus.setText("订单待完成");
+            } else {
+                holder.tvStatus.setText("订单已完成");
+            }
+        }
         return view;
     }
 
