@@ -2,22 +2,22 @@ package com.yyq58.activity.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.itheima.pulltorefreshlib.PullToRefreshListView;
 import com.yyq58.R;
 import com.yyq58.activity.adapter.QiuDanFragmentAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
+import com.yyq58.activity.bean.QiuDanFragmentListbean;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.widget.IButtonClickListener;
 
-import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class QiuDanFragment extends BaseFragment {
 
     private PullToRefreshListView listView;
-    private List<String> mList = new ArrayList<>();
+    private List<QiuDanFragmentListbean.DataBean> mList = new ArrayList<>();
     private QiuDanFragmentAdapter adapter;
     private int page = 1;
 
@@ -74,9 +74,7 @@ public class QiuDanFragment extends BaseFragment {
     private void initView() {
         listView = mRootView.findViewById(R.id.listView);
         listView.setMode(PullToRefreshBase.Mode.BOTH);
-        mList.add("测试1");
-        mList.add("测试2");
-        mList.add("测试3");
+
         adapter = new QiuDanFragmentAdapter(getActivity(), mList);
         listView.setAdapter(adapter);
 
@@ -93,14 +91,15 @@ public class QiuDanFragment extends BaseFragment {
         Map<String, String> params = new HashMap<>();
         params.put("consumerId", consumerId);
         params.put("page", String.valueOf(page));
-        httpPostRequest(ConfigUtil.QUERY_QIUDAN_LIST_URL, params, ConfigUtil.QUERY_QIUDAN_LIST_URL_ACTION);
+        params.put("isQiudan", "1");
+        httpPostRequest(ConfigUtil.QUERY_NOTICE_LIST_URL, params, ConfigUtil.QUERY_NOTICE_LIST_URL_ACTION);
     }
 
     @Override
     public void httpOnResponse(String json, int action) {
         super.httpOnResponse(json, action);
         switch (action) {
-            case ConfigUtil.QUERY_QIUDAN_LIST_URL_ACTION:
+            case ConfigUtil.QUERY_NOTICE_LIST_URL_ACTION:
                 handleQueryQiuDanList(json);
                 break;
         }
@@ -111,7 +110,10 @@ public class QiuDanFragment extends BaseFragment {
      * @param json
      */
     private void handleQueryQiuDanList(String json) {
-        Log.d("Dong", "qd--->" +json);
-        
+        QiuDanFragmentListbean bean = JSON.parseObject(json, QiuDanFragmentListbean.class);
+        if (bean != null) {
+            mList = bean.getData();
+            adapter.setData(mList);
+        }
     }
 }

@@ -1,10 +1,8 @@
 package com.yyq58.activity.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,7 @@ import com.yyq58.R;
 import com.yyq58.activity.AnnunciateDetailsActivity;
 import com.yyq58.activity.adapter.TuijianFragmentAdapter;
 import com.yyq58.activity.base.BaseFragment;
-import com.yyq58.activity.bean.QiangDanFragmentBean;
+import com.yyq58.activity.bean.TuijianFragmentListBean;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.widget.IButtonClickListener;
 import com.yyq58.activity.widget.MyListView;
@@ -31,7 +29,7 @@ import java.util.Map;
 public class TuijianFragment extends BaseFragment{
 
     private MyListView listView;
-    private List<String> mList = new ArrayList<>();
+    private List<TuijianFragmentListBean.DataBean> mList = new ArrayList<>();
     private TuijianFragmentAdapter adapter;
     private String province;
     private String city;
@@ -88,12 +86,6 @@ public class TuijianFragment extends BaseFragment{
 
     private void initView() {
         listView = mRootView.findViewById(R.id.listview);
-        mList.add("不忘初心");
-        mList.add("方得始终");
-        mList.add("励志前行");
-        mList.add("不忘初心");
-        mList.add("方得始终");
-        mList.add("励志前行");
         adapter = new TuijianFragmentAdapter(getActivity(),mList);
         listView.setAdapter(adapter);
 
@@ -129,6 +121,10 @@ public class TuijianFragment extends BaseFragment{
      * @param json
      */
     private void handleQueryTuijianLists(String json) {
-        Log.d("Dong", "推荐艺人列表" + json);
+        TuijianFragmentListBean bean = JSON.parseObject(json, TuijianFragmentListBean.class);
+        if (bean != null) {
+            mList = bean.getData();
+            adapter.setData(mList);
+        }
     }
 }

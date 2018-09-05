@@ -1,10 +1,8 @@
 package com.yyq58.activity.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +27,7 @@ import java.util.Map;
 /***
  * 抢单艺人列表
  */
-public class QiangdanFragment extends BaseFragment{
+public class QiangDanYRFragment extends BaseFragment{
 
     private MyListView listview;
     private List<QiangDanFragmentBean.DataBean> mList = new ArrayList<>();

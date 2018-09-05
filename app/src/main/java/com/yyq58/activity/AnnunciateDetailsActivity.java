@@ -18,7 +18,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.yyq58.R;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
-import com.yyq58.activity.fragment.QiangdanFragment;
+import com.yyq58.activity.fragment.QiangDanYRFragment;
 import com.yyq58.activity.fragment.TuijianFragment;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.StringUtils;
@@ -145,7 +145,7 @@ public class AnnunciateDetailsActivity extends BaseActivity implements View.OnCl
     }
 
     private void initFragment() {
-        QiangdanFragment fragment1 = new QiangdanFragment();
+        QiangDanYRFragment fragment1 = new QiangDanYRFragment();
         TuijianFragment fragment2 = new TuijianFragment();
 
         mFragments = new Fragment[]{fragment1, fragment2};

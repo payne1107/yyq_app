@@ -1,7 +1,6 @@
 package com.yyq58.activity.utils;
 
 
-import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.yyq58.activity.application.MyApplication;
 
 
@@ -77,7 +76,7 @@ public class ConfigUtil {
     public static final String QUERY_RECOMMEND_NOTICE_LIST_URL = MyApplication.REQUEST_URL + "appv1notice/recommendNotice.do";
     public static final int QUERY_RECOMMEND_NOTICE_LIST_URL_ACTION = 11;
     /****
-     * 历史纪录 --》 通告列表
+     * 历史纪录 --》 通告列表 & 求单列表
      */
     public static final String QUERY_NOTICE_LIST_URL = MyApplication.REQUEST_URL + "appv1notice/getNoticeByConsumerId.do";
     public static final int QUERY_NOTICE_LIST_URL_ACTION = 12;
@@ -104,7 +103,7 @@ public class ConfigUtil {
     /***
      * 推荐艺人列表
      */
-    public static final String QUERY_TUIJIAN_LISTS_URL = MyApplication.REQUEST_URL + "appv1notice/getRecommendConsumer.do";
+    public static final String QUERY_TUIJIAN_LISTS_URL = MyApplication.REQUEST_URL + "appConsumer/getRecommendConsumer.do";
     public static final int QUERY_TUIJIAN_LISTS_URL_ACTION = 17;
     /****
      *  求单列表
