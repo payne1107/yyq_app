@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_balance"
             android:layout_marginBottom="@dimen/margin_size_35"
             android:layout_marginTop="@dimen/margin_size_5"
             android:textColor="@color/white"
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content" />
     </com.zhy.autolayout.AutoLinearLayout>
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/layout_drawwith_balance"
         android:background="@color/white"
         android:orientation="horizontal"
         android:gravity="center_vertical"
@@ -52,6 +54,7 @@
                 android:layout_height="wrap_content" />
     </com.zhy.autolayout.AutoLinearLayout>
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/layout_topup"
         android:layout_marginTop="1dp"
         android:background="@color/white"
         android:orientation="horizontal"
@@ -75,6 +78,7 @@
             android:layout_height="wrap_content" />
     </com.zhy.autolayout.AutoLinearLayout>
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/layout_all_order"
         android:layout_marginTop="@dimen/margin_size_5"
         android:background="@color/white"
         android:orientation="horizontal"

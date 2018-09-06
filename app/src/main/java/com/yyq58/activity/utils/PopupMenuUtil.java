@@ -2,6 +2,7 @@ package com.yyq58.activity.utils;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.yyq58.R;
+import com.yyq58.activity.ReleaseNoticeActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
 /**
@@ -138,7 +140,7 @@ public class PopupMenuUtil {
                     break;
                 case 2:
                     //发布图片
-                    //context.startActivity(new Intent(context, ReleasePicActivity.class));
+                    context.startActivity(new Intent(context, ReleaseNoticeActivity.class));
                     _close();
                     break;
                 case 3:

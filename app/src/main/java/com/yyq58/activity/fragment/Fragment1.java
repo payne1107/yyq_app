@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yyq58.R;
+import com.yyq58.activity.MineFinanceActivity;
 import com.yyq58.activity.SearchNoticeActivity;
 import com.yyq58.activity.adapter.TalentTypeAdapter;
 import com.yyq58.activity.application.MyApplication;
@@ -35,6 +36,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
     private TextView tvSeachYR;
     private TextView tvYRDynamic;
     private EditText etSearch;
+    private AutoLinearLayout layoutBalnace;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
         tvSeachYR = mRootView.findViewById(R.id.tv_search_yr);
         tvYRDynamic = mRootView.findViewById(R.id.tv_yr_dynamic);
         etSearch = mRootView.findViewById(R.id.et_search);
+        layoutBalnace = mRootView.findViewById(R.id.layout_balance);
 
         TabLayout tabLayout = mRootView.findViewById(R.id.tabLayout);
         ViewPager viewPager = mRootView.findViewById(R.id.viewpager);
@@ -79,6 +82,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
         tvYRDynamic.setOnClickListener(this);
         tvSeachYR.setOnClickListener(this);
         etSearch.setOnClickListener(this);
+        layoutBalnace.setOnClickListener(this);
     }
 
     @Override
@@ -112,6 +116,10 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.et_search:
                 startActivity(new Intent(getActivity(), SearchNoticeActivity.class));
+                break;
+            case R.id.layout_balance:
+                //跳转到我的财务
+                startActivity(new Intent(getActivity(), MineFinanceActivity.class));
                 break;
         }
     }

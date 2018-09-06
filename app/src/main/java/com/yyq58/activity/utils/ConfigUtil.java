@@ -1,7 +1,10 @@
 package com.yyq58.activity.utils;
 
 
+import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.yyq58.activity.application.MyApplication;
+
+import java.util.Map;
 
 
 /**
@@ -125,6 +128,29 @@ public class ConfigUtil {
      */
     public static final String QUERY_QIANGDAN_LISTS_BY_USERID_URL = MyApplication.REQUEST_URL + "appv1notice/getBaoMingListsByConsumerID.do";
     public static final int QUERY_QIANGDAN_LISTS_BY_USERID_URL_ACTION = 21;
+    /****
+     * 发布通告
+     */
+    public static final String RELEASE_NOTICE_URL = MyApplication.REQUEST_URL + "appv1notice/publishNotice.do";
+    public static final int RELEASE_NOTICE_URL_ACTION = 22;
+
+    /****
+     * Vip刷新
+     */
+    public static final String REFRESH_VIP_URL = MyApplication.REQUEST_URL + "appVIP/refurbish.do";
+    public static final int REFRESH_VIP_URL_ACTION = 23;
+    /****
+     * 我的粉丝
+     */
+    public static final String QUERY_FANS_LIST_URL = MyApplication.REQUEST_URL + "appv1Consumer/getFans.do";
+    public static final int QUERY_FANS_LIST_URL_ACTION = 24;
+    /***
+     * 个人详情
+     *
+     */
+    public static final String QUERY_PERSON_INFO_URL = MyApplication.REQUEST_URL + "appv1Consumer/getConsumerInfo.do";
+    public static final int QUERY_PERSON_INFO_URL_ACTION = 25;
+
 
 
 }
