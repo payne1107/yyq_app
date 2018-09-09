@@ -129,7 +129,7 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.circleImageView:
-                startActivity(new Intent(getActivity(), PersonCenterActivity.class));
+                startActivity(new Intent(getActivity(), PersonCenterActivity.class).putExtra("userId", MyApplication.userId));
                 break;
             case R.id.layout_vip_member:
                 startActivity(new Intent(getActivity(), OpenVIPActivity.class));
@@ -159,7 +159,6 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.tv_refresh_vip:
                 //刷新vip
-
                 refreshVipDialog();
                 break;
         }

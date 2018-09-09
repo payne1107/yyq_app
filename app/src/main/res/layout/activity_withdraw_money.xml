@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/sys_title" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="请绑定银行卡"
+                android:id="@+id/tv_bank_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_list_arrow_black" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_e" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥" />
+
+            <EditText
+                android:id="@+id/et_money"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_size_5"
+                android:background="@null"
+                android:hint="提现金额"
+                android:textColor="@color/text_color_3"
+                android:textColorHint="@color/text_color_9"
+                android:textSize="@dimen/text_size_26" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_marginBottom="@dimen/margin_size_10"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可用金额："
+                android:textSize="@dimen/text_size_24" />
+
+            <TextView
+                android:id="@+id/tv_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.54元"
+                android:textSize="@dimen/text_size_24" />
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/layout_withdraw"
+        android:layout_marginLeft="@dimen/margin_size_15"
+        android:layout_marginRight="@dimen/margin_size_15"
+        android:background="@color/color_e"
+        android:layout_marginTop="@dimen/margin_size_25"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="提现"
+            android:textSize="@dimen/text_size_28"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.zhy.autolayout.AutoLinearLayout
+        >
+</com.zhy.autolayout.AutoLinearLayout>

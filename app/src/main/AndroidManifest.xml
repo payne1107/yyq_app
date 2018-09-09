@@ -139,6 +139,21 @@
         <activity
             android:name=".activity.ReleaseNoticeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WithdrawMoneyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BindBankCardInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AllBillDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MotifyPersonDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineContactsActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

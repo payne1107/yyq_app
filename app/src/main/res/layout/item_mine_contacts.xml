@@ -2,9 +2,7 @@
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    >
+    android:orientation="vertical">
     <com.zhy.autolayout.AutoLinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -48,27 +46,26 @@
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/layout_cancel_attention"
-            android:background="@drawable/guanzhu_btn_style"
-            android:gravity="center_vertical"
             android:layout_marginRight="@dimen/margin_size_15"
+            android:gravity="center_vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
+                android:paddingRight="@dimen/margin_size_10"
+                android:paddingLeft="@dimen/margin_size_10"
+                android:paddingTop="@dimen/margin_size_5"
+                android:paddingBottom="@dimen/margin_size_5"
                 android:drawablePadding="3dp"
-                android:textSize="@dimen/text_size_24"
-                android:layout_marginRight="@dimen/margin_size_10"
-                android:layout_marginLeft="@dimen/margin_size_10"
-                android:layout_marginBottom="@dimen/margin_size_5"
-                android:layout_marginTop="@dimen/margin_size_5"
-                android:textColor="@color/white"
-                android:text="已关注"
-                android:drawableLeft="@mipmap/icon_yiguanzhu"
+                android:drawableLeft="@mipmap/icon_list_review"
+                android:background="@drawable/update_person_info_btn_style"
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_28"
+                android:text="私聊"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>
-
 </com.zhy.autolayout.AutoLinearLayout>

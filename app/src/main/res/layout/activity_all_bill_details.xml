@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout
-    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <include layout="@layout/sys_title" />
-    <TextView
-        android:text="3333333"
+
+    <com.itheima.pulltorefreshlib.PullToRefreshListView
+        android:divider="@null"
+        android:id="@+id/listView"
+        android:dividerHeight="1dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+    </com.itheima.pulltorefreshlib.PullToRefreshListView>
+
 </com.zhy.autolayout.AutoLinearLayout>

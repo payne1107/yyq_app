@@ -146,11 +146,33 @@ public class ConfigUtil {
     public static final int QUERY_FANS_LIST_URL_ACTION = 24;
     /***
      * 个人详情
-     *
      */
     public static final String QUERY_PERSON_INFO_URL = MyApplication.REQUEST_URL + "appv1Consumer/getConsumerInfo.do";
     public static final int QUERY_PERSON_INFO_URL_ACTION = 25;
-
-
+    /***
+     * 绑定银行卡
+     */
+    public static final String BIND_BANK_CARD_URL = MyApplication.REQUEST_URL + "appConsumer/updateBankInfo.do";
+    public static final int BIND_BANK_CARD_URL_ACTION = 26;
+    /***
+     * 账单明细
+     */
+    public static final String QUERY_BILL_DETAILS_URL = MyApplication.REQUEST_URL + "appdetail/getDetailList.do";
+    public static final int QUERY_BILL_DETAILS_URL_ACTION = 27;
+    /**
+     * 我关注的人
+     */
+    public static final String QUERY_MINE_ATTENTION_URL = MyApplication.REQUEST_URL + "appv1Consumer/getAttention.do";
+    public static final int QUERY_MINE_ATTENTION_URL_ACTION = 28;
+    /***
+     * 取消关注艺人
+     */
+    public static final String CANCEL_ATTENTION_URL = MyApplication.REQUEST_URL + "appv1Consumer/cancelAttention.do";
+    public static final int CANCEL_ATTENTION_URL_ACTION = 29;
+    /***
+     * 我的动态列表 传1查作品 不传查动态
+     */
+    public static final String QUERY_MINE_DAYNIC_URL = MyApplication.REQUEST_URL + "appv1zone/list.do";
+    public static final int QUERY_MINE_DAYNIC_URL_ACTION = 30;
 
 }
