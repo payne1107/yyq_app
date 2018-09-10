@@ -36,7 +36,7 @@ public class ConfigUtil {
     public static final String LOGIN_URL = MyApplication.REQUEST_URL + "applogin/userLogin.do";
     public static final int LOGIN_URL_ACTION = 3;
     /****
-     * 上传头像和图片
+     * 上传头像和图片 avatar/zone
      */
     public static final String UPLOAD_PIC_URL = MyApplication.REQUEST_URL + "appv1zone/upload.do";
     public static final int UPLOAD_PIC_URL_ACTION = 4;
@@ -171,5 +171,15 @@ public class ConfigUtil {
      */
     public static final String QUERY_MINE_DAYNIC_URL = MyApplication.REQUEST_URL + "appv1zone/list.do";
     public static final int QUERY_MINE_DAYNIC_URL_ACTION = 30;
+    /***
+     * 修改用户信息
+     */
+    public static final String UPDATE_PERSON_INFO_URL = MyApplication.REQUEST_URL + "appv1Consumer/updateInfo.do";
+    public static final int UPDATE_PERSON_INFO_URL_ACTION = 31;
+    /***
+     * 修改用户标签
+     */
+    public static final String UPDATE_USER_LABEL_URL = MyApplication.REQUEST_URL + "appv1consumerlabel/consumerLable.do";
+    public static final int UPDATE_USER_LABEL_URL_ACTION = 32;
 
 }

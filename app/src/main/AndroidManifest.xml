@@ -154,6 +154,9 @@
         <activity
             android:name=".activity.MineContactsActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChooseMultipleAcquirementActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

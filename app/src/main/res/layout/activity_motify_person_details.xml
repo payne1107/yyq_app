@@ -61,7 +61,7 @@
             android:layout_marginLeft="@dimen/margin_size_15"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_size_28"
-            android:text="请输入"
+            android:hint="请输入"
             android:layout_width="0dp"
             android:layout_weight="4"
             android:background="@null"
@@ -100,7 +100,7 @@
             android:layout_marginLeft="@dimen/margin_size_15"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_size_28"
-            android:text="请输入"
+            android:hint="请输入"
             android:layout_width="0dp"
             android:layout_weight="4"
             android:background="@null"
@@ -115,6 +115,7 @@
         android:layout_height="1dp" />
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:gravity="center_vertical"
         android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -184,7 +185,7 @@
             android:layout_marginLeft="@dimen/margin_size_15"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_size_28"
-            android:text="请输入"
+            android:hint="请输入"
             android:layout_width="0dp"
             android:layout_weight="4"
             android:background="@null"
@@ -199,6 +200,7 @@
         android:layout_height="1dp" />
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:gravity="center_vertical"
         android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -243,6 +245,7 @@
         android:layout_height="1dp" />
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:gravity="center_vertical"
         android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -288,6 +291,7 @@
 
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:gravity="center_vertical"
         android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -357,7 +361,7 @@
             android:layout_marginLeft="@dimen/margin_size_15"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_size_28"
-            android:text="请输入"
+            android:hint="请输入"
             android:layout_width="0dp"
             android:layout_weight="4"
             android:background="@null"
@@ -396,7 +400,7 @@
             android:layout_marginLeft="@dimen/margin_size_15"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_size_28"
-            android:text="请输入"
+            android:hint="请输入"
             android:layout_width="0dp"
             android:layout_weight="4"
             android:background="@null"
@@ -434,7 +438,7 @@
             android:layout_marginLeft="@dimen/margin_size_15"
             android:textColor="@color/text_color_3"
             android:textSize="@dimen/text_size_28"
-            android:text="请输入"
+            android:hint="请输入"
             android:layout_width="0dp"
             android:layout_weight="4"
             android:background="@null"

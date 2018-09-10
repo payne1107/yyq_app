@@ -85,6 +85,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected ImageView ivBack;
     protected TextView tvSet;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -797,4 +798,5 @@ public abstract class BaseActivity extends FragmentActivity {
         MyApplication.userId = "";
         MyApplication.userPhone = "";
     }
+
 }
