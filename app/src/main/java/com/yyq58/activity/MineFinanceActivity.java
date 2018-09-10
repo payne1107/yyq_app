@@ -1,5 +1,7 @@
 package com.yyq58.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,10 +16,12 @@ public class MineFinanceActivity extends BaseActivity implements View.OnClickLis
     private AutoLinearLayout layoutDrawwithBalance;
     private AutoLinearLayout layoutAllOrder;
     private AutoLinearLayout layoutTopup;
+    private Context mContext;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
         setContentView(R.layout.activity_mine_finance);
+        mContext = MineFinanceActivity.this;
     }
 
     @Override
@@ -44,6 +48,8 @@ public class MineFinanceActivity extends BaseActivity implements View.OnClickLis
         layoutDrawwithBalance.setOnClickListener(this);
         layoutAllOrder.setOnClickListener(this);
         layoutTopup.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -51,9 +57,11 @@ public class MineFinanceActivity extends BaseActivity implements View.OnClickLis
         switch (view.getId()) {
             case R.id.layout_drawwith_balance:
                 //绑定银行卡
+                startActivity(new Intent(mContext, WithdrawMoneyActivity.class));
                 break;
             case R.id.layout_all_order:
                 //所有账单
+                startActivity(new Intent(mContext, AllBillDetailsActivity.class));
                 break;
             case R.id.layout_topup:
                 //充值

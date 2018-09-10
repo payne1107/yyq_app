@@ -53,8 +53,10 @@ import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.bean.FieldErrors;
 import com.yyq58.activity.bean.UploadImgBean;
 import com.yyq58.activity.httpstack.OkHttpStack;
+import com.yyq58.activity.utils.AppManager;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.PermissionUtils;
+import com.yyq58.activity.utils.SPUtil;
 import com.yyq58.activity.utils.StatusUtils;
 import com.yyq58.activity.utils.StringUtils;
 import com.yyq58.activity.widget.LoadingDailog;
@@ -90,6 +92,7 @@ public abstract class BaseActivity extends FragmentActivity {
         initView();
         initData();
         mContext = BaseActivity.this;
+        AppManager.getInstance().addActivity(this);
     }
 
     /***
@@ -783,5 +786,15 @@ public abstract class BaseActivity extends FragmentActivity {
                 pullToRefreshListView.setEmptyView(view);
             }
         }
+    }
+
+    /***
+     * 清除用户登陆的数据
+     */
+    protected void clearAppData() {
+        SPUtil.remove(mContext, "userId");
+        SPUtil.remove(mContext, "userPhone");
+        MyApplication.userId = "";
+        MyApplication.userPhone = "";
     }
 }

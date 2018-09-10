@@ -1,5 +1,6 @@
 package com.yyq58.activity;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

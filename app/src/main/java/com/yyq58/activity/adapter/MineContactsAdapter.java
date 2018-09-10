@@ -12,18 +12,17 @@ import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.bean.MineAttentionBean;
 import com.yyq58.activity.utils.StringUtils;
 import com.yyq58.activity.widget.CircleImageView;
-import com.yyq58.activity.widget.IButtonClickListener;
-import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
-public class MineAttentionAdapter extends BaseAdapter {
+public class MineContactsAdapter extends BaseAdapter {
     private Context mContext;
     private List<MineAttentionBean.DataBean> mList;
-    public MineAttentionAdapter(Context context, List<MineAttentionBean.DataBean> list) {
+
+    public MineContactsAdapter(Context context, List<MineAttentionBean.DataBean> list) {
+        mContext = context;
         this.mList = list;
-        this.mContext = context;
     }
 
     /***
@@ -38,7 +37,7 @@ public class MineAttentionAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mList == null ? 0 : mList.size();
+        return mList.size();
     }
 
     @Override
@@ -52,16 +51,15 @@ public class MineAttentionAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = LayoutInflater.from(mContext).inflate(R.layout.item_mine_attention, null);
+            view = LayoutInflater.from(mContext).inflate(R.layout.item_mine_contacts, null);
+            view.setTag(holder);
             holder.tvName = view.findViewById(R.id.tv_name);
             holder.tvLocation = view.findViewById(R.id.tv_location);
             holder.ivAvatar = view.findViewById(R.id.iv_avatar);
-            holder.layoutCancelAttention  =view.findViewById(R.id.layout_cancel_attention);
-            view.setTag(holder);
             AutoUtils.autoSize(view);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -78,13 +76,6 @@ public class MineAttentionAdapter extends BaseAdapter {
                 MyApplication.imageLoader.displayImage(avatar, holder.ivAvatar);
             }
         }
-        //取消关注
-        holder.layoutCancelAttention.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mOnItemClickListener.onDeleClick(view, i);
-            }
-        });
         return view;
     }
 
@@ -92,11 +83,5 @@ public class MineAttentionAdapter extends BaseAdapter {
         TextView tvName;
         public TextView tvLocation;
         public CircleImageView ivAvatar;
-        public AutoLinearLayout layoutCancelAttention;
-    }
-
-    private IButtonClickListener mOnItemClickListener;//声明接口
-    public void setOnItemClickListener(IButtonClickListener onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
     }
 }
