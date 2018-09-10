@@ -24,6 +24,7 @@ import com.yyq58.activity.widget.CircleImageView;
 import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PersonCenterActivity extends BaseActivity implements View.OnClickListener {
@@ -39,6 +40,19 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private ViewPager viewPager;
     private AutoLinearLayout layoutMotifyPersonInfo;
     private Context mContext;
+    private String account;
+    private String avatar;
+    private String sex;
+    private String motto;
+    private String trueName;
+    private String phonenumber;
+    private String height;
+    private String weight;
+    private String labelName;
+    private String province;
+    private String city;
+    private String county;
+    private String workTime;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
@@ -137,12 +151,26 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         if (bean != null) {
             PersonDetailsBean.DataBean data = bean.getData();
             if (data != null) {
-                String account = data.getAccount();
-                String avatar =data.getAvatar();
-                String sex = data.getSex();
+                account = data.getAccount();
+                avatar = data.getAvatar();
+                sex = data.getSex();
+                trueName = data.getTrueName();
                 String fansNum = data.getFansNums();//粉丝
                 String attendNums = data.getAttentionNums();//我关注的人
-                String motto = data.getMotto();//心情
+                //心情
+                motto = data.getMotto();
+                phonenumber = data.getPhoneNum();
+                height = data.getHeight();
+                weight = data.getWeight();
+                province = data.getProvince();
+                city = data.getCity();
+                county = data.getCounty();
+                workTime = data.getStarTime();
+
+                List<PersonDetailsBean.DataBean.LablesBean> bean1 = data.getLables();
+                if (bean1 != null) {
+                     labelName = bean1.get(0).getLabelName();
+                }
 
                 tvUsername.setText(StringUtils.isEmpty(account) ? "" : account);
                 tvCategory.setText(StringUtils.isEmpty(motto) ? "" : motto);
@@ -173,7 +201,21 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.layout_motify_person_info:
                 //修改个人资料
-                startActivity(new Intent(mContext, MotifyPersonDetailsActivity.class));
+                Intent intent = new Intent(mContext, MotifyPersonDetailsActivity.class);
+                intent.putExtra("nickname", account);
+                intent.putExtra("truename", trueName);
+                intent.putExtra("avatar", avatar);
+                intent.putExtra("sex", sex);
+                intent.putExtra("motto", motto);
+                intent.putExtra("phonenumber", phonenumber);
+                intent.putExtra("labelName", labelName);
+                intent.putExtra("height", height);
+                intent.putExtra("weight", weight);
+                intent.putExtra("province", province);
+                intent.putExtra("city", city);
+                intent.putExtra("county", county);
+                intent.putExtra("workTime", workTime);
+                startActivity(intent);
                 break;
         }
     }

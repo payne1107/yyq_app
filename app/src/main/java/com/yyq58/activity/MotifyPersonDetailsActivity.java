@@ -30,6 +30,7 @@ import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.SDCardUtil;
 import com.yyq58.activity.utils.StringUtils;
 import com.yyq58.activity.widget.CircleImageView;
+import com.yyq58.activity.widget.MyDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -83,6 +84,22 @@ public class MotifyPersonDetailsActivity extends BaseActivity implements View.On
         tvSet.setTextColor(getResources().getColor(R.color.white));
         initViewDateDialog(this, System.currentTimeMillis() - ConfigUtil.TenYears);
 
+        String nickname = getIntent().getStringExtra("nickname");
+        String truename = getIntent().getStringExtra("truename");
+        String avatar = getIntent().getStringExtra("avatar");
+        String sex = getIntent().getStringExtra("sex");
+        String motto = getIntent().getStringExtra("motto");
+        String phonenumber = getIntent().getStringExtra("phonenumber");
+        String labelname = getIntent().getStringExtra("labelName");
+        String height = getIntent().getStringExtra("height");
+        String weight = getIntent().getStringExtra("weight");
+        province = getIntent().getStringExtra("province");
+        city = getIntent().getStringExtra("city");
+        district = getIntent().getStringExtra("county");
+        String workTime = getIntent().getStringExtra("workTime");
+
+
+
         ivAvatar = findViewById(R.id.iv_avatar);
         etNickname = findViewById(R.id.et_nick_name);
         etPhone = findViewById(R.id.et_phone);
@@ -94,6 +111,20 @@ public class MotifyPersonDetailsActivity extends BaseActivity implements View.On
         etHeight = findViewById(R.id.et_height);
         etWeight = findViewById(R.id.et_weight);
         etMotto = findViewById(R.id.et_motto);
+
+        if (!StringUtils.isEmpty(avatar)) {
+            MyApplication.imageLoader.displayImage(avatar, ivAvatar);
+        }
+        tvChooseCity.setText(province + " " + city + " " + district);
+        tvChooseCYType.setText(StringUtils.isEmpty(labelname) ? "" : labelname);
+        tvChooseSex.setText(StringUtils.isEmpty(sex) ? "" : sex);
+        tvWorkTime.setText(StringUtils.isEmpty(workTime) ? "" : workTime);
+        etPhone.setText(StringUtils.isEmpty(phonenumber) ? "" : phonenumber);
+        etNickname.setText(StringUtils.isEmpty(nickname) ? "" : nickname);
+        etName.setText(StringUtils.isEmpty(truename) ? "" : truename);
+        etWeight.setText(StringUtils.isEmpty(weight) ? "" : weight);
+        etHeight.setText(StringUtils.isEmpty(height) ? "" : height);
+        etMotto.setText(StringUtils.isEmpty(motto) ? "" : motto);
 
         setListener();
     }
