@@ -1,10 +1,7 @@
 package com.yyq58.activity.utils;
 
 
-import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.yyq58.activity.application.MyApplication;
-
-import java.util.Map;
 
 
 /**
@@ -146,7 +143,6 @@ public class ConfigUtil {
     public static final int QUERY_FANS_LIST_URL_ACTION = 24;
     /***
      * 个人详情
-     *
      */
     public static final String QUERY_PERSON_INFO_URL = MyApplication.REQUEST_URL + "appv1Consumer/getConsumerInfo.do";
     public static final int QUERY_PERSON_INFO_URL_ACTION = 25;
