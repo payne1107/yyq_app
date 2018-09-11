@@ -98,7 +98,9 @@ public class ProductionFragmnet extends BaseFragment {
         DynamicFragmentBean bean = JSON.parseObject(json, DynamicFragmentBean.class);
         if (bean != null) {
             mList = bean.getData();
-            adapter.setData(mList);
+            if (mList != null && mList.size() > 0) {
+                adapter.setData(mList);
+            }
         }
     }
 }

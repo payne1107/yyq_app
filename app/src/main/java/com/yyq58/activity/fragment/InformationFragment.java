@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.yyq58.R;
 import com.yyq58.activity.PersonCenterActivity;
-import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
 import com.yyq58.activity.bean.PersonDetailsBean;
 import com.yyq58.activity.utils.ConfigUtil;
@@ -117,7 +116,7 @@ public class InformationFragment extends BaseFragment {
                 tvPhone.setText(StringUtils.isEmpty(phone) ? "" : phone);
                 tvLocation.setText(province + " " + city + " " + country);
                 String sex = data.getSex();
-                if (sex.equals("1")) {
+                if (("1").equals(sex)) {
                     tvSex.setText("男");
                 } else {
                     tvSex.setText("女");

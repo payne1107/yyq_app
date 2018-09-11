@@ -1,9 +1,7 @@
 package com.yyq58.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 
@@ -11,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.yyq58.R;
 import com.yyq58.activity.adapter.GridViewAdapter3;
 import com.yyq58.activity.adapter.GridViewAdapter4;
+import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
 import com.yyq58.activity.bean.ChooseAcquirementBean;
 import com.yyq58.activity.bean.MuHouBean;
@@ -65,39 +64,6 @@ public class ChooseMultipleAcquirementActivity extends BaseActivity implements V
 
     private void setListener() {
         tvSet.setOnClickListener(this);
-        final Intent intent = new Intent();
-//        gridView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                MuHouBean bean = (MuHouBean) adapterView.getAdapter().getItem(i);
-//                if (bean != null) {
-//                    String labelId = bean.getLabelId();
-//                    String labelName = bean.getLabelName();
-//
-//                    intent.putExtra("laeblId", labelId);
-//                    intent.putExtra("labelName", labelName);
-//                    setResult(RegisterActivity.REQUEST_CHOOSE_QCQUIREMENT_CODE, intent);
-//                    finish();
-//                }
-//            }
-//        });
-//
-//        gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                TaiQianBean bean = (TaiQianBean) adapterView.getAdapter().getItem(i);
-//                if (bean != null) {
-//                    String labelId = bean.getLabelId();
-//                    String labelName = bean.getLabelName();
-//
-//
-//                    intent.putExtra("laeblId", labelId);
-//                    intent.putExtra("labelName", labelName);
-//                    setResult(RegisterActivity.REQUEST_CHOOSE_QCQUIREMENT_CODE, intent);
-//                    finish();
-//                }
-//            }
-//        });
     }
 
     /****
@@ -115,6 +81,12 @@ public class ChooseMultipleAcquirementActivity extends BaseActivity implements V
         switch (action) {
             case ConfigUtil.QUERY_MINE_ACQUIREMENT_URL_ACTION:
                 handlerQueryMineAcquirement(json);
+                break;
+            case ConfigUtil.UPDATE_USER_LABEL_URL_ACTION:
+                if (getRequestCode(json) == 1000) {
+                    toastMessage("保存成功");
+                    finish();
+                }
                 break;
         }
     }
@@ -163,9 +135,19 @@ public class ChooseMultipleAcquirementActivity extends BaseActivity implements V
                 List<String> listMuhou = adapter4.getListCategory();
                 String strTaiqian = StringUtils.listToString(listTaiqian, ',');
                 String strMuhou = StringUtils.listToString(listMuhou, ',');
-                Log.d("Dong", "----->" + strTaiqian);
-                Log.d("Dong", "----->" + strMuhou);
+                updateUserLabel(strTaiqian + "," + strMuhou);
                 break;
         }
     }
+
+    /****
+     * 修改用户标签
+     */
+    private void updateUserLabel(String lableIds) {
+        Map<String, String> params = new HashMap<>();
+        params.put("consumerId", MyApplication.userId);
+        params.put("lableIds", lableIds);
+        httpPostRequest(ConfigUtil.UPDATE_USER_LABEL_URL, params, ConfigUtil.UPDATE_USER_LABEL_URL_ACTION);
+    }
+
 }

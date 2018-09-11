@@ -73,7 +73,11 @@ public class MineContactsActivity extends BaseActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(mContext, PersonCenterActivity.class));
+                MineAttentionBean.DataBean bean = (MineAttentionBean.DataBean) adapterView.getAdapter().getItem(i);
+                if (bean != null) {
+                    String toConsumerId = bean.getConsumerId();
+                    startActivity(new Intent(mContext, PersonCenterActivity.class).putExtra("userId", toConsumerId));
+                }
             }
         });
     }

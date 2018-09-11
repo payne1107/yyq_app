@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -797,6 +798,14 @@ public abstract class BaseActivity extends FragmentActivity {
         SPUtil.remove(mContext, "userPhone");
         MyApplication.userId = "";
         MyApplication.userPhone = "";
+    }
+
+    //电话咨询
+    public void callPhoneConsult(String phone) {
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("tel:" + phone));
+        intent.setAction(Intent.ACTION_CALL);
+        startActivity(intent);
     }
 
 }

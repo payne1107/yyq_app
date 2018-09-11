@@ -5,4 +5,13 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/sys_title" />
+
+    <com.itheima.pulltorefreshlib.PullToRefreshListView
+        android:layout_width="match_parent"
+        android:divider="@color/e5e5e5"
+        android:dividerHeight="0.1dp"
+        android:id="@+id/listView"
+        android:layout_height="match_parent">
+    </com.itheima.pulltorefreshlib.PullToRefreshListView>
+
 </com.zhy.autolayout.AutoLinearLayout>

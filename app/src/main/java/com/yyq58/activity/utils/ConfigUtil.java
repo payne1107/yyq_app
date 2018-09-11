@@ -181,5 +181,11 @@ public class ConfigUtil {
      */
     public static final String UPDATE_USER_LABEL_URL = MyApplication.REQUEST_URL + "appv1consumerlabel/consumerLable.do";
     public static final int UPDATE_USER_LABEL_URL_ACTION = 32;
+    /***
+     * 关注艺人
+     */
+    public static final String ATTENTION_YR_URL = MyApplication.REQUEST_URL + "appv1Consumer/setAttention.do";
+    public static final int ATTENTION_YR_URL_ACTION = 33;
+
 
 }

@@ -13,15 +13,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.yyq58.R;
+import com.yyq58.activity.IntegralActivity;
+import com.yyq58.activity.MineFansActivity;
 import com.yyq58.activity.MineFinanceActivity;
+import com.yyq58.activity.MineOrderActivity;
 import com.yyq58.activity.SearchNoticeActivity;
 import com.yyq58.activity.adapter.TalentTypeAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
+import com.yyq58.activity.bean.PersonDetailsBean;
+import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.SPUtil;
+import com.yyq58.activity.utils.StringUtils;
 import com.zaaach.citypicker.CityPickerActivity;
 import com.zhy.autolayout.AutoLinearLayout;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -37,6 +47,13 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
     private TextView tvYRDynamic;
     private EditText etSearch;
     private AutoLinearLayout layoutBalnace;
+    private AutoLinearLayout layoutFans;
+    private TextView tvJifenNum;
+    private TextView tvFansNum;
+    private TextView tvOrderNum;
+    private TextView tvBalance;
+    private AutoLinearLayout layoutOrder;
+    private AutoLinearLayout layoutJifen;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +83,14 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
         tvYRDynamic = mRootView.findViewById(R.id.tv_yr_dynamic);
         etSearch = mRootView.findViewById(R.id.et_search);
         layoutBalnace = mRootView.findViewById(R.id.layout_balance);
+        layoutFans = mRootView.findViewById(R.id.layout_fans);
+        tvJifenNum = mRootView.findViewById(R.id.tv_jifen_num);
+        tvFansNum = mRootView.findViewById(R.id.tv_fans_num);
+        tvOrderNum = mRootView.findViewById(R.id.tv_order_num);
+        tvBalance = mRootView.findViewById(R.id.tv_balance);
+        layoutOrder = mRootView.findViewById(R.id.layout_order);
+        layoutJifen = mRootView.findViewById(R.id.layout_jifen);
+
 
         TabLayout tabLayout = mRootView.findViewById(R.id.tabLayout);
         ViewPager viewPager = mRootView.findViewById(R.id.viewpager);
@@ -83,12 +108,15 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
         tvSeachYR.setOnClickListener(this);
         etSearch.setOnClickListener(this);
         layoutBalnace.setOnClickListener(this);
+        layoutFans.setOnClickListener(this);
+        layoutOrder.setOnClickListener(this);
+        layoutJifen.setOnClickListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
+        queryPersonDetails();
     }
 
     @Override
@@ -121,6 +149,15 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
                 //跳转到我的财务
                 startActivity(new Intent(getActivity(), MineFinanceActivity.class));
                 break;
+            case R.id.layout_fans:
+                startActivity(new Intent(getActivity(), MineFansActivity.class));
+                break;
+            case R.id.layout_order:
+                startActivity(new Intent(getActivity(), MineOrderActivity.class));
+                break;
+            case R.id.layout_jifen:
+                startActivity(new Intent(getActivity(), IntegralActivity.class));
+                break;
         }
     }
 
@@ -134,6 +171,48 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
                 tvChooseCity.setText(city);
                 //选择城市后将当前选择城市赋值
                 MyApplication.currentCity = city;
+            }
+        }
+    }
+
+    /***
+     * 查询个人信息
+     */
+    private void queryPersonDetails() {
+        Map<String, String> params = new HashMap<>();
+        params.put("consumerId", MyApplication.userId);
+        httpPostRequest(ConfigUtil.QUERY_PERSON_INFO_URL, params, ConfigUtil.QUERY_PERSON_INFO_URL_ACTION);
+    }
+
+    @Override
+    public void httpOnResponse(String json, int action) {
+        super.httpOnResponse(json, action);
+        switch (action) {
+            case ConfigUtil.QUERY_PERSON_INFO_URL_ACTION:
+                //查询个人信息
+                handleQuereyPersonInfo(json);
+                break;
+        }
+    }
+
+    /***
+     * 个人信息
+     * @param json
+     */
+    private void handleQuereyPersonInfo(String json) {
+        PersonDetailsBean bean = JSON.parseObject(json, PersonDetailsBean.class);
+        if (bean != null) {
+            PersonDetailsBean.DataBean data = bean.getData();
+            if (data != null) {
+                double balance = data.getChanges(); //余额
+                String orderNum = data.getOrderNums();//订单
+                String fansNum = data.getFansNums();//粉丝
+                double jifen = data.getJifen();//积分
+
+                tvBalance.setText("" + balance);
+                tvJifenNum.setText("" + jifen);
+                tvFansNum.setText(StringUtils.isEmpty(fansNum) ? "" : fansNum);
+                tvOrderNum.setText(StringUtils.isEmpty(orderNum) ? "" : orderNum);
             }
         }
     }

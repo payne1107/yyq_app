@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <include layout="@layout/sys_title" />
+    <include layout="@layout/sys_title" android:id="@+id/title"/>
 
     <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/layout1"
+        android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_4b3a75"
@@ -152,7 +154,7 @@
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>
     <android.support.design.widget.TabLayout
-        android:layout_below="@+id/layout_container"
+        android:layout_below="@+id/layout1"
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -173,4 +175,14 @@
         >
     </android.support.v4.view.ViewPager>
 
-</com.zhy.autolayout.AutoLinearLayout>
+    <ImageView
+        android:id="@+id/iv_callphone"
+        android:layout_marginBottom="@dimen/margin_size_10"
+        android:layout_marginRight="@dimen/margin_size_10"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/icon_myhome_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

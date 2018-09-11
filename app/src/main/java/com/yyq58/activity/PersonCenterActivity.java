@@ -53,6 +53,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private String city;
     private String county;
     private String workTime;
+    private ImageView ivCallPhone;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
@@ -82,7 +83,12 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         tvFansNum = findViewById(R.id.tv_fans_num);
         ivSex = findViewById(R.id.iv_sex);
         layoutMotifyPersonInfo = findViewById(R.id.layout_motify_person_info);
-
+        ivCallPhone = findViewById(R.id.iv_callphone);
+        if (!userId.equals(MyApplication.userId)) {
+            ivCallPhone.setVisibility(View.VISIBLE);
+        } else {
+            ivCallPhone.setVisibility(View.GONE);
+        }
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewpager);
         PersonCenterAdapter adapter = new PersonCenterAdapter(getSupportFragmentManager());
@@ -93,6 +99,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
 
     private void setListener() {
         layoutMotifyPersonInfo.setOnClickListener(this);
+        ivCallPhone.setOnClickListener(this);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -101,7 +108,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void onPageSelected(int i) {
-                if (i == 3) {
+                if (i == 3 && userId.equals(MyApplication.userId)) {
                     layoutMotifyPersonInfo.setVisibility(View.VISIBLE);
                 } else {
                     layoutMotifyPersonInfo.setVisibility(View.GONE);
@@ -179,7 +186,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 }
                 tvFansNum.setText(StringUtils.isEmpty(fansNum) ? "" : fansNum);
                 tvAttentionNum.setText(StringUtils.isEmpty(attendNums) ? "" : attendNums);
-                if (sex.equals("1")) {
+                if (("1").equals(sex)) {
                     ivSex.setImageResource(R.mipmap.icon_male);
                 } else {
                     ivSex.setImageResource(R.mipmap.icon_female);
@@ -216,6 +223,10 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 intent.putExtra("county", county);
                 intent.putExtra("workTime", workTime);
                 startActivity(intent);
+                break;
+            case R.id.iv_callphone:
+                //拨打电话
+                callPhoneConsult(phonenumber);
                 break;
         }
     }

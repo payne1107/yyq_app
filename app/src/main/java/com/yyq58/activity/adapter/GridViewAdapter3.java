@@ -75,7 +75,7 @@ public class GridViewAdapter3 extends BaseAdapter {
                     mapSelect.put(position, false);
                     if (listCategory != null) {
                         for (int i = 0; i < listCategory.size(); i++) {
-                            if (mList.get(position).getLabelName() == listCategory.get(i)) {
+                            if (mList.get(position).getLabelId() == listCategory.get(i)) {
                                 listCategory.remove(i);
                             }
                         }
@@ -83,7 +83,7 @@ public class GridViewAdapter3 extends BaseAdapter {
                 } else {
                     mapSelect.put(position, true);
                     //添加用户选择的userid
-                    listCategory.add(mList.get(position).getLabelName());
+                    listCategory.add(mList.get(position).getLabelId());
                 }
             }
         });

@@ -9,10 +9,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.yyq58.R;
+import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
+import com.yyq58.activity.bean.PersonDetailsBean;
+import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.StringUtils;
 import com.zhy.autolayout.AutoLinearLayout;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /***
  * 提现
@@ -63,8 +70,22 @@ public class WithdrawMoneyActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.layout_withdraw:
                 //提现
+                withdrawPost();
                 break;
         }
+    }
+
+    /***
+     * 提现
+     */
+    private void withdrawPost() {
+        String bankInfo = tvBankInfo.getText().toString().trim();
+        if ("请绑定银行卡".equals(bankInfo)) {
+            toastMessage("请先绑定银行卡");
+            return;
+        }
+
+
     }
 
     private class MyTextWatcher implements TextWatcher {
@@ -85,6 +106,51 @@ public class WithdrawMoneyActivity extends BaseActivity implements View.OnClickL
                 layoutWithdraw.setBackgroundColor(getResources().getColor(R.color.color_e));
             } else {
                 layoutWithdraw.setBackgroundColor(getResources().getColor(R.color.color_4b3a75));
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        queryPersonDetails();
+    }
+
+    /***
+     * 查询个人信息
+     */
+    private void queryPersonDetails() {
+        startIOSDialogLoading(mContext, "");
+        Map<String, String> params = new HashMap<>();
+        params.put("consumerId", MyApplication.userId);
+        httpPostRequest(ConfigUtil.QUERY_PERSON_INFO_URL, params, ConfigUtil.QUERY_PERSON_INFO_URL_ACTION);
+    }
+
+    @Override
+    public void httpOnResponse(String json, int action) {
+        super.httpOnResponse(json, action);
+        switch (action) {
+            case ConfigUtil.QUERY_PERSON_INFO_URL_ACTION:
+                //查询个人信息
+                handleQuereyPersonInfo(json);
+                break;
+        }
+    }
+
+    /***
+     * 个人信息
+     * @param json
+     */
+    private void handleQuereyPersonInfo(String json) {
+        PersonDetailsBean bean = JSON.parseObject(json, PersonDetailsBean.class);
+        if (bean != null) {
+            PersonDetailsBean.DataBean data = bean.getData();
+            if (data != null) {
+                String bankName = data.getBankName();
+                String bankNameNum = data.getBankNameNum();
+                if (!StringUtils.isEmpty(bankName) && !StringUtils.isEmpty(bankNameNum)) {
+                    tvBankInfo.setText(bankName + "(" + bankNameNum + ")");
+                }
             }
         }
     }
