@@ -80,12 +80,24 @@ public class WithdrawMoneyActivity extends BaseActivity implements View.OnClickL
      */
     private void withdrawPost() {
         String bankInfo = tvBankInfo.getText().toString().trim();
+        String balance = tvBalance.getText().toString().trim();
+        String money = etMoney.getText().toString().trim();
         if ("请绑定银行卡".equals(bankInfo)) {
             toastMessage("请先绑定银行卡");
             return;
         }
-
-
+        if (Double.parseDouble(money) > Double.parseDouble(balance)) {
+            toastMessage("提现金额不能大于余额");
+            return;
+        }
+        if (Double.parseDouble(money) <= 10) {
+            toastMessage("提现金额不能小于10元");
+            return;
+        }
+        Map<String, String> params = new HashMap<>();
+        params.put("money", money);
+        params.put("consumerId", MyApplication.userId);
+        httpPostRequest(ConfigUtil.WITHDRAW_BALANCE_URL, params, ConfigUtil.WITHDRAW_BALANCE_URL_ACTION);
     }
 
     private class MyTextWatcher implements TextWatcher {
@@ -133,6 +145,12 @@ public class WithdrawMoneyActivity extends BaseActivity implements View.OnClickL
             case ConfigUtil.QUERY_PERSON_INFO_URL_ACTION:
                 //查询个人信息
                 handleQuereyPersonInfo(json);
+                break;
+            case ConfigUtil.WITHDRAW_BALANCE_URL_ACTION:
+                if (getRequestCode(json) == 1000) {
+                    toastMessage("提现申请成功");
+                    finish();
+                }
                 break;
         }
     }

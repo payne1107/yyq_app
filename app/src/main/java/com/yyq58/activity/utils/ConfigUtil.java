@@ -186,6 +186,11 @@ public class ConfigUtil {
      */
     public static final String ATTENTION_YR_URL = MyApplication.REQUEST_URL + "appv1Consumer/setAttention.do";
     public static final int ATTENTION_YR_URL_ACTION = 33;
+    /***
+     * 提现
+     */
+    public static final String WITHDRAW_BALANCE_URL = MyApplication.REQUEST_URL + "appcashrecord/savecashrecord.do";
+    public static final int WITHDRAW_BALANCE_URL_ACTION = 34;
 
 
 }
