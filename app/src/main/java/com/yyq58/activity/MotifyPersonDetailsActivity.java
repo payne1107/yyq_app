@@ -124,6 +124,7 @@ public class MotifyPersonDetailsActivity extends BaseActivity implements View.On
         etName.setText(StringUtils.isEmpty(truename) ? "" : truename);
         etWeight.setText(StringUtils.isEmpty(weight) ? "" : weight);
         etHeight.setText(StringUtils.isEmpty(height) ? "" : height);
+
         etMotto.setText(StringUtils.isEmpty(motto) ? "" : motto);
 
         setListener();
