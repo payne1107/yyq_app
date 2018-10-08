@@ -25,6 +25,7 @@
             android:textSize="@dimen/text_size_28" />
 
         <TextView
+            android:id="@+id/tv_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_size_10"
@@ -46,87 +47,212 @@
         android:orientation="horizontal">
 
         <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_pending_file_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_order_undone" />
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="待定档"
-                android:textColor="@color/text_color_3"
-                android:textSize="@dimen/text_size_24" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/layout_pending_file"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:layout_toRightOf="@+id/iv_1"
+                    android:background="@drawable/cirle_radius_shape"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_pending_file"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/color_4b3a75"
+                        android:textSize="@dimen/text_size_18" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/iv_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_order_undone" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_1"
+                    android:layout_marginTop="2dp"
+                    android:text="待定档"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_24" />
+            </RelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_unpaid_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_order_daizhifu" />
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="待支付"
-                android:textColor="@color/text_color_3"
-                android:textSize="@dimen/text_size_24" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/layotu_unpaid"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:layout_toRightOf="@+id/iv_2"
+                    android:background="@drawable/cirle_radius_shape"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_unpaid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/color_4b3a75"
+                        android:textSize="@dimen/text_size_18" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+
+                    android:id="@+id/iv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_order_daizhifu" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_2"
+                    android:layout_marginTop="2dp"
+                    android:text="待支付"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_24" />
+            </RelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_confirm_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_order_daidianping" />
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="确定/完成"
-                android:textColor="@color/text_color_3"
-                android:textSize="@dimen/text_size_24" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/layout_confirm"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:layout_toRightOf="@+id/iv_3"
+                    android:background="@drawable/cirle_radius_shape"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/color_4b3a75"
+                        android:textSize="@dimen/text_size_18" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+
+                    android:id="@+id/iv_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_order_daidianping" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_3"
+                    android:layout_marginTop="2dp"
+                    android:text="确定/完成"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_24" />
+            </RelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_refund_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_order_daijiaoyi" />
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="申请退款"
-                android:textColor="@color/text_color_3"
-                android:textSize="@dimen/text_size_24" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/layout_refund"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:layout_toRightOf="@+id/iv_4"
+                    android:background="@drawable/cirle_radius_shape"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_refund"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/color_4b3a75"
+                        android:textSize="@dimen/text_size_18" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/iv_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_order_daijiaoyi" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_4"
+                    android:layout_marginTop="2dp"
+                    android:text="申请退款"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_24" />
+            </RelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>
 
@@ -165,103 +291,217 @@
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_size_5"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal">
 
         <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_pending_file2_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:layout_marginBottom="@dimen/margin_size_5"
-            android:layout_marginTop="@dimen/margin_size_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_order_undone" />
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="待定档"
-                android:textColor="@color/text_color_3"
-                android:textSize="@dimen/text_size_24" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/layout_pending_file2"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:layout_toRightOf="@+id/iv_11"
+                    android:background="@drawable/cirle_radius_shape"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_pending_file2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/color_4b3a75"
+                        android:textSize="@dimen/text_size_18" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/iv_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_order_undone" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_11"
+                    android:layout_marginTop="2dp"
+                    android:text="待定档"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_24" />
+            </RelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_is_set_file_container"
             android:layout_width="0dp"
-
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_size_5"
-            android:layout_marginTop="@dimen/margin_size_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_order_daizhifu" />
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="已定档"
-                android:textColor="@color/text_color_3"
-                android:textSize="@dimen/text_size_24" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/layout_is_set_file"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:layout_toRightOf="@+id/iv_22"
+                    android:background="@drawable/cirle_radius_shape"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_is_set_file"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/color_4b3a75"
+                        android:textSize="@dimen/text_size_18" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/iv_22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_order_daizhifu" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_22"
+                    android:layout_marginTop="2dp"
+                    android:text="已定档"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_24" />
+            </RelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_ask_for_payment_container"
             android:layout_width="0dp"
-
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_size_5"
-            android:layout_marginTop="@dimen/margin_size_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_order_daidianping" />
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="催付款"
-                android:textColor="@color/text_color_3"
-                android:textSize="@dimen/text_size_24" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/layout_ask_for_payment"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:layout_toRightOf="@+id/iv_33"
+                    android:background="@drawable/cirle_radius_shape"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_ask_for_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/color_4b3a75"
+                        android:textSize="@dimen/text_size_18" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+
+                    android:id="@+id/iv_33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_order_daidianping" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_33"
+                    android:layout_marginTop="2dp"
+                    android:text="催付款"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_24" />
+            </RelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_confirm2_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_size_5"
-            android:layout_marginTop="@dimen/margin_size_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_order_daijiaoyi" />
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="完成"
-                android:textColor="@color/text_color_3"
-                android:textSize="@dimen/text_size_24" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/layout_confirm2"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:layout_toRightOf="@+id/iv_44"
+                    android:background="@drawable/cirle_radius_shape"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_confirm2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="@color/color_4b3a75"
+                        android:textSize="@dimen/text_size_18" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/iv_44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_order_daijiaoyi" />
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_44"
+                    android:layout_marginTop="2dp"
+                    android:text="完成"
+                    android:textColor="@color/text_color_3"
+                    android:textSize="@dimen/text_size_24" />
+            </RelativeLayout>
         </com.zhy.autolayout.AutoLinearLayout>
     </com.zhy.autolayout.AutoLinearLayout>
 </com.zhy.autolayout.AutoLinearLayout>

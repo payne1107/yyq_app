@@ -191,6 +191,11 @@ public class ConfigUtil {
      */
     public static final String WITHDRAW_BALANCE_URL = MyApplication.REQUEST_URL + "appcashrecord/savecashrecord.do";
     public static final int WITHDRAW_BALANCE_URL_ACTION = 34;
+    /****
+     * 我的订单-->数量展示
+     */
+    public static final String QUERY_MINE_ORDER_COUNT_URL = MyApplication.REQUEST_URL + "appv1noticeorder/findOrderCount.do";
+    public static final int QUERY_MINE_ORDER_COUNT_URL_ACTION = 35;
 
 
 }

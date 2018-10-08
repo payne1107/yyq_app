@@ -179,8 +179,8 @@ public class PopupMenuUtil {
         objectAnimator.start();
 
         _startAnimation(layoutReleaseOrder, 500, animatorProperty);
-        _startAnimation(layoutReleasePic, 430, animatorProperty);
-        _startAnimation(layoutReleaseNotice, 500, animatorProperty);
+        _startAnimation(layoutReleasePic, 500, animatorProperty);
+        _startAnimation(layoutReleaseNotice, 430, animatorProperty);
         _startAnimation(layoutReleaseVideo, 430, animatorProperty);
 //
 //        _startAnimation(llTest5, 500, animatorProperty);
@@ -201,9 +201,9 @@ public class PopupMenuUtil {
             objectAnimator.start();
 
             _closeAnimation(layoutReleaseOrder, 300, top);
-            _closeAnimation(layoutReleasePic, 200, top);
+            _closeAnimation(layoutReleasePic, 300, top);
             _closeAnimation(layoutReleaseVideo, 200, top);
-            _closeAnimation(layoutReleaseNotice, 300, top);
+            _closeAnimation(layoutReleaseNotice, 200, top);
 //            _closeAnimation(llTest5, 300, bottom);
 //            _closeAnimation(llTest6, 200, bottom);
 //            _closeAnimation(llTest7, 200, bottom);
