@@ -25,7 +25,7 @@
             android:textSize="@dimen/text_size_28" />
 
         <TextView
-            android:id="@+id/tv_search"
+            android:id="@+id/tv_search1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_size_10"
@@ -276,6 +276,7 @@
             android:textSize="@dimen/text_size_28" />
 
         <TextView
+            android:id="@+id/tv_search2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_size_10"

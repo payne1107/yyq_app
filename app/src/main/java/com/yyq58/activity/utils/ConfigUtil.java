@@ -196,6 +196,30 @@ public class ConfigUtil {
      */
     public static final String QUERY_MINE_ORDER_COUNT_URL = MyApplication.REQUEST_URL + "appv1noticeorder/findOrderCount.do";
     public static final int QUERY_MINE_ORDER_COUNT_URL_ACTION = 35;
-
+    /****
+     * 我的订单-->待支付 & 完成
+     */
+    public static final String QUERY_MINE_ORDER_LIST_FOR_PAY_AND_COMPLETE_URL = MyApplication.REQUEST_URL + "appv1noticeorder/findNotPayOrder.do";
+    public static final int QUERY_MINE_ORDER_LIST_FOR_PAY_AND_COMPLETE_URL_ACTION = 36;
+    /****
+     * 我的订单-->申请退款
+     */
+    public static final String QUERY_MINE_ORDER_LIST_FOR_REFUND_URL = MyApplication.REQUEST_URL + "appv1refund/list.do";
+    public static final int QUERY_MINE_ORDER_LIST_FOR_REFUND_URL_ACTION = 37;
+    /***
+     * 我的订单-->待处理
+     */
+    public static final String QUERY_MINE_ORDER_LIST_FOR_PENDING_URL = MyApplication.REQUEST_URL + "appv1noticeorder/findTransaction.do";
+    public static final int QUERY_MINE_ORDER_LIST_FOR_PENDING_URL_ACTION = 38;
+    /***
+     * 我的订单--》抢单 -已定档 & 催付款 & 完成
+     */
+    public static final String QUERY_MINE_ORDER_QD_PAY_AND_NOT_PAY_URL = MyApplication.REQUEST_URL + "appv1noticeorder/findQiangDanNotPayOrderToPay.do";
+    public static final int QUERY_MINE_ORDER_QD_PAY_AND_NOT_PAY_URL_ACTION = 39;
+    /***
+     * 我的订单的--》抢单 -待定档
+     */
+    public static final String QUERY_MINE_ORDER_QD_PENDING_URL = MyApplication.REQUEST_URL + "appv1noticeorder/findQiangDanTransaction.do";
+    public static final int QUERY_MINE_ORDER_QD_PENDING_URL_ACTION = 40;
 
 }

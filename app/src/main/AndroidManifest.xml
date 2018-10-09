@@ -161,6 +161,12 @@
         <activity
             android:name=".activity.MineOrderDetailsActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AnnunciateOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.QiangDanActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

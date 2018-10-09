@@ -22,6 +22,7 @@ import java.util.Map;
 * */
 public class MineOrderActivity extends BaseActivity implements View.OnClickListener {
     protected static final String EXTRA_MINE_ORDER_TITLE_NAME = "extra_mine_order_title_name";
+    protected static final String EXTRA_MINE_ORDER_TYPE_CODE = "extra_mine_order_type_code";
     private Context mContext;
     private TextView tvSearch;
     private TextView tvPendingFile;
@@ -48,6 +49,7 @@ public class MineOrderActivity extends BaseActivity implements View.OnClickListe
     private AutoLinearLayout layoutIsSetFileContainer;
     private AutoLinearLayout layoutAskForPaymentContainer;
     private AutoLinearLayout layoutConfirm2Container;
+    private TextView tvSearch2;
 
 
     @Override
@@ -65,7 +67,8 @@ public class MineOrderActivity extends BaseActivity implements View.OnClickListe
     protected void initView() {
         super.initView();
         setInVisibleTitleIcon("我的订单", true, true);
-        tvSearch = findViewById(R.id.tv_search);
+        tvSearch = findViewById(R.id.tv_search1);
+        tvSearch2 = findViewById(R.id.tv_search2);
         tvPendingFile = findViewById(R.id.tv_pending_file);
         tvUnpaid = findViewById(R.id.tv_unpaid);
         tvConfirm = findViewById(R.id.tv_confirm);
@@ -87,7 +90,7 @@ public class MineOrderActivity extends BaseActivity implements View.OnClickListe
 
         layoutPendingFileContainer = findViewById(R.id.layout_pending_file_container);
         layoutUnpaidContainer = findViewById(R.id.layout_unpaid_container);
-        layoutConfirmContainer = findViewById(R.id.layout_confirm);
+        layoutConfirmContainer = findViewById(R.id.layout_confirm_container);
         layoutRefundContainer = findViewById(R.id.layout_refund_container);
         layoutPendingFile2Container = findViewById(R.id.layout_pending_file2_container);
         layoutIsSetFileContainer = findViewById(R.id.layout_is_set_file_container);
@@ -99,6 +102,8 @@ public class MineOrderActivity extends BaseActivity implements View.OnClickListe
 
     private void setListener() {
         tvSearch.setOnClickListener(this);
+        tvSearch2.setOnClickListener(this);
+
         layoutPendingFileContainer.setOnClickListener(this);
         layoutUnpaidContainer.setOnClickListener(this);
         layoutConfirmContainer.setOnClickListener(this);
@@ -193,32 +198,36 @@ public class MineOrderActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_search:
+            case R.id.tv_search1:
                 //搜索
+                startActivity(new Intent(mContext, AnnunciateOrderActivity.class));
+                break;
+            case R.id.tv_search2:
+                startActivity(new Intent(mContext,QiangDanActivity.class));
                 break;
             case R.id.layout_pending_file_container:
-                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "通告订单-待定档"));
+                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "通告订单-待定档").putExtra(EXTRA_MINE_ORDER_TYPE_CODE, 1));
                 break;
             case R.id.layout_unpaid_container:
-                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "通告订单-待支付"));
+                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "通告订单-待支付").putExtra(EXTRA_MINE_ORDER_TYPE_CODE, 2));
                 break;
-            case R.id.layout_confirm:
-                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "通告订单-确定/完成"));
+            case R.id.layout_confirm_container:
+                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "通告订单-确定/完成").putExtra(EXTRA_MINE_ORDER_TYPE_CODE, 3));
                 break;
             case R.id.layout_refund_container:
-                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "通告订单-申请退款"));
+                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "通告订单-申请退款").putExtra(EXTRA_MINE_ORDER_TYPE_CODE, 4));
                 break;
             case R.id.layout_pending_file2_container:
-                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "抢单订单-待定档"));
+                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "抢单订单-待定档").putExtra(EXTRA_MINE_ORDER_TYPE_CODE, 5));
                 break;
             case R.id.layout_is_set_file_container:
-                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "抢单订单-已定档"));
+                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "抢单订单-已定档").putExtra(EXTRA_MINE_ORDER_TYPE_CODE, 6));
                 break;
             case R.id.layout_ask_for_payment_container:
-                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "抢单订单-催付款"));
+                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "抢单订单-催付款").putExtra(EXTRA_MINE_ORDER_TYPE_CODE, 7));
                 break;
             case R.id.layout_confirm2_container:
-                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "抢单订单-完成"));
+                startActivity(new Intent(mContext, MineOrderDetailsActivity.class).putExtra(EXTRA_MINE_ORDER_TITLE_NAME, "抢单订单-完成").putExtra(EXTRA_MINE_ORDER_TYPE_CODE, 8));
                 break;
         }
     }

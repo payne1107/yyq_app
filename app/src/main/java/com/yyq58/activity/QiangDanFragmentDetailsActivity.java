@@ -153,7 +153,9 @@ public class QiangDanFragmentDetailsActivity extends BaseActivity implements Vie
         RecommendNoticeBean bean = JSON.parseObject(json, RecommendNoticeBean.class);
         if (bean != null) {
             mList = bean.getData();
-            adapter.setData(mList);
+            if (mList != null && mList.size() > 0) {
+                adapter.setData(mList);
+            }
         }
     }
 
