@@ -3,7 +3,6 @@ package com.yyq58.activity.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import com.yyq58.activity.MineFinanceActivity;
 import com.yyq58.activity.MineOrderActivity;
 import com.yyq58.activity.OpenVIPActivity;
 import com.yyq58.activity.PersonCenterActivity;
+import com.yyq58.activity.ScheduleManagementActivity;
 import com.yyq58.activity.SettingActivity;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
@@ -59,6 +59,7 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
     private TextView tvOrderNum2;
     private ImageView ivSex;
     private double balance;
+    private AutoLinearLayout layoutCalendar;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -105,6 +106,7 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
         tvBalance2 = mRootView.findViewById(R.id.tv_balance2);
         tvOrderNum2 = mRootView.findViewById(R.id.tv_order_num2);
         ivSex = mRootView.findViewById(R.id.iv_sex);
+        layoutCalendar = mRootView.findViewById(R.id.layout_calendar);
     }
 
     private void setListener() {
@@ -120,6 +122,7 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
         layoutFS.setOnClickListener(this);
         layoutIntegral.setOnClickListener(this);
         tvRefreshVip.setOnClickListener(this);
+        layoutCalendar.setOnClickListener(this);
     }
 
     @Override
@@ -160,6 +163,9 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
             case R.id.tv_refresh_vip:
                 //刷新vip
                 refreshVipDialog();
+                break;
+            case R.id.layout_calendar:
+                startActivity(new Intent(getActivity(), ScheduleManagementActivity.class));
                 break;
         }
     }

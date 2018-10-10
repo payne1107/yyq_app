@@ -221,5 +221,31 @@ public class ConfigUtil {
      */
     public static final String QUERY_MINE_ORDER_QD_PENDING_URL = MyApplication.REQUEST_URL + "appv1noticeorder/findQiangDanTransaction.do";
     public static final int QUERY_MINE_ORDER_QD_PENDING_URL_ACTION = 40;
+    /****
+     * 档期发布
+     */
+    public static final String ADD_CONSUMER_SCHEDULE_URL = MyApplication.REQUEST_URL + "appv1consumerschedule/save.do";
+    public static final int ADD_CONSUMER_SCHEDULE_URL_ACTION = 41;
+    /***
+     * 按月查询档期
+     */
+    public static final String QUERY_BY_MONTH_SCHEDULE_URL = MyApplication.REQUEST_URL + "appv1consumerschedule/findByMonth.do";
+    public static final int QUERY_BY_MONTH_SCHEDULE_URL_ACTION = 42;
+    /****
+     * 按天查询档期
+     */
+    public static final String QUERY_BY_DAY_SCHEDULE_URL = MyApplication.REQUEST_URL + "appv1consumerschedule/findByDay.do";
+    public static final int QUERY_BY_DAY_SCHEDULE_URL_ACTION = 43;
+    /***
+     * 档期列表删除
+     */
+    public static final String DELETE_SCHEDULE_LIST_URL = MyApplication.REQUEST_URL + "appv1consumerschedule/delete.do";
+    public static final int DELETE_SCHEDULE_LIST_URL_ACTION = 44;
+    /***
+     * 档期编辑
+     */
+    public static final String EDIT_SCHEDULE_LIST_URL = MyApplication.REQUEST_URL + "appv1consumerschedule/edit.do";
+    public static final int EDIT_SCHEDULE_LIST_URL_ACTIOn = 45;
+
 
 }

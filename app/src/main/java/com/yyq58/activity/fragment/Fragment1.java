@@ -19,6 +19,7 @@ import com.yyq58.activity.IntegralActivity;
 import com.yyq58.activity.MineFansActivity;
 import com.yyq58.activity.MineFinanceActivity;
 import com.yyq58.activity.MineOrderActivity;
+import com.yyq58.activity.ScheduleManagementActivity;
 import com.yyq58.activity.SearchNoticeActivity;
 import com.yyq58.activity.adapter.TalentTypeAdapter;
 import com.yyq58.activity.application.MyApplication;
@@ -54,6 +55,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
     private TextView tvBalance;
     private AutoLinearLayout layoutOrder;
     private AutoLinearLayout layoutJifen;
+    private AutoLinearLayout layoutCalendar;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
         tvBalance = mRootView.findViewById(R.id.tv_balance);
         layoutOrder = mRootView.findViewById(R.id.layout_order);
         layoutJifen = mRootView.findViewById(R.id.layout_jifen);
+        layoutCalendar = mRootView.findViewById(R.id.layout_calendar);
 
 
         TabLayout tabLayout = mRootView.findViewById(R.id.tabLayout);
@@ -111,6 +114,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
         layoutFans.setOnClickListener(this);
         layoutOrder.setOnClickListener(this);
         layoutJifen.setOnClickListener(this);
+        layoutCalendar.setOnClickListener(this);
     }
 
     @Override
@@ -157,6 +161,9 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.layout_jifen:
                 startActivity(new Intent(getActivity(), IntegralActivity.class));
+                break;
+            case R.id.layout_calendar:
+                startActivity(new Intent(getActivity(), ScheduleManagementActivity.class));
                 break;
         }
     }

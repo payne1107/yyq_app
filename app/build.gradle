@@ -51,4 +51,6 @@ dependencies {
     implementation 'liji.library.dev:citypickerview:0.7.0'
     //滚轮效果
     implementation 'com.weigan:loopView:0.1.0'
+    //日历控件
+    compile 'com.prolificinteractive:material-calendarview:1.4.0'
 }

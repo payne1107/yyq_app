@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -98,8 +99,8 @@ public class StringUtils {
      * @param str
      * @return
      */
-    public static List<String> stringsToList(String str) {
-        String[] strings = str.split(",");
+    public static List<String> stringsToList(String str,String separator) {
+        String[] strings = str.split(separator);
         return  Arrays.asList(strings);
     }
 
@@ -384,5 +385,18 @@ public class StringUtils {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    /***
+     * string转Date
+     * @param string
+     * @param format
+     * @return
+     */
+    public static Date string2Date(String string, String format) {
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(string, pos);
+        return strtodate;
     }
 }
