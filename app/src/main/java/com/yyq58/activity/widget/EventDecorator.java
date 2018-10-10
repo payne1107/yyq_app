@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.text.style.ForegroundColorSpan;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -36,6 +37,6 @@ public class EventDecorator implements DayViewDecorator {
         //设置字体颜色
         view.addSpan(new ForegroundColorSpan(Color.parseColor("#000000")));
         //设置背景色
-        view.setSelectionDrawable(mContext.getDrawable(R.drawable.schedule_bg));
+        view.setSelectionDrawable(ContextCompat.getDrawable(mContext,R.drawable.schedule_bg));
     }
 }

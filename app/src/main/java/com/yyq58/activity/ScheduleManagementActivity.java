@@ -27,6 +27,8 @@ import com.yyq58.activity.utils.DateUtils;
 import com.yyq58.activity.utils.StringUtils;
 import com.yyq58.activity.widget.EventDecorator;
 import com.yyq58.activity.widget.HighlightWeekendsDecorator;
+import com.yyq58.activity.widget.IButtonClickListener;
+import com.yyq58.activity.widget.MyDialog;
 import com.yyq58.activity.widget.MyListView;
 
 import java.text.ParseException;
@@ -54,6 +56,11 @@ public class ScheduleManagementActivity extends BaseActivity implements View.OnC
     private List<ScheduleListBean.DataBean> mList = new ArrayList<>();
     private ScheduleManagementAdapter adapter;
     private MaterialCalendarView calendarView;
+    private boolean isEdit = false;
+    private String scheduleId;
+    private String clickYear;
+    private String clickMonth;
+    private String clickDay;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
@@ -93,16 +100,17 @@ public class ScheduleManagementActivity extends BaseActivity implements View.OnC
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                isEdit = false;
                 SimpleDateFormat sf1 = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
                 try {
                     Date newDate = sf1.parse(String.valueOf(date.getDate()));
                     SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
                     selectDate = sf2.format(newDate);
                     List<String> list = StringUtils.stringsToList(selectDate, "-");
-                    String year = list.get(0);
-                    String month =list.get(1);
-                    String day = list.get(2);
-                    queryReleaseScheduleForDay(year,month,day);
+                    clickYear = list.get(0);
+                    clickMonth = list.get(1);
+                    clickDay = list.get(2);
+                    queryReleaseScheduleForDay(clickYear, clickMonth, clickDay);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -114,6 +122,68 @@ public class ScheduleManagementActivity extends BaseActivity implements View.OnC
     private void setListener() {
         tvChooseDate.setOnClickListener(this);
         tvSet.setOnClickListener(this);
+
+        adapter.setOnItemClickListener(new IButtonClickListener() {
+
+
+            @Override
+            public void onEditClick(View view, int position) {
+                isEdit = true;
+                ScheduleListBean.DataBean bean = mList.get(position);
+                if (bean != null) {
+                    String detailTime = bean.getDetailTime();
+                    String place = bean.getPlace();
+                    String content = bean.getContent();
+                    String linkman = bean.getLinkMan();
+                    strHours = detailTime;
+                    scheduleId = bean.getId();
+                    tvChooseDate.setText(StringUtils.isEmpty(detailTime) ? "" : detailTime);
+                    etContent.setText(StringUtils.isEmpty(content) ? "" : content);
+                    etLocation.setText(StringUtils.isEmpty(place) ? "" : place);
+                    etUseranme.setText(StringUtils.isEmpty(linkman) ? "" : linkman);
+                }
+            }
+
+            @Override
+            public void onDeleClick(View view, int position) {
+                ScheduleListBean.DataBean bean = mList.get(position);
+                if (bean != null) {
+                    scheduleId = bean.getId();
+                }
+                final MyDialog dialog = new MyDialog(mContext);
+                dialog.setMessage("是否删除档期？");
+                dialog.setOnPositiveListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteSchedule(scheduleId);
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setOnNegativeListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+
+            @Override
+            public void onSaveClick(View view, int position) {
+
+            }
+        });
+    }
+
+    /****
+     * 删除档期
+     * @param scheduleId
+     */
+    private void deleteSchedule(String scheduleId) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", scheduleId);
+        params.put("consumerId", MyApplication.userId);
+        httpPostRequest(ConfigUtil.DELETE_SCHEDULE_LIST_URL, params, ConfigUtil.DELETE_SCHEDULE_LIST_URL_ACTION);
     }
 
     @Override
@@ -124,7 +194,11 @@ public class ScheduleManagementActivity extends BaseActivity implements View.OnC
                 dialogDay.show(getSupportFragmentManager(), "all");
                 break;
             case R.id.activity_set:
-                releaseSchedule();
+                if (isEdit) {
+                    editSchedule();
+                } else {
+                    releaseSchedule();
+                }
                 break;
         }
     }
@@ -210,6 +284,55 @@ public class ScheduleManagementActivity extends BaseActivity implements View.OnC
         httpPostRequest(ConfigUtil.ADD_CONSUMER_SCHEDULE_URL, params, ConfigUtil.ADD_CONSUMER_SCHEDULE_URL_ACTION);
     }
 
+
+    //编辑档期
+    private void editSchedule() {
+        if (StringUtils.isEmpty(strHours)) {
+            toastMessage("请选择档期时间");
+            return;
+        }
+        String conent = etContent.getText().toString().trim();
+        String location =  etLocation.getText().toString().trim();
+        String username = etUseranme.getText().toString().trim();
+        if (StringUtils.isEmpty(conent)) {
+            toastMessage("档期内容不能为空");
+            return;
+        }
+        if (StringUtils.isEmpty(location)) {
+            toastMessage("档期地点不能为空");
+            return;
+        }
+        if (StringUtils.isEmpty(username)) {
+            toastMessage("联系人不能为空");
+            return;
+        }
+        Map<String, String> params = new HashMap<>();
+        params.put("consumerId", MyApplication.userId);
+        params.put("detailTime",strHours);
+        params.put("id", scheduleId);
+        if (StringUtils.isEmpty(selectDate)) {
+            int year = DateUtils.getYear();
+            int month = DateUtils.getMonth() + 1;
+            int day = DateUtils.getCurrentDayOfMonth();
+            params.put("year", String.valueOf(year));
+            params.put("month", String.valueOf(month));
+            params.put("day", String.valueOf(day));
+        } else {
+            List<String> list = StringUtils.stringsToList(selectDate, "-");
+            String year = list.get(0);
+            String month =list.get(1);
+            String day = list.get(2);
+            params.put("year", year);
+            params.put("month", month);
+            params.put("day", day);
+        }
+        params.put("place",location);
+        params.put("content",conent);
+        params.put("linkMan", username);
+        startIOSDialogLoading(mContext, "");
+        httpPostRequest(ConfigUtil.EDIT_SCHEDULE_LIST_URL, params, ConfigUtil.EDIT_SCHEDULE_LIST_URL_ACTIOn);
+    }
+
     @Override
     protected void httpOnResponse(String json, int action) {
         super.httpOnResponse(json, action);
@@ -225,6 +348,18 @@ public class ScheduleManagementActivity extends BaseActivity implements View.OnC
                 break;
             case ConfigUtil.QUERY_BY_DAY_SCHEDULE_URL_ACTION:
                 handleQueryByDayScheduleList(json);
+                break;
+            case ConfigUtil.EDIT_SCHEDULE_LIST_URL_ACTIOn:
+                if (getRequestCode(json) == 1000) {
+                    toastMessage("档期编辑成功");
+                    finish();
+                }
+                break;
+            case ConfigUtil.DELETE_SCHEDULE_LIST_URL_ACTION:
+                if (getRequestCode(json) == 1000) {
+                    toastMessage("删除成功");
+                    queryReleaseScheduleForDay(clickYear, clickMonth, clickDay);
+                }
                 break;
         }
     }

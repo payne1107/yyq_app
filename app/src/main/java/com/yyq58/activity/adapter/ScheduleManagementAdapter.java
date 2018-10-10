@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.yyq58.R;
 import com.yyq58.activity.bean.ScheduleListBean;
 import com.yyq58.activity.utils.StringUtils;
+import com.yyq58.activity.widget.IButtonClickListener;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class ScheduleManagementAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
@@ -51,6 +52,8 @@ public class ScheduleManagementAdapter extends BaseAdapter {
             holder.tvLinkman = view.findViewById(R.id.tv_linkman);
             holder.tvLocation = view.findViewById(R.id.tv_location);
             holder.tvDate = view.findViewById(R.id.tv_date);
+            holder.tvEdit = view.findViewById(R.id.tv_edit);
+            holder.tvDelete = view.findViewById(R.id.tv_delete);
 
             AutoUtils.autoSize(view);
         } else {
@@ -65,6 +68,19 @@ public class ScheduleManagementAdapter extends BaseAdapter {
             holder.tvLocation.setText(StringUtils.isEmpty(place) ? "" : place);
             holder.tvDate.setText(StringUtils.isEmpty(detailsTime) ? "" : detailsTime);
         }
+        holder.tvEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnItemClickListener.onEditClick(view, i);
+            }
+        });
+
+        holder.tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnItemClickListener.onDeleClick(view, i);
+            }
+        });
         return view;
     }
 
@@ -74,5 +90,10 @@ public class ScheduleManagementAdapter extends BaseAdapter {
         TextView tvLocation;
         TextView tvEdit;
         TextView tvDelete;
+    }
+
+    private IButtonClickListener mOnItemClickListener;//声明接口
+    public void setOnItemClickListener(IButtonClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
     }
 }
