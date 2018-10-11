@@ -31,7 +31,7 @@ public class EditNoticeListAdapter extends BaseAdapter {
     public EditNoticeListAdapter(Context context, List<String> list) {
         this.mContext = context;
         this.mList = list;
-        mlistPersonCouont = new HashMap<>();
+
     }
 
     /***
@@ -39,6 +39,7 @@ public class EditNoticeListAdapter extends BaseAdapter {
      * @param data
      */
     public void setData(List<String> data) {
+        mlistPersonCouont = new HashMap<>();
         if (data != null && data.size() > 0) {
             for (int i = 0; i < data.size(); i++) {
                 mlistPersonCouont.put(i, "1");
