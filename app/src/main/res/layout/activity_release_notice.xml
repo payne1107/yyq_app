@@ -35,6 +35,12 @@
             android:textSize="@dimen/text_size_28" />
     </com.zhy.autolayout.AutoLinearLayout>
 
+    <com.yyq58.activity.widget.MyListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.yyq58.activity.widget.MyListView>
+
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"

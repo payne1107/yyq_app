@@ -12,6 +12,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -86,7 +87,10 @@ public class StringUtils {
      * @param separator
      * @return
      */
-    public static String listToString(List list, char separator) {
+    public static String listToString(List<String> list, char separator) {
+        if (list.size() <= 0) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             sb.append(list.get(i)).append(separator);
@@ -101,7 +105,8 @@ public class StringUtils {
      */
     public static List<String> stringsToList(String str,String separator) {
         String[] strings = str.split(separator);
-        return  Arrays.asList(strings);
+        List arrList = new ArrayList(Arrays.asList(strings));
+        return  arrList;
     }
 
     /***

@@ -2,9 +2,7 @@ package com.yyq58.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -16,19 +14,22 @@ import android.widget.TextView;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
-import com.lidroid.xutils.db.annotation.Check;
 import com.lljjcoder.citypickerview.widget.CityPicker;
 import com.yyq58.R;
+import com.yyq58.activity.adapter.EditNoticeListAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
 import com.yyq58.activity.utils.ConfigUtil;
-import com.yyq58.activity.utils.SDCardUtil;
 import com.yyq58.activity.utils.StringUtils;
+import com.yyq58.activity.widget.IButtonClickListener;
+import com.yyq58.activity.widget.MyListView;
 import com.zhy.autolayout.AutoLinearLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.yyq58.activity.RegisterActivity.REQUEST_CHOOSE_QCQUIREMENT_CODE;
@@ -53,6 +54,12 @@ public class ReleaseNoticeActivity extends BaseActivity implements View.OnClickL
     private Context mContext;
     private String labelId;
     private String labelName;
+    private MyListView listView;
+    private List<String> mListLabelName = new ArrayList<>();
+    private EditNoticeListAdapter adapter;
+    private List<String> mListLabelId = new ArrayList<>();
+    private List<String> mListLabelType = new ArrayList<>();
+
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
@@ -79,7 +86,9 @@ public class ReleaseNoticeActivity extends BaseActivity implements View.OnClickL
         checkBox = findViewById(R.id.checkbox_price);
         etContent = findViewById(R.id.et_content);
         layoutSave = findViewById(R.id.layout_save);
-
+        listView = findViewById(R.id.listView);
+        adapter = new EditNoticeListAdapter(mContext, mListLabelName);
+        listView.setAdapter(adapter);
         setListener();
     }
 
@@ -100,6 +109,39 @@ public class ReleaseNoticeActivity extends BaseActivity implements View.OnClickL
                 }
             }
         });
+
+        adapter.setOnItemClickListener(new IButtonClickListener() {
+            @Override
+            public void onEditClick(View view, int position) {
+                
+            }
+
+            @Override
+            public void onDeleClick(View view, int position) {
+                if (mListLabelName != null && mListLabelName.size() > 0) {
+                    mListLabelName.remove(position);
+                }
+
+                if (mListLabelId != null && mListLabelId.size() > 0) {
+                    mListLabelId.remove(position);
+                }
+
+                if (mListLabelType != null && mListLabelType.size() > 0) {
+                    mListLabelType.remove(position);
+                }
+
+                if (mListLabelName != null && mListLabelName.size() > 0) {
+                    adapter.setData(mListLabelName);
+                } else {
+                    adapter.setData(mListLabelName);
+                }
+            }
+
+            @Override
+            public void onSaveClick(View view, int position) {
+
+            }
+        });
     }
 
     @Override
@@ -107,7 +149,7 @@ public class ReleaseNoticeActivity extends BaseActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.tv_category:
                 //选择分类
-                startActivityForResult(new Intent(mContext, ChooseAcquirementActivity.class), REQUEST_CHOOSE_QCQUIREMENT_CODE);
+                startActivityForResult(new Intent(mContext, ChooseMultipleAcquirementActivity.class).putExtra("extra_category_type",1), REQUEST_CHOOSE_QCQUIREMENT_CODE);
                 break;
             case R.id.tv_time:
                 dialogDay.show(getSupportFragmentManager(), "all");
@@ -125,10 +167,82 @@ public class ReleaseNoticeActivity extends BaseActivity implements View.OnClickL
      * 发布通告
      */
     private void releaseNotice() {
-        Map<String, String> params = new HashMap<>();
 
+        Map<String, String> params = new HashMap<>();
+        if (mListLabelId != null && mListLabelId.size() > 0) {
+            String labelId = StringUtils.listToString(mListLabelId, ',');
+            params.put("labelIds",labelId);
+        } else {
+          toastMessage("请选择才艺类别");
+        }
+        if (mListLabelName != null && mListLabelName.size() > 0) {
+            String labelName = StringUtils.listToString(mListLabelName, ',');
+            params.put("labelNames", labelName);
+        } else {
+            toastMessage("请选择才艺类别");
+        }
+        if (mListLabelType != null && mListLabelType.size() > 0) {
+            String labelType = StringUtils.listToString(mListLabelType, ',');
+            params.put("types", labelType);
+        } else {
+            toastMessage("请选择才艺类别");
+        }
+
+        String time = tvTime.getText().toString().trim();
+        String location = tvLocation.getText().toString().trim();
+        String detailLocation = etDetailsLocation.getText().toString().trim();
+        String content = etContent.getText().toString().trim();
+        String price = etPrice.getText().toString().trim();
+
+        if ("请选择时间".equals(time)) {
+            toastMessage("请选择时间");
+            return;
+        }
+        if ("请选择地区".equals(location)) {
+            toastMessage("请选择地区");
+            return;
+        }
+        if (StringUtils.isEmpty(detailLocation)) {
+            toastMessage("请输入详细地址");
+            return;
+        }
+        if (StringUtils.isEmpty(content)) {
+            toastMessage("内容不能为空");
+            return;
+        }
+
+        //人数
+        Map<Integer, String> map = adapter.getMlistPersonCouont();
+        List<String> listPersonCount = new ArrayList<>();
+        for (String v : map.values()) {
+            listPersonCount.add(v);
+        }
+        String strPersonCount = StringUtils.listToString(listPersonCount, ',');
+        params.put("nums", strPersonCount);
+        params.put("time", time);
+        params.put("province", province);
+        params.put("city", city);
+        params.put("county", district);
+        params.put("content", content);
+        params.put("detailPlace", detailLocation);
+        params.put("prcie", StringUtils.isEmpty(price) ? "" : price);
+        params.put("consumerId", MyApplication.userId);
+        startIOSDialogLoading(mContext, "");
+        httpPostRequest(ConfigUtil.RELEASE_NOTICE_URL,params,ConfigUtil.RELEASE_NOTICE_URL_ACTION);
     }
 
+    @Override
+    protected void httpOnResponse(String json, int action) {
+        super.httpOnResponse(json, action);
+        switch (action) {
+            case ConfigUtil.RELEASE_NOTICE_URL_ACTION:
+                if (getRequestCode(json) == 1000) {
+                    toastMessage("发布成功");
+                    finish();
+                }
+                break;
+        }
+    }
 
     /**
      * 初始化时间选择器
@@ -194,11 +308,26 @@ public class ReleaseNoticeActivity extends BaseActivity implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_CHOOSE_QCQUIREMENT_CODE:
-                //选择才艺
                 if (data != null) {
                     labelId = data.getStringExtra("laeblId");
                     labelName = data.getStringExtra("labelName");
-                    tvCategory.setText(StringUtils.isEmpty(labelName) ? "" : labelName);
+                    String labeType = data.getStringExtra("labelType");
+                    if (!StringUtils.isEmpty(labelId)) {
+                        mListLabelId = StringUtils.stringsToList(labelId, ",");
+                    }
+                    if (!StringUtils.isEmpty(labelName)) {
+                        tvCategory.setText(StringUtils.isEmpty(labelName) ? "" : labelName);
+                        mListLabelName = StringUtils.stringsToList(labelName, ",");
+                    }
+                    if (!StringUtils.isEmpty(labeType)) {
+                        mListLabelType = StringUtils.stringsToList(labeType, ",");
+                    }
+
+                    if (mListLabelName != null && mListLabelName.size() > 0) {
+                        adapter.setData(mListLabelName);
+                    } else {
+                        adapter.setData(mListLabelName);
+                    }
                 }
                 break;
         }

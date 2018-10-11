@@ -92,8 +92,7 @@ public class NoticeEditActivity extends BaseActivity implements View.OnClickList
         title = getIntent().getStringExtra("title");
         String mianyi = getIntent().getStringExtra("mianyi");
 
-
-        if (mianyi.equals("1")) {
+        if (("1").equals(mianyi)) {
             //面议
             checkBox.setChecked(true);
             etPrice.setText("");

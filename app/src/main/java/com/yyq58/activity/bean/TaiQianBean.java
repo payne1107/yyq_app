@@ -3,6 +3,15 @@ package com.yyq58.activity.bean;
 public class TaiQianBean {
     private String labelName;
     private String labelId;
+    private int labelType;
+
+    public int getLabelType() {
+        return labelType;
+    }
+
+    public void setLabelType(int labelType) {
+        this.labelType = labelType;
+    }
 
     public String getLabelName() {
         return labelName;

@@ -97,7 +97,9 @@ public class AllBillDetailsActivity extends BaseActivity {
         AllBillDetailsBean bean = JSON.parseObject(json, AllBillDetailsBean.class);
         if (bean != null) {
             mList = bean.getData();
-            adapter.setData(mList);
+            if (mList != null && mList.size() > 0) {
+                adapter.setData(mList);
+            }
         }
     }
 }

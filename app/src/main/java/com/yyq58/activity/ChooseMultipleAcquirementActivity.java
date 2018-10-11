@@ -1,6 +1,7 @@
 package com.yyq58.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
@@ -22,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.yyq58.activity.RegisterActivity.REQUEST_CHOOSE_QCQUIREMENT_CODE;
+
 /****
  * 选择才艺 多选
  */
@@ -34,6 +37,7 @@ public class ChooseMultipleAcquirementActivity extends BaseActivity implements V
     private List<MuHouBean> muhouList = new ArrayList<>();
     private GridViewAdapter3 adapter3;
     private GridViewAdapter4 adapter4;
+    private int extraCategoryType;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class ChooseMultipleAcquirementActivity extends BaseActivity implements V
     protected void initView() {
         super.initView();
         setInVisibleTitleIcon("选择才艺", true, true);
+        extraCategoryType = getIntent().getIntExtra("extra_category_type", 0);
         tvSet.setVisibility(View.VISIBLE);
         tvSet.setTextColor(getResources().getColor(R.color.white));
         tvSet.setText("保存");
@@ -106,17 +111,21 @@ public class ChooseMultipleAcquirementActivity extends BaseActivity implements V
                 int type = mList.get(j).getLabelType();
                 if (type == 1) {
                     taiQianBean = new TaiQianBean();
+                    int labelType = mList.get(j).getLabelType();
                     String labelId = mList.get(j).getLabelId();
                     String labelName = mList.get(j).getLabelName();
                     taiQianBean.setLabelId(labelId);
                     taiQianBean.setLabelName(labelName);
+                    taiQianBean.setLabelType(labelType);
                     taiqianList.add(taiQianBean);
                 } else {
                     muHouBean = new MuHouBean();
+                    int labelType = mList.get(j).getLabelType();
                     String labelId = mList.get(j).getLabelId();
                     String labelName = mList.get(j).getLabelName();
                     muHouBean.setLabelId(labelId);
                     muHouBean.setLabelName(labelName);
+                    muHouBean.setLabelType(labelType);
                     muhouList.add(muHouBean);
                 }
             }
@@ -131,11 +140,49 @@ public class ChooseMultipleAcquirementActivity extends BaseActivity implements V
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_set:
+                //id
                 List<String> listTaiqian = adapter3.getListCategory();
                 List<String> listMuhou = adapter4.getListCategory();
+                //name
+                List<String> listTaiqianCategoryName = adapter3.getListCategoryName();
+                List<String> listMuhouCategoryName = adapter4.getListCategoryName();
+                //type
+                List<String> listTaiqianCategoryType = adapter3.getListCategoryType();
+                List<String> listMuhouCategoryType = adapter4.getListCategoryType();
+
                 String strTaiqian = StringUtils.listToString(listTaiqian, ',');
                 String strMuhou = StringUtils.listToString(listMuhou, ',');
-                updateUserLabel(strTaiqian + "," + strMuhou);
+
+                String strTaiqianName = StringUtils.listToString(listTaiqianCategoryName, ',');
+                String strMuhouName = StringUtils.listToString(listMuhouCategoryName, ',');
+
+                String strTaiqianType = StringUtils.listToString(listTaiqianCategoryType, ',');
+                String strMuhouType = StringUtils.listToString(listMuhouCategoryType, ',');
+
+                String strName = "";
+                String strId = "";
+                String strType = "";
+                if (extraCategoryType == 1) {
+                    Intent intent = new Intent();
+                    if (!StringUtils.isEmpty(strTaiqianName)) {
+                        strName = strTaiqianName;
+                        strId = strTaiqian;
+                        strType = strTaiqianType;
+                    }
+                    if (!StringUtils.isEmpty(strMuhouName)) {
+                        strName = strName + " , "+ strMuhouName;
+                        strId = strId + strMuhou;
+                        strType = strTaiqianType + "," + strMuhouType;
+                    }
+
+                    intent.putExtra("labelName", strName);
+                    intent.putExtra("laeblId", strId);
+                    intent.putExtra("labelType", strType);
+                    setResult(REQUEST_CHOOSE_QCQUIREMENT_CODE, intent);
+                    finish();
+                } else {
+                    updateUserLabel(strTaiqian + "," + strMuhou);
+                }
                 break;
         }
     }
@@ -149,5 +196,4 @@ public class ChooseMultipleAcquirementActivity extends BaseActivity implements V
         params.put("lableIds", lableIds);
         httpPostRequest(ConfigUtil.UPDATE_USER_LABEL_URL, params, ConfigUtil.UPDATE_USER_LABEL_URL_ACTION);
     }
-
 }

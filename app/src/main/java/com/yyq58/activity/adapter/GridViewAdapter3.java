@@ -25,11 +25,22 @@ public class GridViewAdapter3 extends BaseAdapter {
     public static List<String> getListCategory() {
         return listCategory;
     }
+    private static List<String> listCategoryName;
+    public static List<String> getListCategoryName() {
+        return listCategoryName;
+    }
+    private static List<String> listCategoryType;
+    public static List<String> getListCategoryType() {
+        return listCategoryType;
+    }
+
     public GridViewAdapter3(Context context, List<TaiQianBean> list) {
         this.mContext = context;
         this.mList = list;
         mapSelect = new HashMap<>();
         listCategory = new ArrayList<>();
+        listCategoryName = new ArrayList<>();
+        listCategoryType = new ArrayList<>();
         initData();
     }
 
@@ -77,6 +88,8 @@ public class GridViewAdapter3 extends BaseAdapter {
                         for (int i = 0; i < listCategory.size(); i++) {
                             if (mList.get(position).getLabelId() == listCategory.get(i)) {
                                 listCategory.remove(i);
+                                listCategoryName.remove(i);
+                                listCategoryType.remove(i);
                             }
                         }
                     }
@@ -84,6 +97,8 @@ public class GridViewAdapter3 extends BaseAdapter {
                     mapSelect.put(position, true);
                     //添加用户选择的userid
                     listCategory.add(mList.get(position).getLabelId());
+                    listCategoryName.add(mList.get(position).getLabelName());
+                    listCategoryType.add(String.valueOf(mList.get(position).getLabelType()));
                 }
             }
         });
