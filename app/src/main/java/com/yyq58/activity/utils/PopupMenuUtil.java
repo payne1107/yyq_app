@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.yyq58.R;
 import com.yyq58.activity.ReleaseNoticeActivity;
+import com.yyq58.activity.ReleaseQiuDanActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
 /**
@@ -135,7 +136,7 @@ public class PopupMenuUtil {
                     break;
                 case 1:
                     //发布工单
-                    //context.startActivity(new Intent(context, ReleaseOrderActivity.class));
+                    context.startActivity(new Intent(context, ReleaseQiuDanActivity.class));
                     _close();
                     break;
                 case 2:

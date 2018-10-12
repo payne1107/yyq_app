@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -16,7 +17,6 @@ import com.yyq58.activity.EditQiuDanDetailsActivity;
 import com.yyq58.activity.adapter.QiuDanFragmentAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
-import com.yyq58.activity.bean.AnnuciteFragmentBean;
 import com.yyq58.activity.bean.QiuDanFragmentListbean;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.widget.IButtonClickListener;
@@ -97,6 +97,19 @@ public class QiuDanFragment extends BaseFragment {
 
             }
         });
+
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page = 1;
+                queryQiudanList(MyApplication.userId, page);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+            }
+        });
     }
 
     /***
@@ -158,6 +171,7 @@ public class QiuDanFragment extends BaseFragment {
         params.put("consumerId", consumerId);
         params.put("page", String.valueOf(page));
         params.put("isQiudan", "1");
+        startIOSDialogLoading(getActivity(), "");
         httpPostRequest(ConfigUtil.QUERY_NOTICE_LIST_URL, params, ConfigUtil.QUERY_NOTICE_LIST_URL_ACTION);
     }
 
@@ -188,7 +202,9 @@ public class QiuDanFragment extends BaseFragment {
         QiuDanFragmentListbean bean = JSON.parseObject(json, QiuDanFragmentListbean.class);
         if (bean != null) {
             mList = bean.getData();
-            adapter.setData(mList);
+            if (mList != null && mList.size() > 0) {
+                adapter.setData(mList);
+            }
         }
     }
 }

@@ -170,6 +170,9 @@
         <activity
             android:name=".activity.ScheduleManagementActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ReleaseQiuDanActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

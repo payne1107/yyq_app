@@ -256,6 +256,11 @@ public class ConfigUtil {
      */
     public static final String QUERY_GET_SHARE_JIFEN_URL = MyApplication.REQUEST_URL + "appv1Consumer/getJifen.do";
     public static final int QUERY_GET_SHARE_JIFEN_URL_ACTION = 47;
+    /***
+     * 发布求单
+     */
+    public static final String RELEASE_QIUDAN_URL = MyApplication.REQUEST_URL + "appv1qiudan/save.do";
+    public static final int RELEASE_QIUDAN_URL_ACTION = 48;
 
 
 
