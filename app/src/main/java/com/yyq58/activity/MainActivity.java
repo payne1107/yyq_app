@@ -19,13 +19,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yyq58.R;
+import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
 import com.yyq58.activity.fragment.Fragment1;
 import com.yyq58.activity.fragment.Fragment2;
 import com.yyq58.activity.fragment.Fragment3;
 import com.yyq58.activity.fragment.Fragment4;
+import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.PopupMenuUtil;
 import com.yyq58.activity.utils.StatusUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ImageView imageView;
@@ -67,7 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData() {
-
+        getJifenByLogin();
     }
 
     @Override
@@ -221,5 +226,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             return false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    /***
+     * 登录获取积分
+     */
+    private void getJifenByLogin() {
+        Map<String, String> params = new HashMap<>();
+        params.put("consumerId", MyApplication.userId);
+        httpPostRequest(ConfigUtil.QUERY_JIFEN_BY_LOGIN_URL, params, ConfigUtil.QUERY_JIFEN_BY_LOGIN_URL_ACTION);
+    }
+
+    @Override
+    protected void httpOnResponse(String json, int action) {
+        super.httpOnResponse(json, action);
+        switch (action) {
+            case ConfigUtil.QUERY_JIFEN_BY_LOGIN_URL_ACTION:
+                handleQueryJifenByLogin(json);
+                break;
+        }
+    }
+
+    private void handleQueryJifenByLogin(String json) {
+        if (getRequestCode(json) == 1000) {
+            toastMessage("每日登录获得20积分");
+        }
     }
 }

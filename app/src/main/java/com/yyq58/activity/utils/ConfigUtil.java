@@ -11,10 +11,10 @@ import com.yyq58.activity.application.MyApplication;
 
 public class ConfigUtil {
     public static long TenYears8 = 10L * 365 * 1000 * 60 * 60 * 24L * 80;
-    public static long TenYears = 10L * 365 * 1000 * 60 * 60 * 24L * 3 ;
+    public static long TenYears = 10L * 365 * 1000 * 60 * 60 * 24L * 3;
     public static String sessionId;
-    public static final String SAVE_CITY_ID="city_id";
-    public static final String SAVE_CITY_NAME="city_name";
+    public static final String SAVE_CITY_ID = "city_id";
+    public static final String SAVE_CITY_NAME = "city_name";
     /***
      * 分享的链接地址
      */
@@ -246,6 +246,18 @@ public class ConfigUtil {
      */
     public static final String EDIT_SCHEDULE_LIST_URL = MyApplication.REQUEST_URL + "appv1consumerschedule/edit.do";
     public static final int EDIT_SCHEDULE_LIST_URL_ACTIOn = 45;
+    /****
+     * 每日登录获取积分
+     */
+    public static final String QUERY_JIFEN_BY_LOGIN_URL = MyApplication.REQUEST_URL + "appv1Consumer/getJifenByLogin.do";
+    public static final int QUERY_JIFEN_BY_LOGIN_URL_ACTION = 46;
+    /***
+     * 分享得积分
+     */
+    public static final String QUERY_GET_SHARE_JIFEN_URL = MyApplication.REQUEST_URL + "appv1Consumer/getJifen.do";
+    public static final int QUERY_GET_SHARE_JIFEN_URL_ACTION = 47;
+
+
 
 
 }
