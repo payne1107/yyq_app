@@ -249,7 +249,7 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
                 balance = data.getChanges();
                 String orderNum = data.getOrderNums();//订单
                 String fansNum = data.getFansNums();//粉丝
-                double jifen = data.getJifen();//积分
+                String jifen = data.getJifen();//积分
                 String attendNums = data.getAttentionNums();//我关注的人
                 String motto = data.getMotto();//心情
 

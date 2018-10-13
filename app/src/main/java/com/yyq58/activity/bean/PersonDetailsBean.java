@@ -104,7 +104,7 @@ public class PersonDetailsBean {
         private String avatar;
         private String fansNums;
         private String weixin;
-        private double jifen;
+        private String jifen;
         private String motto;
         private String bankPalce;
         private String orderNums;
@@ -295,11 +295,11 @@ public class PersonDetailsBean {
             this.weixin = weixin;
         }
 
-        public double getJifen() {
+        public String getJifen() {
             return jifen;
         }
 
-        public void setJifen(double jifen) {
+        public void setJifen(String jifen) {
             this.jifen = jifen;
         }
 
