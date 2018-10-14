@@ -195,7 +195,7 @@
 
         <!-- 微信支付回调 -->
         <activity
-            android:name=".wxapi.WXPayEntryActivity"
+            android:name=".activity.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent" />
