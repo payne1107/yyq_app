@@ -1,6 +1,7 @@
 package com.yyq58.activity.utils;
 
 
+import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.yyq58.activity.application.MyApplication;
 
 
@@ -261,6 +262,16 @@ public class ConfigUtil {
      */
     public static final String RELEASE_QIUDAN_URL = MyApplication.REQUEST_URL + "appv1qiudan/save.do";
     public static final int RELEASE_QIUDAN_URL_ACTION = 48;
+    /***
+     * 发布图片
+     */
+    public static final String RELEASE_PIC_URL = MyApplication.REQUEST_URL + "appv1zone/add.do";
+    public static final int RELEASE_PIC_URL_ACTION = 49;
+    /****
+     * 首页 保存用户地理信息
+     */
+    public static final String SAVE_LOCATION_URL = MyApplication.REQUEST_URL + "appv1Consumer/updateSite.do";
+    public static final int SAVE_LOCATION_URL_ACTION = 50;
 
 
 

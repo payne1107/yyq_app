@@ -321,7 +321,7 @@ public class MotifyPersonDetailsActivity extends BaseActivity implements View.On
                             Bitmap bitmap = bundle.getParcelable("data");
                             //将bitmap保存到本地，下次在获取可以从本地获取展示，之后在从网络获取显示
                             SDCardUtil.saveBitmap(bitmap, newPath);
-                            uploadImg("", newPath, ConfigUtil.UPLOAD_PIC_URL, "avatar");
+                            uploadImg("", newPath, ConfigUtil.UPLOAD_PIC_URL, "avatar", null);
                         }
                     }
                     break;

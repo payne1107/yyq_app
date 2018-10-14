@@ -173,6 +173,32 @@
         <activity
             android:name=".activity.ReleaseQiuDanActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ReleasePicActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChoosePicActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ImageGridActivity1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PhotoActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 高德地图 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1f2af169be10eba0f2c11a7239cdc979" />
+
+        <service android:name="com.amap.api.location.APSService"></service>
+
+        <!-- 微信支付回调 -->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent" />
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

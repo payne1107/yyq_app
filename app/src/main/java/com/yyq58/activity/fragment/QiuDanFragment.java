@@ -152,7 +152,7 @@ public class QiuDanFragment extends BaseFragment {
 
     private void initView() {
         listView = mRootView.findViewById(R.id.listView);
-        listView.setMode(PullToRefreshBase.Mode.BOTH);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
 
         adapter = new QiuDanFragmentAdapter(getActivity(), mList);
         listView.setAdapter(adapter);

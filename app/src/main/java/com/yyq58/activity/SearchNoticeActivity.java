@@ -42,6 +42,7 @@ public class SearchNoticeActivity extends BaseActivity implements View.OnClickLi
     private NewestFragmentAdapter adapter;
     private boolean swipeLoadMore = false;
     private EditText editSearch;
+    private String strSearch;
 
     @Override
     protected void onCreateCustom(Bundle savedInstanceState) {
@@ -78,14 +79,14 @@ public class SearchNoticeActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page = 1;
-                queryNoticeList(page, 3, "", "", "", "", "");
+                queryNoticeList(page, 3, strSearch, "", MyApplication.currentCity, "", "");
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 ++page;
                 swipeLoadMore = true;
-                queryNoticeList(page, 3, "", "", "", "", "");
+                queryNoticeList(page, 3, strSearch, "", MyApplication.currentCity, "", "");
             }
         });
 
@@ -161,12 +162,12 @@ public class SearchNoticeActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_set:
-                String strSearch = editSearch.getText().toString().trim();
+                strSearch = editSearch.getText().toString().trim();
                 if (StringUtils.isEmpty(strSearch)) {
                     toastMessage("搜索条件不能为空");
                     return;
                 }
-                queryNoticeList(page,0, strSearch, "", "", "", "");
+                queryNoticeList(page,0, strSearch, "", MyApplication.currentCity, "", "");
                 break;
         }
     }

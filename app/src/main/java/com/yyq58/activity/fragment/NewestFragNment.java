@@ -76,14 +76,14 @@ public class NewestFragNment extends BaseFragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page = 1;
-                queryNoticeList(page,0,"","","","","");
+                queryNoticeList(page,0,"","",MyApplication.currentCity,"","");
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 ++page;
                 swipeLoadMore = true;
-                queryNoticeList(page,0,"","","","","");
+                queryNoticeList(page,0,"","",MyApplication.currentCity,"","");
             }
         });
 
@@ -152,7 +152,7 @@ public class NewestFragNment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        queryNoticeList(page, 0, "", "", "", "", "");
+        queryNoticeList(page, 0, "", "", MyApplication.currentCity, "", "");
     }
 
     /****

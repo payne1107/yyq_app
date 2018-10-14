@@ -322,25 +322,26 @@ public abstract class BaseActivity extends FragmentActivity {
      * @param photoPath
      * @param type avatar/zone
      */
-    public void uploadImg(String content,String photoPath,String url,String type) {
+    public void uploadImg(String content,String photoPath,String url,String type,File filePath) {
         startIOSDialogLoading(mContext,"正在上传中..");
         HttpUtils httpUtils = new HttpUtils();
         httpUtils.configResponseTextCharset("UTF-8");
         RequestParams params = new RequestParams();
-        params.addBodyParameter("file", new File(photoPath));
+        if ("avatar".equals(type)) {
+            params.addBodyParameter("file", new File(photoPath));
+        } else {
+            params.addBodyParameter("file",filePath);
+        }
         params.addBodyParameter("type", type);
         params.addHeader("Accept", "application/json");
         if (!StringUtils.isEmpty(MyApplication.isLogin)) {
             params.addHeader("Authorization", MyApplication.isLogin);
         }
-        Log.d("Dong", "==-=====?>>" + " content --"+content +" phot" +photoPath +" typ=="+type);
         httpUtils.send(HttpRequest.HttpMethod.POST, url, params, new RequestCallBack<Object>() {
             @Override
             public void onSuccess(ResponseInfo<Object> responseInfo) {
                 stopIOSDialogLoading(mContext);
                 String json = (String) responseInfo.result;
-                Log.d("Dong", "上传头像成功返回json --->" + json);
-                toastMessage("上传成功");
                 UploadImgBean uploadImgBean = JSON.parseObject(json, UploadImgBean.class);
                 if (1000 == uploadImgBean.getCode()) { //上传成功
                     toastMessage("上传成功");

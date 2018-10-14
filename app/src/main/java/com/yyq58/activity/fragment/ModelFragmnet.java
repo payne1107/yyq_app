@@ -72,14 +72,14 @@ public class ModelFragmnet extends BaseFragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page = 1;
-                queryNoticeList(page,2,"","","","","");
+                queryNoticeList(page,2,"","",MyApplication.currentCity,"","");
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 ++page;
                 swipeLoadMore = true;
-                queryNoticeList(page,2,"","","","","");
+                queryNoticeList(page,2,"","",MyApplication.currentCity,"","");
             }
         });
 
@@ -148,7 +148,7 @@ public class ModelFragmnet extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        queryNoticeList(page, 2, "", "", "", "", "");
+        queryNoticeList(page, 2, "", "", MyApplication.currentCity, "", "");
     }
 
     /****

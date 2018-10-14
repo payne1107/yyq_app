@@ -14,10 +14,19 @@
     <string name="permission_read_external_hint">没有读取文件权限，无法开启这个功能，请开启读取文件权限。</string>
     <string name="permission_white_external_hint">没有写入文件权限，无法开启这个功能，请开启写入文件权限。</string>
     <string name="permission_recode_audio_hint">没有此权限，无法开启这个功能，请开启权限。</string>
+    <string name="str_check_sd_card">请检查sdcard是否存在</string>
 
     <!--求职类型选择-->
     <string-array name="array_sex_category">
         <item>男</item>
         <item>女</item>
     </string-array>
+
+    <declare-styleable name="HorizontalListView">
+        <attr name="dividerWidth" format="dimension" />
+        <attr name="android:divider" />
+        <attr name="android:requiresFadingEdge" />
+        <attr name="android:fadingEdgeLength" />
+    </declare-styleable>
+
 </resources>

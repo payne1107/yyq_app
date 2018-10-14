@@ -123,7 +123,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         //将bitmap保存到本地，下次在获取可以从本地获取展示，之后在从网络获取显示
                         ivAvatar.setImageBitmap(bitmap);
                         SDCardUtil.saveBitmap(bitmap, newPath);
-                        uploadImg(MyApplication.userId, newPath, ConfigUtil.UPLOAD_PIC_URL, "avatar");
+                        uploadImg(MyApplication.userId, newPath, ConfigUtil.UPLOAD_PIC_URL, "avatar",null);
                     }
                 }
                 break;

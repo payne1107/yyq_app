@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.yyq58.R;
 import com.yyq58.activity.IntegralActivity;
 import com.yyq58.activity.MineFansActivity;
@@ -74,6 +79,7 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        initLocation();
     }
 
     private void initView() {
@@ -178,8 +184,53 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
                 tvChooseCity.setText(city);
                 //选择城市后将当前选择城市赋值
                 MyApplication.currentCity = city;
+                saveLocation(city);
             }
         }
+    }
+
+    private void initLocation() {
+        AMapLocationClient mLocationClient = new AMapLocationClient(getActivity());
+        AMapLocationClientOption option = new AMapLocationClientOption();
+        option.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        option.setOnceLocation(true);
+        mLocationClient.setLocationOption(option);
+        mLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                if (aMapLocation != null) {
+                    if (aMapLocation.getErrorCode() == 0) {
+                        //登陆之后记录经纬度
+                        MyApplication.currentLat = aMapLocation.getLatitude();
+                        MyApplication.currentLon = aMapLocation.getLongitude();
+                        MyApplication.currentArea = aMapLocation.getCity() + aMapLocation.getPoiName();
+                        MyApplication.currentCity = aMapLocation.getCity();
+                        city = aMapLocation.getCity();
+                        tvChooseCity.setText(city);
+                        saveLocation(city);
+                        Log.d("Dong", "定位成功-----》" + MyApplication.currentArea + "," + MyApplication.currentLat +","  + MyApplication.currentLon);
+                    } else {
+                        //定位失败
+                        city = "合肥市";
+                        tvChooseCity.setText(city);
+                        MyApplication.currentCity = city;
+                    }
+                }
+            }
+        });
+        mLocationClient.startLocation();
+    }
+
+    /****
+     * 保存用户地址
+     */
+    private void saveLocation(String city) {
+        Map<String, String> params = new HashMap<>();
+        params.put("consumerId", MyApplication.userId);
+        params.put("province", "");
+        params.put("city", city);
+        params.put("county", "");
+        httpPostRequest(ConfigUtil.SAVE_LOCATION_URL, params, ConfigUtil.SAVE_LOCATION_URL_ACTION);
     }
 
     /***
@@ -198,6 +249,9 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
             case ConfigUtil.QUERY_PERSON_INFO_URL_ACTION:
                 //查询个人信息
                 handleQuereyPersonInfo(json);
+                break;
+            case ConfigUtil.SAVE_LOCATION_URL_ACTION:
+                Log.d("Dong", "保存用户地址---- " +json);
                 break;
         }
     }

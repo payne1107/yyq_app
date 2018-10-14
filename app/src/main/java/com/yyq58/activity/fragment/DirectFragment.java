@@ -72,14 +72,14 @@ public class DirectFragment extends BaseFragment{
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page = 1;
-                queryNoticeList(page,4,"","","","","");
+                queryNoticeList(page,4,"","",MyApplication.currentCity,"","");
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 ++page;
                 swipeLoadMore = true;
-                queryNoticeList(page,4,"","","","","");
+                queryNoticeList(page,4,"","",MyApplication.currentCity,"","");
             }
         });
 
@@ -148,7 +148,7 @@ public class DirectFragment extends BaseFragment{
     @Override
     public void onResume() {
         super.onResume();
-        queryNoticeList(page, 4, "", "", "", "", "");
+        queryNoticeList(page, 4, "", "", MyApplication.currentCity, "", "");
     }
 
     /****

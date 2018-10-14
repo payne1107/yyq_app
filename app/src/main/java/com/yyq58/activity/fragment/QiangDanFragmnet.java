@@ -121,6 +121,7 @@ public class QiangDanFragmnet extends BaseFragment {
      * @param userId
      */
     private void queryQiangdanList(int page,String userId) {
+        startIOSDialogLoading(getActivity(), "");
         Map<String, String> params = new HashMap<>();
         params.put("consumerId", userId);
         params.put("page", String.valueOf(page));

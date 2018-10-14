@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.yyq58.R;
 import com.yyq58.activity.ReleaseNoticeActivity;
+import com.yyq58.activity.ReleasePicActivity;
 import com.yyq58.activity.ReleaseQiuDanActivity;
 import com.zhy.autolayout.AutoLinearLayout;
 
@@ -140,15 +142,18 @@ public class PopupMenuUtil {
                     _close();
                     break;
                 case 2:
-                    //发布图片
+                    //发布通告
                     context.startActivity(new Intent(context, ReleaseNoticeActivity.class));
                     _close();
                     break;
                 case 3:
-
+                    //发布图片
+                    context.startActivity(new Intent(context, ReleasePicActivity.class));
+                    _close();
                     break;
                 case 4:
-
+                    //发布视频
+                    showToast(context,"暂未开放");
                     break;
             }
         }

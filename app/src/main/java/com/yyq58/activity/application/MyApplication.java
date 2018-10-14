@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
+import android.text.format.DateFormat;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -15,11 +16,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.yyq58.activity.httpstack.OkHttpStack;
 
 import java.io.File;
+import java.util.Date;
 
 public class MyApplication extends Application{
     public static final String REQUEST_URL = "https://wxapi.yyq58.com/";
@@ -47,7 +51,17 @@ public class MyApplication extends Application{
     private static MyApplication mInstance;
     //记录上次选择的城市位置
     public static String currentCity;
+    public static double currentLon = 0.0;
+    public static double currentLat = 0.0;
+    public static String currentArea;
 
+    public static final String wxAppID = "wxaaeca438918db105";
+    public static final String MCH_ID = "1500136582";
+    public static IWXAPI iwxapi;
+
+    /** 图片存储路基 **/
+    public static final String PHOTO_PATH = MyApplication.getImageFolderPath() +
+            DateFormat.format("yyyy-MM-dd-hh-mm-ss", new Date()) + ".png";
     public static MyApplication getApplication() {
         if (mInstance == null) {
             mInstance = new MyApplication();
@@ -62,6 +76,9 @@ public class MyApplication extends Application{
         createVolley();
         //初始化
         UMConfigure.init(this, "5b8a87268f4a9d75c00000ab", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+
+        iwxapi = WXAPIFactory.createWXAPI(getApplicationContext(), wxAppID,true);
+        iwxapi.registerApp(wxAppID);
     }
 
     //配置网络框架

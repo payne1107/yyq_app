@@ -74,14 +74,14 @@ public class AnchorFragment extends BaseFragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page = 1;
-                queryNoticeList(page, 3, "", "", "", "", "");
+                queryNoticeList(page, 3, "", "", MyApplication.currentCity, "", "");
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 ++page;
                 swipeLoadMore = true;
-                queryNoticeList(page, 3, "", "", "", "", "");
+                queryNoticeList(page, 3, "", "", MyApplication.currentCity, "", "");
             }
         });
 
@@ -150,7 +150,7 @@ public class AnchorFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        queryNoticeList(page, 3, "", "", "", "", "");
+        queryNoticeList(page, 3, "", "", MyApplication.currentCity, "", "");
     }
 
     /****
