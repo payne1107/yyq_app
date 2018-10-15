@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_5"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员A套餐"
+                android:textColor="@color/text_color_3" />
+
+            <TextView
+                android:id="@+id/tv_pull_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="700次刷新"
+                android:textColor="@color/text_color_9" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥128"
+                android:textColor="@color/google_red" />
+
+            <TextView
+                android:id="@+id/tv_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60天"
+                android:textColor="@color/text_color_9" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_open_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_size_20"
+            android:layout_marginRight="@dimen/margin_size_15"
+            android:background="@drawable/flag_button_normal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_size_5"
+                android:layout_marginLeft="@dimen/margin_size_20"
+                android:layout_marginRight="@dimen/margin_size_20"
+                android:layout_marginTop="@dimen/margin_size_5"
+                android:text="开通"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_24" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1px"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginTop="@dimen/margin_size_5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="刷新总次数："
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24" />
+
+            <TextView
+                android:id="@+id/tv_pull_count2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="700次"
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="有效期天数："
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24" />
+
+            <TextView
+                android:id="@+id/tv_days2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60天"
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_size_15"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员基本信息描述："
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24" />
+
+            <TextView
+                android:id="@+id/tv_vip_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员享有积分加权；排名靠前；抢单无限量；尊贵标识；通告优先推送。"
+                android:textColor="@color/text_color_6"
+                android:textSize="@dimen/text_size_24" />
+        </com.zhy.autolayout.AutoLinearLayout>
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

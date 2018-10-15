@@ -272,7 +272,16 @@ public class ConfigUtil {
      */
     public static final String SAVE_LOCATION_URL = MyApplication.REQUEST_URL + "appv1Consumer/updateSite.do";
     public static final int SAVE_LOCATION_URL_ACTION = 50;
-
+    /***
+     * 获取vip套餐列表
+     */
+    public static final String QUERY_VIP_LIST_URL = MyApplication.REQUEST_URL + "appVIP/getPackagesOfvip.do";
+    public static final int QUERY_VIP_LIST_URL_ACTION = 51;
+    /****
+     * 购买vip套餐
+     */
+    public static final String BUY_APP_VIP_URL = MyApplication.REQUEST_URL + "appVIP/appbuyvip.do";
+    public static final int BUY_APP_VIP_URL_ACTION = 52;
 
 
 

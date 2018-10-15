@@ -60,6 +60,8 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
     private ImageView ivSex;
     private double balance;
     private AutoLinearLayout layoutCalendar;
+    private String avatar;
+    private String account;
 
     @Override
     public View onCustomCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -135,7 +137,7 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), PersonCenterActivity.class).putExtra("userId", MyApplication.userId));
                 break;
             case R.id.layout_vip_member:
-                startActivity(new Intent(getActivity(), OpenVIPActivity.class));
+                startActivity(new Intent(getActivity(), OpenVIPActivity.class).putExtra("username", account).putExtra("avatarUrl", avatar));
                 break;
             case R.id.layotu_mine_order:
             case R.id.layout_order:
@@ -242,8 +244,8 @@ public class Fragment4 extends BaseFragment implements View.OnClickListener {
         if (bean != null) {
             PersonDetailsBean.DataBean data = bean.getData();
             if (data != null) {
-                String account = data.getAccount();
-                String avatar =data.getAvatar();
+                account = data.getAccount();
+                avatar = data.getAvatar();
                 String sex = data.getSex();
                 //余额
                 balance = data.getChanges();
