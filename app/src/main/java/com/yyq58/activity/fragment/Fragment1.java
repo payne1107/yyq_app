@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.amap.api.location.AMapLocation;
@@ -26,6 +25,8 @@ import com.yyq58.activity.MineFinanceActivity;
 import com.yyq58.activity.MineOrderActivity;
 import com.yyq58.activity.ScheduleManagementActivity;
 import com.yyq58.activity.SearchNoticeActivity;
+import com.yyq58.activity.SearchYRListActivity;
+import com.yyq58.activity.YRDynamicListActivity;
 import com.yyq58.activity.adapter.TalentTypeAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseFragment;
@@ -147,10 +148,10 @@ public class Fragment1 extends BaseFragment implements View.OnClickListener {
                 ivOpen.setVisibility(View.VISIBLE);
                 break;
             case R.id.tv_yr_dynamic:
-                Toast.makeText(getActivity(), "1233333333333", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), YRDynamicListActivity.class));
                 break;
             case R.id.tv_search_yr:
-                Toast.makeText(getActivity(), "1233333333333", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), SearchYRListActivity.class));
                 break;
             case R.id.et_search:
                 startActivity(new Intent(getActivity(), SearchNoticeActivity.class));

@@ -3,14 +3,12 @@ package com.yyq58.activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -20,10 +18,8 @@ import com.yyq58.R;
 import com.yyq58.activity.adapter.VipListAdapter;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.base.BaseActivity;
-import com.yyq58.activity.bean.BuyVipBean;
 import com.yyq58.activity.bean.VipListBean;
 import com.yyq58.activity.bean.WXPayBean;
-import com.yyq58.activity.utils.AppManager;
 import com.yyq58.activity.utils.ConfigUtil;
 import com.yyq58.activity.utils.StringUtils;
 import com.yyq58.activity.widget.CircleImageView;
@@ -87,6 +83,10 @@ public class OpenVIPActivity extends BaseActivity implements View.OnClickListene
         adapter.setOnItemClickListener(new IButtonClickListener() {
             @Override
             public void onEditClick(View view, int position) {
+                if (payType == 2) {
+                    toastMessage("暂未开通支付宝支付");
+                    return;
+                }
                 VipListBean.DataBean bean = mList.get(position);
                 if (bean != null) {
                     String vipId = bean.getVIP_ID();
@@ -125,7 +125,7 @@ public class OpenVIPActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.tv_choose_pay_type3:
                  payType = 2; //支付宝支付
-                tvChoosePayType.setText("支付宝支付");
+                 tvChoosePayType.setText("支付宝支付");
                  dialog.dismiss();
                 break;
         }
