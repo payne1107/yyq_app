@@ -35,7 +35,7 @@ public class YRDynamicListActivity extends BaseActivity{
 
     @Override
     protected void initData() {
-
+        queryDynamicList(pageNo);
     }
 
     @Override
@@ -70,7 +70,6 @@ public class YRDynamicListActivity extends BaseActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        queryDynamicList(pageNo);
     }
 
     /***

@@ -191,6 +191,9 @@
         <activity
             android:name=".activity.SearchYRListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CheckBigImgActivity"
+            android:screenOrientation="portrait" />
         <!-- 高德地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"

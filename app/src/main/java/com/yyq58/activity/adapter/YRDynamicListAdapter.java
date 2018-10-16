@@ -1,6 +1,8 @@
 package com.yyq58.activity.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.icu.text.UnicodeSetSpanner;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +12,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.yyq58.R;
+import com.yyq58.activity.CheckBigImgActivity;
 import com.yyq58.activity.application.MyApplication;
 import com.yyq58.activity.bean.DynamicFragmentBean;
 import com.yyq58.activity.utils.StringUtils;
@@ -19,6 +24,7 @@ import com.yyq58.activity.widget.CircleImageView;
 import com.yyq58.activity.widget.SpacesItemDecoration;
 import com.zhy.autolayout.utils.AutoUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class YRDynamicListAdapter extends BaseAdapter {
@@ -123,6 +129,20 @@ public class YRDynamicListAdapter extends BaseAdapter {
             if (bean != null) {
                 String urlImg = bean.getUrl();
                 MyApplication.imageLoader.displayImage(urlImg,viewHolder.ivDynamicPic);
+                ((ViewHolder) holder).ivDynamicPic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        List<String> listUrl = new ArrayList<>();
+                        for (int i=0;i<mUrlList.size();i++) {
+                            listUrl.add(mUrlList.get(i).getUrl());
+                        }
+                        //把图片集合转成json传递到下个页面
+                        String jsonImgs = JSON.toJSONString(listUrl);
+                        Intent intent = new Intent(mContext, CheckBigImgActivity.class);
+                        intent.putExtra("jsonImgs", jsonImgs);
+                        mContext.startActivity(intent);
+                    }
+                });
             }
         }
 
