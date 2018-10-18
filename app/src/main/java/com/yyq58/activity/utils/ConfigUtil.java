@@ -1,7 +1,6 @@
 package com.yyq58.activity.utils;
 
 
-import com.itheima.pulltorefreshlib.PullToRefreshBase;
 import com.yyq58.activity.application.MyApplication;
 
 
@@ -282,7 +281,11 @@ public class ConfigUtil {
      */
     public static final String BUY_APP_VIP_URL = MyApplication.REQUEST_URL + "appVIP/appbuyvip.do";
     public static final int BUY_APP_VIP_URL_ACTION = 52;
-
+    /***
+     * 艺人列表
+     */
+    public static final String QUERY_YR_LIST_URL = MyApplication.REQUEST_URL + "appv1Consumer/consumerList.do";
+    public static final int QUERY_YR_LIST_URL_ACTION = 53;
 
 
 }

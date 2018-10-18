@@ -203,7 +203,7 @@ public abstract class BaseFragment extends Fragment {
             if (jsonObject == null) {
                 return;
             }
-            int code = (int) jsonObject.get("code");
+            int code = (int) jsonObject.get("flag");
             FieldErrors error = null;
             if (code == 1000) {
                 Object data = jsonObject.get("data");
