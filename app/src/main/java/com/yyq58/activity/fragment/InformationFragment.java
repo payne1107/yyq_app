@@ -101,7 +101,6 @@ public class InformationFragment extends BaseFragment {
      * @param json
      */
     private void handleQuereyPersonInfo(String json) {
-        Log.d("Dong", "-->" + json);
         PersonDetailsBean bean = JSON.parseObject(json, PersonDetailsBean.class);
         if (bean != null) {
             PersonDetailsBean.DataBean data = bean.getData();
@@ -114,7 +113,7 @@ public class InformationFragment extends BaseFragment {
                 String labelName = label.get(0).getLabelName();
                 tvCategory.setText("" + labelName);
                 tvPhone.setText(StringUtils.isEmpty(phone) ? "" : phone);
-                tvLocation.setText(province + " " + city + " " + country);
+                tvLocation.setText(province + " " + city );
                 String sex = data.getSex();
                 if (("1").equals(sex)) {
                     tvSex.setText("男");
