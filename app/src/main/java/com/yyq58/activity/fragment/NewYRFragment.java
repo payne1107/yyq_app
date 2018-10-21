@@ -1,5 +1,6 @@
 package com.yyq58.activity.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -14,10 +16,12 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yyq58.R;
+import com.yyq58.activity.PersonCenterActivity;
 import com.yyq58.activity.adapter.SearchYRListAdapter;
 import com.yyq58.activity.base.BaseFragment;
 import com.yyq58.activity.bean.SearchYRListBean;
 import com.yyq58.activity.utils.ConfigUtil;
+import com.yyq58.activity.widget.IRecycleViewOnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,6 +82,21 @@ public class NewYRFragment extends BaseFragment {
                 pageNo++;
                 swipeLoadMore = true;
                 queryYRList(pageNo);
+            }
+        });
+        mAdapter.setOnItemClickListener(new IRecycleViewOnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                SearchYRListBean.DataBean bean = mList.get(position);
+                if (bean != null) {
+                    String toConsumerId = bean.getCONSUMER_ID();
+                    startActivity(new Intent(getActivity(), PersonCenterActivity.class).putExtra("userId", toConsumerId));
+                }
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
             }
         });
     }

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.yyq58.R;
 import com.yyq58.activity.bean.SearchYRListBean;
 import com.yyq58.activity.utils.StringUtils;
+import com.yyq58.activity.widget.IRecycleViewOnItemClickListener;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class SearchYRListAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ViewHolder holder1 = (ViewHolder) holder;
         holder1.userAvatar.getLayoutParams().height = (position % 2) * 200 + 600; //偶数和奇数的图片设置不同的高度，以到达错开的目的
         SearchYRListBean.DataBean bean = mList.get(position);
@@ -50,6 +51,12 @@ public class SearchYRListAdapter extends RecyclerView.Adapter{
                 String avatarUrl = avatarBean.getUrl();
                 Glide.with(mContext).load(avatarUrl).into(holder1.userAvatar);
             }
+            holder1.userAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onItemClick(view, position);
+                }
+            });
         }
     }
 
@@ -66,5 +73,10 @@ public class SearchYRListAdapter extends RecyclerView.Adapter{
              userAvatar =  itemView.findViewById(R.id.user_avatar);
              userName =  itemView.findViewById(R.id.user_name);
         }
+    }
+
+    private IRecycleViewOnItemClickListener mOnItemClickListener;//声明接口
+    public void setOnItemClickListener(IRecycleViewOnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
     }
 }

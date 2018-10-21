@@ -286,6 +286,20 @@ public class ConfigUtil {
      */
     public static final String QUERY_YR_LIST_URL = MyApplication.REQUEST_URL + "appv1Consumer/consumerList.do";
     public static final int QUERY_YR_LIST_URL_ACTION = 53;
-
+    /***
+     * 获取系统消息
+     */
+    public static final String QUERY_SYSTEM_NOITCE_LIST_URL = MyApplication.REQUEST_URL + "appv1sysmsg/list.do";
+    public static final int QUERY_SYSTEM_NOITCE_LIST_URL_ACTION = 54;
+    /****
+     * 获取系统未读消息数
+     */
+    public static final String QUERY_SYSTEM_UNREAD_MSG_URL = MyApplication.REQUEST_URL + "appv1sysmsg/unreadNum.do";
+    public static final int QUERY_SYSTEM_UNREAD_MSG_URL_ACTION = 55;
+    /****
+     * 获取推送的消息
+     */
+    public static final String QUERY_PUSH_MSG_LIST_URL = MyApplication.REQUEST_URL + "appv1getuimanager/list.do";
+    public static final int QUERY_PUSH_MSG_LIST_URL_ACTION = 56;
 
 }

@@ -5,8 +5,107 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/sys_title" />
-    <TextView
-        android:text="3333333"
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content">
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_system_notice"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.yyq58.activity.widget.CircleImageView
+                android:layout_marginLeft="@dimen/margin_size_15"
+                android:src="@mipmap/icon_msg_notice"
+                android:layout_width="60dp"
+                android:layout_height="60dp" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/text_size_28"
+                        android:textColor="@color/text_color_3"
+                        android:text="系统通知"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="@dimen/margin_size_5"
+                        android:textSize="@dimen/text_size_24"
+                        android:textColor="@color/text_color_9"
+                        android:text="点击查看系统消息"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/layout_push_msg"
+            android:layout_marginTop="1dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.yyq58.activity.widget.CircleImageView
+                    android:layout_marginBottom="@dimen/margin_size_10"
+                    android:layout_marginTop="@dimen/margin_size_10"
+                    android:layout_marginLeft="@dimen/margin_size_15"
+                    android:src="@mipmap/icon_message_service"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_marginTop="@dimen/margin_size_5"
+                    android:layout_marginLeft="@dimen/margin_size_10"
+                    android:orientation="vertical"
+                    android:layout_marginRight="@dimen/margin_size_15"
+                    android:layout_marginBottom="@dimen/margin_size_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_unread_msg"
+                        android:background="@drawable/background_item4"
+                        android:paddingLeft="@dimen/margin_size_5"
+                        android:paddingRight="@dimen/margin_size_5"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </com.zhy.autolayout.AutoLinearLayout>
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_marginLeft="@dimen/margin_size_10"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/text_size_28"
+                    android:textColor="@color/text_color_3"
+                    android:text="系统通知"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="@dimen/margin_size_5"
+                    android:textSize="@dimen/text_size_24"
+                    android:textColor="@color/text_color_9"
+                    android:text="点击查看系统消息"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.zhy.autolayout.AutoLinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+    </com.zhy.autolayout.AutoLinearLayout>
 </com.zhy.autolayout.AutoLinearLayout>
